@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.NewDirectionFragment"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical"
+        android:clickable="false"
+        android:longClickable="false"
+        android:focusable="false"
+        >
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_margin="16dp"
+            android:elevation="4dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="#FF9E80"
+            app:cardCornerRadius="15dp">
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.MapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/relLayout1">
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/idCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="MissingConstraints"
+                >
+
+                <fragment
+                    android:id="@+id/autocomplete_fragment_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+                    />
+            </com.google.android.material.card.MaterialCardView>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/overlay">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tlDirection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="20dp"
+                app:hintTextColor="@color/browser_actions_title_color">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etDirection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Residencial "
+                    android:fontFamily="@font/neue_kabel_bold"
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:inputType="text"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tlTelephone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="20dp"
+                app:hintTextColor="@color/browser_actions_title_color">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etTelephone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Teléfono "
+                    android:fontFamily="@font/neue_kabel_bold"
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:inputType="number"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tlMunicipality"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="16dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etMunicipality"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Municipio"
+                        android:fontFamily="@font/neue_kabel_bold"
+                        android:inputType="text"
+                        android:imeOptions="actionNext"
+                        android:maxLines="1"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tlDepartment"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="24dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etDepartment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Departamento"
+                        android:fontFamily="@font/neue_kabel_bold"
+                        android:inputType="text"
+                        android:imeOptions="actionDone"
+                        android:maxLines="1" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <RadioGroup
+                    android:id="@+id/rgDirections"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checkedButton="@+id/rbHouse"
+                    android:orientation="horizontal">
+                    <RadioButton
+                        android:id="@+id/rbHouse"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/house"
+                        android:buttonTint="@color/md_black_1000"
+                        android:fontFamily="@font/neue_kabel"/>
+                    <RadioButton
+                        android:id="@+id/rbWork"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/work"
+                        android:buttonTint="@color/md_black_1000"
+                        android:fontFamily="@font/neue_kabel"/>
+                    <RadioButton
+                        android:id="@+id/rbOther"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Otro"
+                        android:buttonTint="@color/md_black_1000"
+                        android:fontFamily="@font/neue_kabel"/>
+                </RadioGroup>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tlOther"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etOther"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:imeOptions="actionDone"
+                        android:maxLines="1" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSaveDirection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:backgroundTint="#F44336"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:layout_gravity="end"
+                android:text="Guardar dirección"
+                android:fontFamily="@font/neue_kabel_bold"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

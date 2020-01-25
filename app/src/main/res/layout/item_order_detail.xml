@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:id="@+id/tbRowOrderDetail"
+    >
+    <ImageView
+        android:id="@+id/btnDeleteProcess"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:layout_weight="0.5"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        app:elevation="0dp"
+        android:src="@drawable/ic_delete_forever_black_24dp"
+        android:visibility="visible"
+        />
+    <TextView
+        android:id="@+id/txtOrderQuantity"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.7"
+        android:gravity="center"
+        android:text="1"
+        android:textColor="#000"
+        android:textSize="12sp"
+        android:fontFamily="@font/neue_kabel"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/txtOrderProduct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Sopa Mein Mixta"
+            android:textColor="#000"
+            android:textSize="12sp"
+            android:fontFamily="@font/neue_kabel_bold"/>
+
+        <TextView
+            android:id="@+id/txtOrderDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:lines="2"
+            android:text="Especialidad con Camarón \n Entrada principal"
+            android:textColor="#000"
+            android:textSize="8sp"
+            android:fontFamily="@font/neue_kabel"/>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/txtOrderPrice"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.7"
+        android:gravity="center"
+        android:text="Q77.00"
+        android:textColor="#000"
+        android:textSize="12sp"
+        android:fontFamily="@font/neue_kabel" />
+    <TextView
+        android:id="@+id/txtOrderTotal"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.7"
+        android:gravity="center"
+        android:text="Q77.00"
+        android:textColor="#000"
+        android:textSize="12sp"
+        android:fontFamily="@font/neue_kabel" />
+</TableRow>

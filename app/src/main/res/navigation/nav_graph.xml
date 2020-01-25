@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="net.dsdev.lailai.clientes.fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_subCategoriesFragment"
+            app:destination="@id/subCategoriesFragment"
+            app:enterAnim="@anim/fragment_fade_enter" />
+        <action
+            android:id="@+id/action_homeFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_orderDetailFragment"
+            app:destination="@id/orderDetailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_menuDetailFragment"
+            app:destination="@id/menuDetailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/subCategoriesFragment"
+        android:name="net.dsdev.lailai.clientes.fragments.SubCategoriesFragment"
+        android:label="fragment_sub_categories"
+        tools:layout="@layout/fragment_sub_categories">
+        <action
+            android:id="@+id/action_subCategoriesFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+        <action
+            android:id="@+id/action_subCategoriesFragment_to_orderDetailFragment"
+            app:destination="@id/orderDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="net.dsdev.lailai.clientes.fragments.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" >
+        <action
+            android:id="@+id/action_menuFragment_to_menuDetailFragment"
+            app:destination="@id/menuDetailFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_orderDetailFragment"
+            app:destination="@id/orderDetailFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/menuDetailFragment"
+        android:name="net.dsdev.lailai.clientes.fragments.MenuDetailFragment"
+        android:label="fragment_menu_detail"
+        tools:layout="@layout/fragment_menu_detail" >
+        <action
+            android:id="@+id/action_menuDetailFragment_to_orderDetailFragment"
+            app:destination="@id/orderDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderDetailFragment"
+        android:name="net.dsdev.lailai.clientes.fragments.OrderDetailFragment"
+        android:label="fragment_order_detail"
+        tools:layout="@layout/fragment_order_detail" >
+        <action
+            android:id="@+id/action_orderDetailFragment_to_menuDetailFragment"
+            app:destination="@id/menuDetailFragment" />
+        <action
+            android:id="@+id/action_orderDetailFragment_to_homeFragment"
+            app:destination="@+id/homeFragment"
+            app:launchSingleTop="false"
+            app:popUpTo="@+id/homeFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_orderDetailFragment_to_paymentMethodFragment2"
+            app:destination="@id/paymentMethodFragment" />
+        <action
+            android:id="@+id/action_orderDetailFragment_to_directionsFragment"
+            app:destination="@id/directionsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentMethodFragment"
+        android:name="net.dsdev.lailai.clientes.fragments.PaymentMethodFragment"
+        android:label="layout_payment_method"
+        tools:layout="@layout/fragment_payment_method" >
+        <action
+            android:id="@+id/action_paymentMethodFragment2_to_orderDetailFragment"
+            app:destination="@id/orderDetailFragment"
+            app:popUpTo="@+id/orderDetailFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_paymentMethodFragment2_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@+id/homeFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_paymentMethodFragment_to_newCreditCardFragment"
+            app:destination="@id/newCreditCardFragment" />
+        <action
+            android:id="@+id/action_paymentMethodFragment_to_orderLastRevisionFragment"
+            app:destination="@id/orderLastRevisionFragment" />
+        <action
+            android:id="@+id/action_paymentMethodFragment_to_editCreditCardFragment"
+            app:destination="@id/editCreditCardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/directionsFragment"
+        android:name="net.dsdev.lailai.clientes.fragments.DirectionsFragment"
+        android:label="fragment_directions"
+        tools:layout="@layout/fragment_directions" >
+        <action
+            android:id="@+id/action_directionsFragment_to_newDirectionFragment"
+            app:destination="@id/newDirectionFragment" />
+        <action
+            android:id="@+id/action_directionsFragment_to_paymentMethodFragment2"
+            app:destination="@id/paymentMethodFragment" />
+        <action
+            android:id="@+id/action_directionsFragment_to_editDirectionFragment"
+            app:destination="@id/editDirectionFragment" />
+        <action
+            android:id="@+id/action_directionsFragment_to_orderLastRevisionFragment"
+            app:destination="@id/orderLastRevisionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newDirectionFragment"
+        android:name="net.dsdev.lailai.clientes.fragments.NewDirectionFragment"
+        android:label="fragment_new_direction"
+        tools:layout="@layout/fragment_new_direction" />
+    <fragment
+        android:id="@+id/newCreditCardFragment"
+        android:name="net.dsdev.lailai.clientes.fragments.NewCreditCardFragment"
+        android:label="fragment_new_credit_card"
+        tools:layout="@layout/fragment_new_credit_card" >
+        <action
+            android:id="@+id/action_newCreditCardFragment_to_paymentMethodFragment"
+            app:destination="@id/paymentMethodFragment"
+            app:popUpTo="@+id/paymentMethodFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderLastRevisionFragment"
+        android:name="net.dsdev.lailai.clientes.fragments.OrderLastRevisionFragment"
+        android:label="fragment_order_last_revision"
+        tools:layout="@layout/fragment_order_last_revision" >
+        <action
+            android:id="@+id/action_orderLastRevisionFragment_to_paymentMethodFragment"
+            app:destination="@id/paymentMethodFragment" />
+        <action
+            android:id="@+id/action_orderLastRevisionFragment_to_thanksFragment"
+            app:destination="@id/thanksFragment"
+            app:popUpTo="@+id/thanksFragment" />
+        <action
+            android:id="@+id/action_orderLastRevisionFragment_to_directionsFragment"
+            app:destination="@id/directionsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="net.dsdev.lailai.clientes.fragments.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_menuDetailFragment"
+            app:destination="@id/menuDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/thanksFragment"
+        android:name="net.dsdev.lailai.clientes.fragments.ThanksFragment"
+        android:label="fragment_thanks"
+        tools:layout="@layout/fragment_thanks" >
+        <action
+            android:id="@+id/action_thanksFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@+id/homeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="net.dsdev.lailai.clientes.fragments.user.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/layout_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_directionsFragment"
+            app:destination="@id/directionsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_paymentMethodFragment"
+            app:destination="@id/paymentMethodFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="net.dsdev.lailai.clientes.fragments.user.ChangePasswordFragment"
+        android:label="fragment_change_password"
+        tools:layout="@layout/fragment_change_password" />
+    <fragment
+        android:id="@+id/editDirectionFragment"
+        android:name="net.dsdev.lailai.clientes.fragments.EditDirectionFragment"
+        android:label="EditDirectionFragment" />
+    <fragment
+        android:id="@+id/editCreditCardFragment"
+        android:name="net.dsdev.lailai.clientes.fragments.EditCreditCardFragment"
+        android:label="fragment_edit_credit_card"
+        tools:layout="@layout/fragment_edit_credit_card" />
+</navigation>

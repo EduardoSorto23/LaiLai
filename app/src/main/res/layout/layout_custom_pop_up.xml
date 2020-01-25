@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@android:color/transparent"
+    >
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="25dp"
+        android:background="@color/white">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@android:color/transparent"
+            android:layout_marginTop="@dimen/standard_margin">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/big_standard_margin"
+                android:layout_marginStart="@dimen/big_standard_margin"
+                android:layout_marginEnd="@dimen/big_standard_margin">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:src="@drawable/ic_custom_pop_up" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/send_address"
+                    android:textColor="@color/md_black_1000"
+                    android:textSize="16sp"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:fontFamily="@font/neue_kabel"
+                    android:textAlignment="center"
+                    />
+
+                <TextView
+                    android:id="@+id/txtAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:textAlignment="center"
+                    android:textColor="@color/md_black_1000"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/neue_kabel_bold"
+                    />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/big_standard_margin">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    style="@style/MyButtonStyleText"
+                    android:text="Cancelar"
+                    android:textColor="@color/md_black_1000"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/neue_kabel_bold"
+                    android:textAllCaps="false"
+                    android:textAlignment="textStart"
+                    />
+
+                <Button
+                    android:id="@+id/btnAccept"
+                    style="@style/AppTheme.RoundedCornerMaterialButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/corner_radius_cart_bottom_item"
+                    android:insetTop="3dp"
+                    android:insetBottom="3dp"
+                    android:text="Aceptar"
+                    app:cornerRadius="15dp"
+                    app:backgroundTint="@color/red_app"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/neue_kabel_bold"
+                    android:textAllCaps="false"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</LinearLayout>

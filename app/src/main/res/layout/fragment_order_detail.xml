@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:stretchColumns="3"
+    >
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/big_standard_margin"
+        android:layout_marginBottom="@dimen/big_standard_margin"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/add_more"
+        android:textAllCaps="true"
+        android:textColor="#000000"
+        android:fontFamily="@font/neue_kabel_bold"
+        app:backgroundTint="@color/md_yellow_700"
+        app:cornerRadius="20dp"
+        app:icon="@drawable/ic_add_black_24dp"
+        app:iconTint="#000000"
+        />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/simpleTableLayout"
+        android:stretchColumns="4"
+        android:layout_below="@id/btnAdd"
+        android:layout_margin="@dimen/standard_margin">
+        <TableRow
+            android:id="@+id/firstRow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/simpleTextView0"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:fontFamily="@font/neue_kabel_bold"
+                android:padding="0dp"
+                android:textColor="#000"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/simpleTextView1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.7"
+                android:fontFamily="@font/neue_kabel_bold"
+                android:gravity="center"
+                android:padding="0dp"
+                android:text="@string/quantity"
+                android:textColor="#000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/simpleTextView2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:fontFamily="@font/neue_kabel_bold"
+                android:gravity="center"
+                android:padding="0dp"
+                android:text="@string/product"
+                android:textColor="#000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/simpleTextView3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.7"
+                android:fontFamily="@font/neue_kabel_bold"
+                android:gravity="center"
+                android:padding="0dp"
+                android:text="@string/price"
+                android:textColor="#000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/simpleTextView4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.7"
+                android:fontFamily="@font/neue_kabel_bold"
+                android:gravity="center"
+                android:padding="0dp"
+                android:text="@string/total"
+                android:textColor="#000"
+                android:textSize="16sp" />
+        </TableRow>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:background="@color/md_red_800" />
+    </TableLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btnProcess"
+        android:layout_below="@id/simpleTableLayout"
+        android:layout_margin="@dimen/standard_margin">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvOrderDetail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                >
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/cancel_order"
+                android:textColor="#FFFFFF"
+                android:textSize="10sp"
+                android:fontFamily="@font/neue_kabel_bold"
+                app:backgroundTint="@color/red_app"
+                app:cornerRadius="10dp"
+                app:icon="@drawable/ic_close_black_24dp"
+                app:iconTint="#FFFFFF"
+                android:layout_marginTop="10dp"
+                />
+        </LinearLayout>
+
+
+
+    </androidx.core.widget.NestedScrollView>
+    <Button
+        android:id="@+id/btnProcess"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/red_app"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        app:backgroundTint="@color/red_app"
+        android:text="@string/process_my_order"
+        android:fontFamily="@font/neue_kabel_bold"
+        android:textAllCaps="true"
+        app:cornerRadius="0dp"
+        />
+</RelativeLayout>

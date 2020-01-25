@@ -1,0 +1,81 @@
+<resources>
+    <string name="app_name">Lai Lai</string>
+    <string name="base_url">base</string>
+    <string name="email">Correo electrónico</string>
+    <string name="helper_email">Ingresa tu correo</string>
+    <string name="password">Contraseña</string>
+    <string name="helper_password">Ingresa tu contraseña</string>
+    <string name="recover_password">Recuperar contraseña</string>
+    <string name="login">Iniciar sesión</string>
+    <string name="not_account">¿No tienes cuenta?</string>
+    <string name="yes_account">¿Ya tienes una cuenta?</string>
+    <string name="sign_up">¡Regístrate!</string>
+    <string name="remember">Recordarme</string>
+    <string name="facebook_login">FaceBook Login</string>
+    <string name="login_facebook">Continúa con Facebook</string>
+    <string name="login_google">Continúa con Google</string>
+    <string name="login_email">Usar correo y contraseña</string>
+    <string name="logout">Cerrar sesión</string>
+    <!--<string name="facebook_app_id">567286757347170</string>
+    <string name="fb_login_protocol_scheme">fb567286757347170</string>-->
+    <string name="facebook_app_id">850990605322315</string>
+    <string name="fb_login_protocol_scheme">fb850990605322315</string>
+    <string name="user_menu">Usuario</string>
+    <string name="cart_menu">Carrito</string>
+    <string name="tittle">Titulo</string>
+    <string name="home_items">Items</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="process_my_order">Procesar mi orden</string>
+    <string name="view_order">Finalizar</string>
+    <string name="quantity">Cant.</string>
+    <string name="product">Producto</string>
+    <string name="price">Precio</string>
+    <string name="total">Total</string>
+    <string name="action">A</string>
+    <string name="cancel_order">Cancelar orden</string>
+    <string name="add_more">Agregar algo más</string>
+    <string name="cash">Efectivo</string>
+    <string name="quetzales">Quetzales</string>
+    <string name="cards_available">Tarjetas disponibles :</string>
+    <string name="general_information">Información General</string>
+    <string name="general_information_detail">
+        Ingresa tus credenciales para obtener los datos de tu cuenta bancaria, recuerda que tu información será tratada con privacidad, responsabilidad y ética.
+    </string>
+    <string name="card_number">Número de tarjeta</string>
+    <string name="until_valid">Válido hasta</string>
+    <string name="cvc">CVC</string>
+    <string name="name_at_the_card">Nombre en la tarjeta</string>
+    <string name="cancel">Cancelar</string>
+    <string name="save_card">Guardar tarjeta</string>
+    <string name="delivery_charge">Cargo de entrega</string>
+    <string name="sub_total">Subtotal</string>
+    <string name="delivery_charge_qty">Q5.0</string>
+    <string name="sub_total_qty">Q165.00</string>
+    <string name="send_address">Estas seguro que deseas enviar a la siguiente dirección?</string>
+    <string name="add_sweet">¿Quieres agregar un postre?</string>
+    <string name="change_password">Cambiar Contraseña</string>
+    <string name="address">Direcciones</string>
+    <string name="cards">Tarjetas</string>
+    <string name="name">John Deere</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="createAccount">Crear nueva cuenta</string>
+    <string name="userNames">Ingresa tu nombre</string>
+    <string name="names">Nombres</string>
+    <string name="lastNames">Apellidos</string>
+    <string name="helper_last_names">Ingresa tus apellidos</string>
+    <string name="actual_password">Contraseña actual</string>
+    <string name="new_password">Nueva contraseña</string>
+    <string name="confirm_password">Confirmar contraseña</string>
+
+
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyBD-ECx8wbrcvlSCUTCKgL8o0P8qHATGts</string>
+    <string name="house">Casa</string>
+    <string name="work">Trabajo</string>
+    <string name="guess">Ingresar como invitado</string>
+    <string name="edit">Editar</string>
+
+</resources>

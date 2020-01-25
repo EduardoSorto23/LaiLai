@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.LoginActivity"
+    android:background="@drawable/light_background">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imgLogin"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginStart="@dimen/margin_layout"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="@dimen/margin_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/logo_welcome" />
+
+            <ImageView
+                android:id="@+id/imgLoginLai"
+                android:layout_width="100dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/margin_layout"
+                android:layout_marginEnd="@dimen/margin_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.484"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imgLogin"
+                app:srcCompat="@drawable/logo_lailai_black" />
+
+            <LinearLayout
+                android:id="@+id/llLoginApiButtons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/imgLoginLai">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    app:cardBackgroundColor="@color/facebookLogin"
+                    app:cardCornerRadius="25dp"
+                    app:cardElevation="10dp"
+                    android:layout_marginTop="@dimen/big_standard_margin"
+                    android:layout_marginBottom="@dimen/big_standard_margin"
+                    android:id="@+id/cvFbLogin"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <com.facebook.login.widget.LoginButton
+                            android:id="@+id/login_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone" />
+                        <TextView
+                            android:id="@+id/txtLoginFace"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_centerInParent="true"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:text="@string/login_facebook"
+                            android:textSize="18sp"
+                            android:textColor="@color/white"/>
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    app:cardBackgroundColor="@color/googleLogin"
+                    app:cardCornerRadius="25dp"
+                    app:cardElevation="10dp"
+                    android:id="@+id/cvGoogleLogin"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/txtGoogle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="@string/login_google"
+                            android:textSize="18sp"
+                            android:textColor="@color/white"/>
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider"
+                style="@style/Divider"
+                android:layout_marginTop="@dimen/big_standard_margin"
+                android:layout_marginEnd="@dimen/margin_layout"
+                android:layout_marginStart="@dimen/margin_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/llLoginApiButtons"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tlEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_layout"
+                app:helperText="@string/helper_email"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress"
+                    android:fontFamily="@font/neue_kabel"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tlPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_layout"
+                app:helperText="@string/helper_password"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tlEmail"
+                app:passwordToggleDrawable="@drawable/show_password_selector"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTintMode="multiply">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:fontFamily="@font/neue_kabel"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/LLRe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_layout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tlPassword"
+                android:orientation="horizontal"
+                >
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/swRemember"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:layout_marginStart="@dimen/margin_layout"
+                    android:layout_marginEnd="10dp"
+                    />
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/remember"
+                    android:fontFamily="@font/neue_kabel"
+                    />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                app:cardBackgroundColor="@color/colorLogin"
+                app:cardCornerRadius="25dp"
+                app:cardElevation="10dp"
+                android:id="@+id/cvLogin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/LLRe"
+                android:layout_margin="@dimen/margin_layout"
+                android:clickable="true"
+                android:onClick="onClick"
+                android:focusable="true">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/lblLoginClick"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/login"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/neue_kabel_bold"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/lblNotAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="@dimen/margin_layout"
+                android:text="@string/not_account"
+                android:fontFamily="@font/neue_kabel"
+                app:layout_constraintBottom_toTopOf="@+id/btnRecover"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cvLogin" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSignUp"
+                style="@style/MyButtonStyleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_layout"
+                android:onClick="onClick"
+                android:text="@string/sign_up"
+                android:textAllCaps="false"
+                android:textColor="#6F84E9"
+                android:fontFamily="@font/neue_kabel_bold"
+                app:layout_constraintBottom_toTopOf="@+id/btnRecover"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/lblNotAccount"
+                app:layout_constraintTop_toBottomOf="@+id/cvLogin"
+                />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnRecover"
+                style="@style/MyButtonStyleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:gravity="center"
+                android:text="@string/recover_password"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@color/md_black_1000"
+                android:fontFamily="@font/neue_kabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnSignUp"
+                android:onClick="onClick"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnGuess"
+                style="@style/MyButtonStyleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:gravity="center"
+                android:text="@string/guess"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@color/md_black_1000"
+                android:fontFamily="@font/neue_kabel"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnRecover"
+                android:onClick="onClick"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
