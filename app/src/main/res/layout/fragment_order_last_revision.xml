@@ -436,6 +436,7 @@
                             android:hint="Q"
                             android:textColor="@color/white"
                             android:textColorHint="@color/white"
+                            android:inputType="numberDecimal"
                             android:maxLines="1"
                             android:imeOptions="actionDone"
                             android:fontFamily="@font/neue_kabel"/>
@@ -478,8 +479,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textMultiLine"
-                            android:maxLines="5"
-                            android:minLines="3"
+                            android:maxLines="4"
+                            android:minLines="2"
                             android:fontFamily="@font/neue_kabel"
                             android:imeOptions="actionDone"/>
 

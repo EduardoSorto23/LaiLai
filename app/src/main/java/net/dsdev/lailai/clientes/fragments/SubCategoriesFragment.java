@@ -79,9 +79,9 @@ public class SubCategoriesFragment extends Fragment {
             Log.d(TAG, "onActivityCreated: Obtiene el fab"+btnButtomCart.getText().toString());
             ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
             actionBar.setTitle(actionBarTittle);
-            actionBar.setDisplayHomeAsUpEnabled(false);
+            actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
-            actionBar.setDisplayUseLogoEnabled(false);
+            actionBar.setDisplayUseLogoEnabled(true);
             actionBar.setLogo(R.drawable.logo_toolbar);
             try{
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {

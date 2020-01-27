@@ -5,6 +5,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Build;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -93,6 +94,7 @@ public abstract class MenuDetailAdapter extends RecyclerView.Adapter<MenuDetailV
             }
             radioButton.setHeight(90);
             textView.setHeight(90);
+            textView.setGravity(Gravity.CENTER);
 
             ll.addView(textView);
             rg.addView(radioButton);

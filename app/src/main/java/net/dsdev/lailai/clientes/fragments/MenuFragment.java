@@ -95,7 +95,7 @@ public class MenuFragment extends Fragment {
 
             ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
             actionBar.setTitle(actionBarTittle);
-            actionBar.setDisplayHomeAsUpEnabled(false);
+            actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
             actionBar.setDisplayUseLogoEnabled(true);
             actionBar.setLogo(R.drawable.logo_toolbar);
