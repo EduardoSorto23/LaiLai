@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.dsdev.lailai.clientes.model.cards.CardAuth;
 import net.dsdev.lailai.clientes.retrofit.requests.OrderRequest;
@@ -70,7 +71,7 @@ public class OrderLastRevisionFragment extends Fragment {
     MenuDetailList menuDetailList;
     SharedPreferencesMethods sharedPreferencesMethods;
     Order finalOrder;
-    TextView txtPayment;
+    TextView txtPayment, txtLastOrderNumber;
     View paymentLine;
     ImageView imgPayment,imgArrowAddress, imgArrowPayment;
     TextView txtAddress,txtTotal,txtSubTotal;
@@ -135,6 +136,7 @@ public class OrderLastRevisionFragment extends Fragment {
         imgArrowPayment = rootView.findViewById(R.id.imgArrowPayment);
         txtTotal = rootView.findViewById(R.id.txtTotal);
         txtSubTotal = rootView.findViewById(R.id.txtSubTotal);
+        txtLastOrderNumber = rootView.findViewById(R.id.txtLastOrderNumber);
         String method = getArguments().getString("paymentMethod", "EFE");
         if (method.equals("EFE")){
             txtPayment.setText("EFECTIVO");
@@ -153,7 +155,6 @@ public class OrderLastRevisionFragment extends Fragment {
         finalOrder.setCanal("APP");
         finalOrder.setIdClient(sharedPreferencesMethods.getLoggedUser().getIdCliente());
         finalOrder.setIdDirection(sharedPreferencesMethods.getLoggedUser().getIdAddress());
-        finalOrder.setTelephone(sharedPreferencesMethods.getLoggedUser().getTelephone());
         finalOrder.setIndications(etIndications.getText().toString());
         Card card = new Card();
         card.setPaymentMethod(getArguments().getString("paymentMethod", "EFE"));
@@ -172,6 +173,11 @@ public class OrderLastRevisionFragment extends Fragment {
         btnProcess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (txtLastOrderNumber.getText().length()<=0){
+                    Toast.makeText(getContext(), "El número de teléfono es un campo obligatorio", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                finalOrder.setTelephone(txtLastOrderNumber.getText().toString());
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 CustomDialogConfirmation custom = new CustomDialogConfirmation(finalOrder,OrderLastRevisionFragment.this,sharedPreferencesMethods);
                 custom.show(fm,"");
@@ -220,6 +226,7 @@ public class OrderLastRevisionFragment extends Fragment {
             btnProcess.setText(String.format(formatButton,getResources().getString(R.string.process_my_order),menuDetailList.getMenus().size(),orderDetailAdapter.getTotal()));
             txtTotal.setText(String.format("Q%s",orderDetailAdapter.getTotal()));
             txtSubTotal.setText(String.format("Q%s",orderDetailAdapter.getTotal()));
+            txtLastOrderNumber.setText(sharedPreferencesMethods.getLoggedUser().getTelephone());
         }
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
