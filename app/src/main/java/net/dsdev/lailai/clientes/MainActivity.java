@@ -305,6 +305,12 @@ public class MainActivity extends AppCompatActivity implements AddOrRemoveCallba
                     navController.navigate(R.id.profileFragment);
                 }
                 break;
+            case R.id.drawerOrder:
+                navController.navigate(R.id.trackOrderFragment);
+                break;
+            case R.id.drawerOrderHistory:
+                navController.navigate(R.id.orderHistoryFragment);
+                break;
             default:
                 Toast.makeText(this, "click default", Toast.LENGTH_SHORT).show();
         }

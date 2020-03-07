@@ -208,4 +208,14 @@
         android:name="net.dsdev.lailai.clientes.fragments.EditCreditCardFragment"
         android:label="fragment_edit_credit_card"
         tools:layout="@layout/fragment_edit_credit_card" />
+    <fragment
+        android:id="@+id/trackOrderFragment"
+        android:name="net.dsdev.lailai.clientes.fragments.user.TrackOrderFragment"
+        android:label="fragment_track_order"
+        tools:layout="@layout/fragment_track_order" />
+    <fragment
+        android:id="@+id/orderHistoryFragment"
+        android:name="net.dsdev.lailai.clientes.fragments.user.OrderHistoryFragment"
+        android:label="fragment_order_history"
+        tools:layout="@layout/fragment_order_history" /><action android:id="@+id/action_global_orderHistoryFragment" app:destination="@id/orderHistoryFragment"/>
 </navigation>

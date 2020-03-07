@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import net.dsdev.lailai.clientes.R;
 import net.dsdev.lailai.clientes.model.Menus;
@@ -28,7 +29,8 @@ public abstract class MenuAdapter extends RecyclerView.Adapter<RecyclerView.View
     private Context context;
     private SubCategories subCategory;
     private Menus menus;
-    private boolean isList = false;
+    /** CAMBIADO POR REQUERIMIENTO DE SOLO MOSTRAR LISTA **/
+    private boolean isList = true;
 
 
     public MenuAdapter(Context context) {
@@ -129,11 +131,12 @@ public abstract class MenuAdapter extends RecyclerView.Adapter<RecyclerView.View
         public void bind(Menus menu, int position){
             this.txtName.setText(menu.getName());
             this.txtDesc.setText(menu.getDescription());
-
+            /** CAMBIADO POR REQUERIMIENTO DE MOSTRAR IMAGEN CUADRADA **/
             Glide.with(context)
                     .load(menu.getImages().getNormal() == null ? menu.getImages().getUnavailable():menu.getImages().getNormal())
                     .centerCrop()
-                    .apply(RequestOptions.circleCropTransform())
+                    //.apply(RequestOptions.circleCropTransform())
+                    .transform(new RoundedCorners(16))
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(this.imgMenuList);
 

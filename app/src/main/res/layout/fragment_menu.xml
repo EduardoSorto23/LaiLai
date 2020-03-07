@@ -28,6 +28,7 @@
             android:layout_margin="@dimen/margin_layout"
             />
         <RadioGroup
+            android:visibility="gone"
             android:id="@+id/rgToList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,24 +36,23 @@
             app:layout_constraintTop_toTopOf="parent"
             android:orientation="horizontal"
             android:layout_margin="@dimen/margin_layout"
-            android:checkedButton="@id/rbCrop"
+            android:checkedButton="@id/rbList"
             >
-
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rbList"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:checked="true"
+                android:button="@drawable/radio_selector_list"
+                app:useMaterialThemeColors="false"
+                />
             <com.google.android.material.radiobutton.MaterialRadioButton
                 android:id="@+id/rbCrop"
                 style="@style/CustomTheme"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:button="@drawable/radio_selector_crop"
-                android:checked="true"
-                app:useMaterialThemeColors="false"
-                />
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/rbList"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
                 android:checked="false"
-                android:button="@drawable/radio_selector_list"
                 app:useMaterialThemeColors="false"
                 />
         </RadioGroup>

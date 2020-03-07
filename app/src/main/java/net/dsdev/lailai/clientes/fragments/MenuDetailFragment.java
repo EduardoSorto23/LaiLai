@@ -327,7 +327,7 @@ public class MenuDetailFragment extends Fragment {
         editMenuDetailAdapter.setOptions(menuDetail.getOptions());
         txtMenuDetailName.setText(menuDetail.getName());
         txtMenuDetailPrice.setText("Q"+menuDetail.getPrice());
-
+        /* Cambiar por catch de objeto vacio */
         Glide.with(context)
                 .load((menuDetail.getImages().getNormal().equals(""))?menuDetail.getImages().getUnavailable():menuDetail.getImages().getNormal())
                 .fitCenter()

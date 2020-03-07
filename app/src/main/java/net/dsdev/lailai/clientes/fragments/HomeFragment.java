@@ -34,6 +34,7 @@ import net.dsdev.lailai.clientes.retrofit.Promo.PromoService;
 import net.dsdev.lailai.clientes.retrofit.RetrofitInstance;
 import net.dsdev.lailai.clientes.retrofit.menu.MenuService;
 import net.dsdev.lailai.clientes.util.Constants;
+import net.dsdev.lailai.clientes.util.Globals;
 import net.dsdev.lailai.clientes.viewHolders.HomeViewHolder;
 import net.dsdev.lailai.clientes.viewHolders.SliderAdapterVH;
 import net.dsdev.lailai.clientes.util.SharedPreferencesMethods;
@@ -57,7 +58,7 @@ import static androidx.navigation.Navigation.findNavController;
  */
 public class HomeFragment extends Fragment {
 
-
+    //public static String MENU_SAVED = "";
     static int secondsForSlider = 7;
     View rootView;
     SliderView sliderView;
@@ -272,61 +273,77 @@ public class HomeFragment extends Fragment {
     }
 
     public void retrofit(){
-        menuService = RetrofitInstance.getRetrofitInstance().create(MenuService.class);
-        call = menuService.getMenus();
-        call.enqueue(new Callback<JsonMenus>() {
-            @Override
-            public void onResponse(Call<JsonMenus> call, Response<JsonMenus> response) {
-                if (response.code() == 404){
-                    Log.d(TAG, "onResponse: code "+response.code());
-                    return;
+        if (Globals.MENUS_SAVED != null && !Globals.MENUS_SAVED.equals("")){
+            shimmerFrameLayout.stopShimmerAnimation();
+            shimmerFrameLayout.setVisibility(View.GONE);
+            categoryAdapter.setMenu(new Gson().fromJson(Globals.MENUS_SAVED,JsonMenus.class));
+            rvIniHome.setAdapter(categoryAdapter);
+            rvIniHome.setLayoutManager(
+                    new GridLayoutManager(getActivity().getApplicationContext(),2));
+        }else {
+            menuService = RetrofitInstance.getRetrofitInstance().create(MenuService.class);
+            call = menuService.getMenus();
+            call.enqueue(new Callback<JsonMenus>() {
+                @Override
+                public void onResponse(Call<JsonMenus> call, Response<JsonMenus> response) {
+                    if (response.code() == 404) {
+                        Log.d(TAG, "onResponse: code " + response.code());
+                        return;
+                    }
+                    if (response.body() != null) {
+                        sharedPreferencesMethods.saveMenuTree(Constants.menuTree, new Gson().toJson(response.body()));
+                        Globals.MENUS_SAVED = new Gson().toJson(response.body());
+                        shimmerFrameLayout.stopShimmerAnimation();
+                        shimmerFrameLayout.setVisibility(View.GONE);
+
+                        categoryAdapter.setMenu(response.body());
+                        rvIniHome.setAdapter(categoryAdapter);
+                        rvIniHome.setLayoutManager(
+                                new GridLayoutManager(getActivity().getApplicationContext(), 2));
+                    } else {
+                        Log.d(TAG, "onResponse: null");
+                    }
                 }
-                if (response.body() != null) {
-                    sharedPreferencesMethods.saveMenuTree(Constants.menuTree,new Gson().toJson(response.body()));
 
-                    shimmerFrameLayout.stopShimmerAnimation();
-                    shimmerFrameLayout.setVisibility(View.GONE);
-
-                    categoryAdapter.setMenu(response.body());
-                    rvIniHome.setAdapter(categoryAdapter);
-                    rvIniHome.setLayoutManager(
-                            new GridLayoutManager(getActivity().getApplicationContext(),2));
-                }else{
-                    Log.d(TAG, "onResponse: null");
+                @Override
+                public void onFailure(Call<JsonMenus> call, Throwable t) {
+                    Log.d(TAG, "onFailure : " + t.getMessage());
                 }
-            }
-
-            @Override
-            public void onFailure(Call<JsonMenus> call, Throwable t) {
-                Log.d(TAG, "onFailure : " +t.getMessage());
-            }
-        });
+            });
+        }
 
     }
 
     private void setPromoList(){
-        promoList = new PromoList();
-        PromoService promoService = RetrofitInstance.getRetrofitInstance().create(PromoService.class);
-        Call<PromoList> callPromos = promoService.getPromos();
-        callPromos.enqueue(new Callback<PromoList>() {
-            @Override
-            public void onResponse(Call<PromoList> call, Response<PromoList> response) {
-                if (response.code() == 404){
-                    Log.d(TAG, "onResponse: code "+response.code());
-                    return;
+        if (Globals.PROMOS_SAVED != null && !Globals.PROMOS_SAVED.equals("")){
+            promoList = new Gson().fromJson(Globals.PROMOS_SAVED,PromoList.class);
+            sliderAdapter.setPromoList(promoList);
+            sliderView.setSliderAdapter(sliderAdapter);
+        }else{
+            promoList = new PromoList();
+            PromoService promoService = RetrofitInstance.getRetrofitInstance().create(PromoService.class);
+            Call<PromoList> callPromos = promoService.getPromos();
+            callPromos.enqueue(new Callback<PromoList>() {
+                @Override
+                public void onResponse(Call<PromoList> call, Response<PromoList> response) {
+                    if (response.code() == 404){
+                        Log.d(TAG, "onResponse: code "+response.code());
+                        return;
+                    }
+                    if(response.body() != null){
+                        promoList = response.body();
+                        Globals.PROMOS_SAVED = new Gson().toJson(response.body());
+                        sliderAdapter.setPromoList(promoList);
+                        sliderView.setSliderAdapter(sliderAdapter);
+                    }
+                    Log.d(TAG, "onResponse: getPromos ");
                 }
-                if(response.body() != null){
-                    promoList = response.body();
-                    sliderAdapter.setPromoList(promoList);
-                    sliderView.setSliderAdapter(sliderAdapter);
-                }
-                Log.d(TAG, "onResponse: getPromos ");
-            }
 
-            @Override
-            public void onFailure(Call<PromoList> call, Throwable t) {
-                Log.d(TAG, "onFailure : " +t.getMessage());
-            }
-        });
+                @Override
+                public void onFailure(Call<PromoList> call, Throwable t) {
+                    Log.d(TAG, "onFailure : " +t.getMessage());
+                }
+            });
+        }
     }
 }
