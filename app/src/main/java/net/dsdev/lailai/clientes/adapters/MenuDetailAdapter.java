@@ -71,11 +71,13 @@ public abstract class MenuDetailAdapter extends RecyclerView.Adapter<MenuDetailV
                 radioButton.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
             }
 
+            radioButton.setTextColor(Color.parseColor("#000000"));
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 radioButton.setTextAppearance(R.style.CustomFontFamily);
             }else{
                 radioButton.setTextAppearance(context,R.style.CustomFontFamily);
             }
+
             radioButton.setText(v.getVariant());
             if (v.isDefault()) {
                 radioButton.setChecked(true);

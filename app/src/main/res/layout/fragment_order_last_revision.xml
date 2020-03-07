@@ -362,10 +362,56 @@
                     style="@style/Divider"/>
 
                 <LinearLayout
-                    android:id="@+id/linear_layout_factura"
+                    android:id="@+id/linear_layout_telefono"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/lineDivider3"
+                    android:layout_marginStart="@dimen/big_margin"
+                    android:layout_marginTop="@dimen/standard_margin"
+                    android:layout_marginEnd="@dimen/big_standard_margin"
+                    android:layout_marginBottom="@dimen/standard_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Teléfono"
+                        android:textColor="@color/red_app"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/neue_kabel_bold"/>
+
+                    <EditText
+                        android:id="@+id/txtLastOrderNumber"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:paddingStart="@dimen/big_standard_margin"
+                        android:paddingEnd="@dimen/big_standard_margin"
+                        android:paddingTop="@dimen/little_standard_margin"
+                        android:paddingBottom="@dimen/little_standard_margin"
+                        android:background="@drawable/corner_radius_cart_bottom_item"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+                        android:inputType="numberDecimal"
+                        android:textSize="18sp"
+                        android:maxLines="1"
+                        android:imeOptions="actionDone"
+                        android:fontFamily="@font/neue_kabel"/>
+
+                </LinearLayout>
+
+                <View android:id="@+id/lineDivider4"
+                    android:layout_below="@id/linear_layout_telefono"
+                    android:layout_marginStart="@dimen/medium_margin"
+                    android:layout_marginEnd="@dimen/big_standard_margin"
+                    style="@style/Divider"/>
+
+                <LinearLayout
+                    android:id="@+id/linear_layout_factura"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/lineDivider4"
                     android:layout_marginStart="@dimen/big_margin"
                     android:layout_marginTop="@dimen/standard_margin"
                     android:layout_marginEnd="@dimen/big_standard_margin"
@@ -446,7 +492,7 @@
 
                 </LinearLayout>
 
-                <View android:id="@+id/lineDivider4"
+                <View android:id="@+id/lineDivider5"
                     android:layout_below="@id/linear_layout_factura"
                     android:layout_marginStart="@dimen/medium_margin"
                     android:layout_marginEnd="@dimen/big_standard_margin"
@@ -455,7 +501,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/lineDivider4"
+                    android:layout_below="@id/lineDivider5"
                     android:layout_marginStart="@dimen/big_margin"
                     android:layout_marginTop="@dimen/standard_margin"
                     android:layout_marginEnd="@dimen/big_standard_margin"
