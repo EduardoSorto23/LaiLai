@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/big_standard_margin"
+    >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="ORDEN #: 000000"
+        android:fontFamily="@font/neue_kabel_bold"
+        android:textColor="#000"
+        android:textSize="19sp"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/line_divider"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:id="@+id/linear_layout_products"
+        >
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/simpleTableLayout"
+            android:stretchColumns="3">
+            <TableRow
+                android:id="@+id/firstRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:id="@+id/simpleTextView1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.8"
+                    android:layout_marginStart="@dimen/little_margin"
+                    android:fontFamily="@font/neue_kabel_bold"
+                    android:gravity="center"
+                    android:padding="0dp"
+                    android:text="@string/quantity"
+                    android:textColor="#000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/simpleTextView2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.1"
+                    android:fontFamily="@font/neue_kabel_bold"
+                    android:gravity="center"
+                    android:padding="0dp"
+                    android:text="@string/product"
+                    android:textColor="#000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/simpleTextView3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.8"
+                    android:fontFamily="@font/neue_kabel_bold"
+                    android:gravity="center"
+                    android:padding="0dp"
+                    android:text="@string/price"
+                    android:textColor="#000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/simpleTextView4"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.8"
+                    android:fontFamily="@font/neue_kabel_bold"
+                    android:gravity="center"
+                    android:padding="0dp"
+                    android:text="@string/total"
+                    android:textColor="#000"
+                    android:textSize="16sp" />
+            </TableRow>
+            <View
+                android:layout_width="match_parent"
+                android:background="@color/md_red_800"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/standard_margin"
+                />
+        </TableLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvOrderTrackList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            >
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+</LinearLayout>

@@ -1,6 +1,7 @@
 package net.dsdev.lailai.clientes.fragments;
 
 
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import net.dsdev.lailai.clientes.MainActivity;
@@ -25,11 +27,15 @@ import net.dsdev.lailai.clientes.model.users.AddressResponse;
 import net.dsdev.lailai.clientes.model.users.Client;
 import net.dsdev.lailai.clientes.retrofit.RetrofitInstance;
 import net.dsdev.lailai.clientes.retrofit.users.AddressService;
+import net.dsdev.lailai.clientes.util.Globals;
 import net.dsdev.lailai.clientes.viewHolders.DirectionViewHolder;
 import net.dsdev.lailai.clientes.util.SharedPreferencesMethods;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
+
+import java.util.Calendar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,7 +45,7 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DirectionsFragment extends Fragment {
+public class DirectionsFragment extends Fragment implements View.OnClickListener {
 
     View rootView;
     RecyclerView recyclerView;
@@ -52,6 +58,11 @@ public class DirectionsFragment extends Fragment {
     Call<AddressResponse> call;
     String action = "";
     SharedPreferencesMethods sharedPreferencesMethods;
+    private Boolean isTimeSelected = false;
+    private int hourSelected,minuteSelected;
+    TimePickerDialog mTimePicker;
+    MaterialButton btnTimePicker;
+
     public DirectionsFragment() {
     }
 
@@ -75,10 +86,16 @@ public class DirectionsFragment extends Fragment {
     private void bindUI(){
         recyclerView = rootView.findViewById(R.id.rvDirections);
         fab = rootView.findViewById(R.id.fabDirections);
+        btnTimePicker = rootView.findViewById(R.id.btnTimePicker);
     }
 
     public void init(){
         sharedPreferencesMethods = new SharedPreferencesMethods(getActivity());
+        btnTimePicker.setOnClickListener(this);
+        Calendar mcurrentTime = Calendar.getInstance();
+        hourSelected = mcurrentTime.get(Calendar.HOUR);
+        minuteSelected = mcurrentTime.get(Calendar.MINUTE);
+
         if (getArguments() != null) {
             String actionArg = getArguments().getString("action");
             if (actionArg != null) {
@@ -160,7 +177,7 @@ public class DirectionsFragment extends Fragment {
     }
 
     private void initAdapter(){
-        directionAdapter = new DirectionAdapter(getActivity().getApplicationContext()) {
+        directionAdapter = new DirectionAdapter(getActivity()) {
             @Override
             public void setClickListener(DirectionViewHolder holder, final Address address) {
                 holder.getConstraintLayout().setOnClickListener(new View.OnClickListener() {
@@ -179,6 +196,10 @@ public class DirectionsFragment extends Fragment {
                             Navigation.findNavController(v).navigate(R.id.action_directionsFragment_to_orderLastRevisionFragment,bundle);
                         }else {
                             sharedPreferencesMethods.saveLoggedUser(client);
+                            String f = String.format("%d:%d", hourSelected,minuteSelected);
+                            Globals.horaEntrega = f;
+                            Globals.tienda = null;
+                            Globals.OCASION = "DOM";
                             Navigation.findNavController(v).navigate(R.id.action_directionsFragment_to_paymentMethodFragment2);
                         }
                     }
@@ -188,6 +209,29 @@ public class DirectionsFragment extends Fragment {
         directionAdapter.setDirections(addresses.getAddresses());
         recyclerView.setAdapter(directionAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btnTimePicker:
+                showTimePicker();
+                break;
+        }
+    }
+    private void showTimePicker() {
+        mTimePicker = new TimePickerDialog(getActivity(),R.style.MyTimePickerDialogTheme, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                String f = String.format("%d:%d", selectedHour, selectedMinute);
+                isTimeSelected = true;
+                hourSelected = selectedHour;
+                minuteSelected = selectedMinute;
+                btnTimePicker.setText(f);
+            }
+        }, hourSelected,minuteSelected, false);//Yes 24 hour time
+        //mTimePicker.setTitle("Select Time");
+        mTimePicker.show();
     }
 
 }

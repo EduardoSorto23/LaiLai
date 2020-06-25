@@ -86,7 +86,8 @@ public abstract class EditMenuDetailAdapter extends RecyclerView.Adapter<MenuDet
             }
 
             TextView textView = new TextView(context);
-            textView.setText("+"+v.getExtraPrice().toString());
+            String formatText = "+%01.02f";
+            textView.setText(String.format(formatText,v.getExtraPrice()));
             if (!(v.getExtraPrice()>0)){
                 textView.setVisibility(View.INVISIBLE);
             }

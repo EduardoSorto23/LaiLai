@@ -97,13 +97,17 @@ public class CustomDialogConfirmation extends DialogFragment implements View.OnC
                 }
                 Log.d(TAG, "onResponse: response code last revision "+response.code());
                 if (response.body() != null){
+                    try {
+                        Toast.makeText(getActivity(),response.body().getMsg(),Toast.LENGTH_LONG).show();
+                    }catch (Exception e){
+                        Log.d(TAG, "onResponse: error al mostrar toast"+e.getMessage());
+                    }
                     if (response.body().isValid()){
                         sharedPreferencesMethods.deleteMenusTree();
                         ((AddOrRemoveCallbacks) Objects.requireNonNull(getActivity())).onRemoveProduct();
                         dismiss();
                         NavHostFragment.findNavController(fragment).navigate(R.id.action_orderLastRevisionFragment_to_thanksFragment);
                     }else{
-                        Toast.makeText(getActivity(),response.body().getMsg(),Toast.LENGTH_LONG).show();
                         dismiss();
                     }
                 }else{

@@ -8,11 +8,13 @@ public class AuthResponse {
     @SerializedName(Constants.valid)
     private boolean valid;
 
+    @SerializedName(Constants.msg)
+    private String msg;
+
+
     @SerializedName(Constants.client)
     private Client client;
 
-    @SerializedName(Constants.msg)
-    private String msg;
 
     public boolean isValid() {
         return valid;

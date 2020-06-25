@@ -13,8 +13,8 @@
         android:icon="@drawable/ic_order_24dp"
         android:title="@string/track_order"/>
 
-    <item android:id="@+id/drawerOrderHistory"
+    <!--<item android:id="@+id/drawerOrderHistory"
         android:icon="@drawable/ic_order_history_24dp"
-        android:title="@string/order_history"/>
+        android:title="@string/order_history"/>-->
 
 </menu>

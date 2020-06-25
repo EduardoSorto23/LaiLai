@@ -94,8 +94,8 @@ public class NewDirectionFragment extends Fragment implements OnMapReadyCallback
 
     /*UI*/
     RadioGroup rgDirections;
-    TextInputEditText etDirection,etMunicipality,etDepartment,etOther,etTelephone;
-    TextInputLayout tlDirection,tlMunicipality,tlDepartment,tlOther,tlTelephone;
+    TextInputEditText etDirection,etMunicipality,etDepartment,etOther,etTelephone,etIndication;
+    TextInputLayout tlDirection,tlMunicipality,tlDepartment,tlOther,tlTelephone,tlIndication;
     MaterialButton btnSaveDirection;
     /**/
     AddressService addressService;
@@ -128,6 +128,8 @@ public class NewDirectionFragment extends Fragment implements OnMapReadyCallback
     private void bindUI() {
         rgDirections = rootView.findViewById(R.id.rgDirections);
         etDirection = rootView.findViewById(R.id.etDirection);
+        etIndication = rootView.findViewById(R.id.etIndication);
+        tlIndication = rootView.findViewById(R.id.tlIndication);
         etMunicipality = rootView.findViewById(R.id.etMunicipality);
         etDepartment = rootView.findViewById(R.id.etDepartment);
         etOther = rootView.findViewById(R.id.etOther);
@@ -213,7 +215,8 @@ public class NewDirectionFragment extends Fragment implements OnMapReadyCallback
         address.setNombre(getAddressName());
         address.setDepartment(etDepartment.getText().toString());
         address.setMunicipaly(etMunicipality.getText().toString());
-        address.setIndications(etDirection.getText().toString());
+        address.setDirection(etDirection.getText().toString());
+        address.setIndications(etIndication.getText().toString());
         address.setLatitude(latitudeSelected);
         address.setLongitude(longitudeSelected);
         address.setTelephone(etTelephone.getText().toString());

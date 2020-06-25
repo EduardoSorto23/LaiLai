@@ -34,6 +34,7 @@ import net.dsdev.lailai.clientes.activity.LoginActivity;
 import net.dsdev.lailai.clientes.adapters.OrderDetailAdapter;
 import net.dsdev.lailai.clientes.model.menuDetail.MenuDetailList;
 import net.dsdev.lailai.clientes.util.AddOrRemoveCallbacks;
+import net.dsdev.lailai.clientes.util.Globals;
 import net.dsdev.lailai.clientes.viewHolders.OrderDetailHolder;
 import net.dsdev.lailai.clientes.util.RandomMethods;
 import net.dsdev.lailai.clientes.util.SharedPreferencesMethods;
@@ -122,7 +123,7 @@ public class OrderDetailFragment extends Fragment {
 
         btnProcess.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
 
                 if (!sharedMethods.getIsLogged() || sharedMethods.getLoggedUser()==null){
                     //showInfoAlert();
@@ -135,7 +136,23 @@ public class OrderDetailFragment extends Fragment {
                             custom.show(fm,"");
                             sharedMethods.saveSweetSelect("isSweetSelected",true);
                         }else{
-                            Navigation.findNavController(v).navigate(R.id.action_orderDetailFragment_to_directionsFragment);
+                            new MaterialAlertDialogBuilder(getActivity(), R.style.MyDialogThemeMaterial)
+                                    .setTitle("Importante")
+                                    .setMessage("¿Deseas tu pedido a domicilio o para pasar a recogerlo en tienda?")
+                                    .setNeutralButton("DOMICILIO", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            Navigation.findNavController(v).navigate(R.id.action_orderDetailFragment_to_directionsFragment);
+                                        }
+                                    })
+                                    .setNegativeButton("RECOGER", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            Navigation.findNavController(v).navigate(R.id.action_orderDetailFragment_to_storesFragment);
+                                        }
+                                    })
+                                    .setPositiveButton("CANCELAR",null)
+                                    .show();
                         }
                         //Navigation.findNavController(v).navigate(R.id.action_orderDetailFragment_to_directionsFragment);
                     }else{
@@ -175,7 +192,8 @@ public class OrderDetailFragment extends Fragment {
 
                         orderDetailAdapter.removeAt(position);
                         ((AddOrRemoveCallbacks)getActivity()).onRemoveProduct();
-                        String formatButton = " %s ( %s ) ── Q%s";
+                        //String formatButton = " %s ( %s ) ── Q%s";
+                        String formatButton = Globals.formatBtn;
                         btnProcess.setText(String.format(formatButton,getResources().getString(R.string.process_my_order), menuDetailList.getMenus() == null ? 0:menuDetailList.getMenus().size(),orderDetailAdapter.getTotal()));
                         Toast.makeText(getActivity().getApplicationContext(),"Producto eliminado exitosamente",Toast.LENGTH_LONG).show();
                     }
@@ -199,7 +217,8 @@ public class OrderDetailFragment extends Fragment {
         if ( menuDetailList != null && menuDetailList.getMenus() != null && menuDetailList.getMenus().size() > 0 ){
             orderDetailAdapter.setMenuDetailList(menuDetailList);
             recyclerView.setAdapter(orderDetailAdapter);
-            String formatButton = " %s ( %s ) ── Q%s";
+            //String formatButton = " %s ( %s ) ── Q%s";
+            String formatButton = Globals.formatBtn;
             btnProcess.setText(String.format(formatButton,getResources().getString(R.string.process_my_order),menuDetailList.getMenus().size(),orderDetailAdapter.getTotal()));
         }
         recyclerView.setLayoutManager(new LinearLayoutManager(context));

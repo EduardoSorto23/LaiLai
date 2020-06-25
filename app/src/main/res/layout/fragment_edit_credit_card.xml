@@ -142,7 +142,7 @@
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:fontFamily="monospace"
-                                                android:text="MM/YY"
+                                                android:text="MM/YYYY"
                                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                                                 android:textColor="@android:color/white" />
 
@@ -257,8 +257,10 @@
                             android:layout_height="wrap_content"
                             android:hint="@string/until_valid"
                             android:maxLines="1"
-                            android:maxLength="5"
-                            android:inputType="text" />
+                            android:maxLength="7"
+                            android:digits="/1234567890"
+                            android:inputType="number"
+                            android:imeOptions="actionNext"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout

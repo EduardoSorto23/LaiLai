@@ -285,7 +285,7 @@ public class EditCreditCardFragment extends Fragment implements View.OnClickList
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (lock || s.length() > 3) {
+                if (lock || s.length() > 5) {
                     return;
                 }
                 lock = true;

@@ -157,7 +157,9 @@ public class PaymentMethodFragment extends Fragment {
                 if (response.body()!=null){
                     paymentMethodAdapter.setCardList(response.body().getCards());
                     rvCards.setAdapter(paymentMethodAdapter);
-                    rvCards.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+                    if (getActivity()!=null){
+                        rvCards.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+                    }
                 }
             }
 

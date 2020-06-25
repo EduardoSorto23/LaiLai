@@ -83,6 +83,9 @@
         <action
             android:id="@+id/action_orderDetailFragment_to_directionsFragment"
             app:destination="@id/directionsFragment" />
+        <action
+            android:id="@+id/action_orderDetailFragment_to_storesFragment"
+            app:destination="@id/storesFragment" />
     </fragment>
     <fragment
         android:id="@+id/paymentMethodFragment"
@@ -209,13 +212,35 @@
         android:label="fragment_edit_credit_card"
         tools:layout="@layout/fragment_edit_credit_card" />
     <fragment
-        android:id="@+id/trackOrderFragment"
-        android:name="net.dsdev.lailai.clientes.fragments.user.TrackOrderFragment"
-        android:label="fragment_track_order"
-        tools:layout="@layout/fragment_track_order" />
+        android:id="@+id/activeOrdersFragment"
+        android:name="net.dsdev.lailai.clientes.fragments.user.ActiveOrdersFragment"
+        android:label="fragment_active_order"
+        tools:layout="@layout/fragment_active_orders">
+        <action
+            android:id="@+id/action_activeOrdersFragment_to_activeOrderDetailFragment"
+            app:destination="@id/activeOrderDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/orderHistoryFragment"
         android:name="net.dsdev.lailai.clientes.fragments.user.OrderHistoryFragment"
         android:label="fragment_order_history"
-        tools:layout="@layout/fragment_order_history" /><action android:id="@+id/action_global_orderHistoryFragment" app:destination="@id/orderHistoryFragment"/>
+        tools:layout="@layout/fragment_order_history" >
+        <action
+            android:id="@+id/action_orderHistoryFragment_to_activeOrderDetailFragment"
+            app:destination="@id/activeOrderDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/activeOrderDetailFragment"
+        android:name="net.dsdev.lailai.clientes.fragments.ActiveOrderDetailFragment"
+        android:label="fragment_active_order_detail"
+        tools:layout="@layout/fragment_active_order__detail" />
+    <fragment
+        android:id="@+id/storesFragment"
+        android:name="net.dsdev.lailai.clientes.fragments.StoresFragment"
+        android:label="fragment_stores"
+        tools:layout="@layout/fragment_stores" >
+        <action
+            android:id="@+id/action_storesFragment_to_paymentMethodFragment"
+            app:destination="@id/paymentMethodFragment" />
+    </fragment>
 </navigation>

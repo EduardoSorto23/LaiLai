@@ -36,6 +36,7 @@ import net.dsdev.lailai.clientes.model.Request.Order;
 import net.dsdev.lailai.clientes.model.menuDetail.JsonMenuDetail;
 import net.dsdev.lailai.clientes.model.menuDetail.MenuDetail;
 import net.dsdev.lailai.clientes.model.menuDetail.MenuDetailList;
+import net.dsdev.lailai.clientes.util.Globals;
 import net.dsdev.lailai.clientes.viewHolders.OrderDetailHolder;
 import net.dsdev.lailai.clientes.util.SharedPreferencesMethods;
 import net.dsdev.lailai.clientes.view.CustomDialogConfirmation;
@@ -156,6 +157,10 @@ public class OrderLastRevisionFragment extends Fragment {
         finalOrder.setIdClient(sharedPreferencesMethods.getLoggedUser().getIdCliente());
         finalOrder.setIdDirection(sharedPreferencesMethods.getLoggedUser().getIdAddress());
         finalOrder.setIndications(etIndications.getText().toString());
+
+        finalOrder.setHoraEntrega(Globals.horaEntrega);
+        finalOrder.setIdStore(Globals.tienda);
+        finalOrder.setOcasion(Globals.OCASION);
         Card card = new Card();
         card.setPaymentMethod(getArguments().getString("paymentMethod", "EFE"));
         if (getArguments() != null && getArguments().getString("cardAuth") != null) {
@@ -205,7 +210,7 @@ public class OrderLastRevisionFragment extends Fragment {
             menuDetailList = gson.fromJson(json, MenuDetailList.class);
             List<MenuDetail> menuDetails = new ArrayList<>();
             for (JsonMenuDetail me : menuDetailList.getMenus()) {
-                me.getMenu().setQuantity(1);
+                //me.getMenu().setQuantity(1);
                 menuDetails.add(me.getMenu());
             }
             finalOrder.setMenus(menuDetails);
@@ -222,10 +227,11 @@ public class OrderLastRevisionFragment extends Fragment {
         if ( menuDetailList != null && menuDetailList.getMenus() != null && menuDetailList.getMenus().size() > 0 ){
             orderDetailAdapter.setMenuDetailList(menuDetailList);
             recyclerView.setAdapter(orderDetailAdapter);
-            String formatButton = " %s ( %s ) ── Q%s";
+            //String formatButton = " %s ( %s ) ── Q%s";
+            String formatButton = Globals.formatBtn;
             btnProcess.setText(String.format(formatButton,getResources().getString(R.string.process_my_order),menuDetailList.getMenus().size(),orderDetailAdapter.getTotal()));
-            txtTotal.setText(String.format("Q%s",orderDetailAdapter.getTotal()));
-            txtSubTotal.setText(String.format("Q%s",orderDetailAdapter.getTotal()));
+            txtTotal.setText(String.format("Q%01.02f",orderDetailAdapter.getTotal()));
+            txtSubTotal.setText(String.format("Q%01.02f",orderDetailAdapter.getTotal()));
             txtLastOrderNumber.setText(sharedPreferencesMethods.getLoggedUser().getTelephone());
         }
         recyclerView.setLayoutManager(new LinearLayoutManager(context));

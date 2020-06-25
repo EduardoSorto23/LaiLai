@@ -45,10 +45,14 @@ import net.dsdev.lailai.clientes.model.menuDetail.OptionMenuDetail;
 import net.dsdev.lailai.clientes.model.menuDetail.VariantMenuDetail;
 import net.dsdev.lailai.clientes.retrofit.RetrofitInstance;
 import net.dsdev.lailai.clientes.util.AddOrRemoveCallbacks;
+import net.dsdev.lailai.clientes.util.Globals;
 import net.dsdev.lailai.clientes.viewHolders.MenuDetailViewHolder;
 import net.dsdev.lailai.clientes.util.SharedPreferencesMethods;
 import com.google.android.material.button.MaterialButton;
 import com.google.gson.Gson;
+import com.travijuu.numberpicker.library.Enums.ActionEnum;
+import com.travijuu.numberpicker.library.Interface.ValueChangedListener;
+import com.travijuu.numberpicker.library.NumberPicker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,8 +90,8 @@ public class MenuDetailFragment extends Fragment {
     private int positionSelectedMenu;
     Call<JsonMenuDetail> call;
     private static final String actionBarTittle = "";
-
-
+    NumberPicker numberPicker;
+    private static String formatText = "Q%01.02f";
     public MenuDetailFragment() {
         // Required empty public constructor
     }
@@ -129,6 +133,11 @@ public class MenuDetailFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     prefsEditor = mPrefs.edit();
+                    try {
+                        jsonMenuDetail.getMenu().setQuantity(numberPicker.getValue());
+                    }catch (Exception e){
+                        Log.d(TAG, "onClick: error al actualizar cantidad"+e.getMessage());
+                    }
                     json = mPrefs.getString("shoppingCart", "");
                     if (json.equals("")){
                         menuDetailList = new MenuDetailList();
@@ -220,6 +229,25 @@ public class MenuDetailFragment extends Fragment {
         txtMenuDetailPrice = rootView.findViewById(R.id.txtMenuDetailPrice);
         gson = new Gson();
         txtPriceCart = getActivity().findViewById(R.id.txtPriceCart);
+        numberPicker = rootView.findViewById(R.id.numberPicker);
+        numberPicker.setDisplayFocusable(false);
+        numberPicker.setFocusable(false);
+        numberPicker.setEnabled(false);
+        numberPicker.setValueChangedListener(new ValueChangedListener() {
+            @Override
+            public void valueChanged(int value, ActionEnum action) {
+                String actionText = action == ActionEnum.MANUAL ? "manually set" : (action == ActionEnum.INCREMENT ? "incremented" : "decremented");
+                String message = String.format("NumberPicker is %s to %d", actionText, value);
+                if (jsonMenuDetail!=null && jsonMenuDetail.getMenu()!=null){
+                    Double price = (jsonMenuDetail.getMenu().getPrice() * value) + (jsonMenuDetail.getMenu().getExtraPrice()*value);
+                    jsonMenuDetail.getMenu().setQuantity(value);
+                    jsonMenuDetail.getMenu().setFinalPrice(price);
+                    txtPriceCart.setText(String.format(formatText,price));
+                }
+                Log.d(TAG, message);
+            }
+        });
+        txtPriceCart.setText("Q0.00");
     }
 
     public void initMenuDetailAdapter(long id){
@@ -259,18 +287,21 @@ public class MenuDetailFragment extends Fragment {
                 if (response.body() != null){
                     jsonMenuDetail = response.body();
                     btnBottomCart.setEnabled(true);
+                    numberPicker.setFocusable(true);
+                    numberPicker.setEnabled(true);
                     Log.d(TAG, "onResponse: JSONMENU: "+gson.toJson(jsonMenuDetail));
                     Log.d(TAG, "onResponse: Response JSONMENU: "+gson.toJson(response.body()));
                     Log.d(TAG, "onResponse: Response JSONMENU: "+response.body().getMenu().getPrice());
+                    jsonMenuDetail.getMenu().setFinalPrice(jsonMenuDetail.getMenu().getPrice());
                     //menuDetailAdapter.setOptions(response.body().getMenu().getOptions());
                     menuDetailAdapter.setOptions(jsonMenuDetail.getMenu().getOptions());
                     txtMenuDetailName.setText(jsonMenuDetail.getMenu().getName());
-                    txtMenuDetailPrice.setText("Q"+jsonMenuDetail.getMenu().getPrice());
+                    txtMenuDetailPrice.setText(String.format(formatText,jsonMenuDetail.getMenu().getPrice()));
                     menuDetailAdapter.setOptions(jsonMenuDetail.getMenu().getOptions());
                     recyclerView.setAdapter(menuDetailAdapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
                     try{
-                        txtPriceCart.setText("Q"+jsonMenuDetail.getMenu().getPrice());
+                        txtPriceCart.setText(String.format(formatText,jsonMenuDetail.getMenu().getPrice()));
                     }catch (Exception e){
                         Log.d(TAG, "onResponse: exception btnBottomCart "+e.toString());
                     }
@@ -326,19 +357,26 @@ public class MenuDetailFragment extends Fragment {
         MenuDetail menuDetail = currentMenu.getMenu();
         editMenuDetailAdapter.setOptions(menuDetail.getOptions());
         txtMenuDetailName.setText(menuDetail.getName());
-        txtMenuDetailPrice.setText("Q"+menuDetail.getPrice());
+        txtMenuDetailPrice.setText(String.format(formatText,menuDetail.getPrice()));
         /* Cambiar por catch de objeto vacio */
-        Glide.with(context)
-                .load((menuDetail.getImages().getNormal().equals(""))?menuDetail.getImages().getUnavailable():menuDetail.getImages().getNormal())
-                .fitCenter()
-                .centerCrop()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(imgMenu);
-
-        txtPriceCart.setText("Q"+menuDetail.getFinalPrice());
+        if (menuDetail.getImages() != null){
+            Glide.with(context)
+                    .load((menuDetail.getImages().getNormal() != null && !menuDetail.getImages().getNormal().equals(""))
+                                    ? menuDetail.getImages().getNormal()
+                                    : menuDetail.getImages().getUnavailable())
+                    .fitCenter()
+                    .centerCrop()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(imgMenu);
+        }
+        txtPriceCart.setText(String.format(formatText,menuDetail.getFinalPrice()));
+        //cantidad
+        numberPicker.setValue(menuDetail.getQuantity());
         recyclerView.setAdapter(editMenuDetailAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
         btnBottomCart.setEnabled(true);
+        numberPicker.setFocusable(true);
+        numberPicker.setEnabled(true);
     }
 
     public void setSelectedVariant(int idOption, int checkedIdVariant){
@@ -355,9 +393,12 @@ public class MenuDetailFragment extends Fragment {
                         } else {
                             jsonMenuDetail.getMenu().getOptions().get(i).getSelectedVariants().add(variant);
                         }
-                        Double price = jsonMenuDetail.getMenu().getPrice() + jsonMenuDetail.getMenu().getOptions().get(i).getSelectedVariants().get(0).getExtraPrice();
+                        //Double price = jsonMenuDetail.getMenu().getPrice() + jsonMenuDetail.getMenu().getOptions().get(i).getSelectedVariants().get(0).getExtraPrice();
+                        Double price = jsonMenuDetail.getMenu().getFinalPrice() + (jsonMenuDetail.getMenu().getOptions().get(i).getSelectedVariants().get(0).getExtraPrice()*numberPicker.getValue());
+                        jsonMenuDetail.getMenu().setExtraPrice(jsonMenuDetail.getMenu().getOptions().get(i).getSelectedVariants().get(0).getExtraPrice());
                         jsonMenuDetail.getMenu().setFinalPrice(price);
-                        txtPriceCart.setText("Q"+price.toString());
+                        txtPriceCart.setText(String.format(formatText,price));
+                        //txtPriceCart.setText("Q"+price.toString());
                         //jsonMenuDetail.getMenu().setFinalPrice();
                         //jsonMenuDetail.getMenu().getOptions().get(i).setSelectedVariant(variant);
                         //jsonMenuDetail.getMenu().getOptions().get(i).getSelectedVariants().add(0,variant);

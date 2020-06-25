@@ -12,4 +12,5 @@
     <color name="yellow_app">#fbc02d</color>
     <color name="overlay">#A9FFFFFF</color>
     <color name="skeleton_background">#dddddd</color>
+    <color name="call">#109507</color>
 </resources>

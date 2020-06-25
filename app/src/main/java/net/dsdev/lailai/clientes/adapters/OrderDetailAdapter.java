@@ -56,8 +56,10 @@ public abstract class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetai
         if (menuDetailList.getMenus() != null && menuDetailList.getMenus().size() > 0 ){
             holder.getTxtOrderProduct().setText(menuDetailList.getMenus().get(position).getMenu().getName());
             holder.getTxtOrderDesc().setText(menuDetailList.getMenus().get(position).getMenu().getDesc());
-            holder.getTxtOrderPrice().setText(menuDetailList.getMenus().get(position).getMenu().getFinalPrice().toString());
-            holder.getTxtOrderTotal().setText(menuDetailList.getMenus().get(position).getMenu().getFinalPrice().toString());
+            String formatText = "%01.02f";
+            holder.getTxtOrderPrice().setText(String.format(formatText,menuDetailList.getMenus().get(position).getMenu().getPrice()));
+            holder.getTxtOrderTotal().setText(String.format(formatText,menuDetailList.getMenus().get(position).getMenu().getFinalPrice()));
+            holder.getTxtOrderQuantity().setText(String.valueOf(menuDetailList.getMenus().get(position).getMenu().getQuantity()));
         }else {
             //all null
         }

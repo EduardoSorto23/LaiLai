@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:numberpicker="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.MenuDetailFragment">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -106,7 +107,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginHorizontal="8dp"
-                            android:text="Variedad de carnes picadas con queso de soya y chile picante. Variedad de carnes picadas con queso de soya y chile picante."
+                            android:text=""
                             android:fontFamily="@font/neue_kabel"/>
 
                     </LinearLayout>
@@ -118,6 +119,25 @@
                         android:layout_marginTop="@dimen/standard_divider"
                         android:layout_marginStart="@dimen/medium_margin"
                         android:layout_marginEnd="@dimen/medium_margin"
+                        />
+                    <TextView
+                        android:id="@+id/txtSel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Elige Cantidad"
+                        android:fontFamily="@font/neue_kabel"
+                        android:layout_gravity="center"/>
+                    <com.travijuu.numberpicker.library.NumberPicker
+                        android:id="@+id/numberPicker"
+                        android:layout_width="130dp"
+                        android:layout_height="40dp"
+                        numberpicker:min="1"
+                        numberpicker:max="20"
+                        numberpicker:value="1"
+                        numberpicker:unit="1"
+                        android:layout_gravity="center"
+                        android:focusable="false"
+                        numberpicker:custom_layout="@layout/number_picker_layout"
                         />
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>

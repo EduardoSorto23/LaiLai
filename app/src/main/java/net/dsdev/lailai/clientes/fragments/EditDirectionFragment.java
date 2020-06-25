@@ -85,8 +85,8 @@ public class EditDirectionFragment extends Fragment implements OnMapReadyCallbac
 
     /*UI*/
     RadioGroup rgDirections;
-    TextInputEditText etDirection,etMunicipality,etDepartment,etOther,etTelephone;
-    TextInputLayout tlDirection,tlMunicipality,tlDepartment,tlOther,tlTelephone;
+    TextInputEditText etDirection,etMunicipality,etDepartment,etOther,etTelephone,etIndication;
+    TextInputLayout tlDirection,tlMunicipality,tlDepartment,tlOther,tlTelephone,tlIndication;
     MaterialButton btnEditDirection,btnCancel, btnDeleteDirection;
     RadioButton rbHouse,rbWork,rbOther;
     /**/
@@ -133,6 +133,9 @@ public class EditDirectionFragment extends Fragment implements OnMapReadyCallbac
         tlDepartment = rootView.findViewById(R.id.tlDepartment);
         tlTelephone = rootView.findViewById(R.id.tlTelephone);
         etTelephone = rootView.findViewById(R.id.etTelephone);
+
+        etIndication = rootView.findViewById(R.id.etIndication);
+        tlIndication = rootView.findViewById(R.id.tlIndication);
     }
 
     @Override
@@ -268,7 +271,8 @@ public class EditDirectionFragment extends Fragment implements OnMapReadyCallbac
                     etOther.setText(currentAddress.getNombre());
                     break;
             }
-            etDirection.setText(currentAddress.getIndications());
+            etDirection.setText(currentAddress.getDirection());
+            etIndication.setText(currentAddress.getIndications());
             etMunicipality.setText(currentAddress.getMunicipaly());
             etDepartment.setText(currentAddress.getDepartment());
             etTelephone.setText(currentAddress.getTelephone());
@@ -282,7 +286,8 @@ public class EditDirectionFragment extends Fragment implements OnMapReadyCallbac
         address.setNombre(getAddressName());
         address.setDepartment(etDepartment.getText().toString());
         address.setMunicipaly(etMunicipality.getText().toString());
-        address.setIndications(etDirection.getText().toString());
+        address.setIndications(etIndication.getText().toString());
+        address.setDirection(etDirection.getText().toString());
         address.setLatitude(latitudeSelected);
         address.setLongitude(longitudeSelected);
         address.setTelephone(etTelephone.getText().toString());

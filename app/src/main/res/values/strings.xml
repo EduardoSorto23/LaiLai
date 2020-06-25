@@ -78,8 +78,10 @@
     <string name="guess">Ingresar como invitado</string>
     <string name="edit">Editar</string>
     <string name="home">HOME</string>
-    <string name="track_order">CONSULTA TU ORDEN</string>
+    <string name="track_order">CONSULTA TUS ORDENES</string>
     <string name="order_history">HISTORIAL DE ORDENES</string>
     <string name="profile">PERFIl</string>
+    <string name="back">Regresar</string>
+    <string name="call">Llamar</string>
 
 </resources>

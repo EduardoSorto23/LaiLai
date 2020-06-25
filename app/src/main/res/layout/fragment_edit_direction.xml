@@ -83,7 +83,29 @@
                     android:id="@+id/etDirection"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Residencial "
+                    android:hint="Dirección"
+                    android:fontFamily="@font/neue_kabel_bold"
+                    android:inputType="text"
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tlIndication"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="20dp"
+                app:hintTextColor="@color/browser_actions_title_color">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etIndication"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Referencia"
                     android:fontFamily="@font/neue_kabel_bold"
                     android:inputType="text"
                     android:imeOptions="actionNext"

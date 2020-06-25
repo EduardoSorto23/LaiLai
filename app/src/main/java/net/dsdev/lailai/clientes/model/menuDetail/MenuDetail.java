@@ -31,7 +31,7 @@ public class MenuDetail {
     private String courtesy = "N";
 
     @SerializedName(Constants.quantity)
-    private int quantity = 1;
+    private int quantity;
 
     @SerializedName(Constants.extraPrice)
     private Double extraPrice = 0.0;

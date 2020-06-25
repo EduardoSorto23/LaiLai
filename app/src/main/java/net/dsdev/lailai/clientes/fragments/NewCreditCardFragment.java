@@ -176,7 +176,7 @@ public class NewCreditCardFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (lock || s.length() > 3) {
+                if (lock || s.length() > 5) {
                     return;
                 }
                 lock = true;

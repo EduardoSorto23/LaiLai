@@ -6,16 +6,18 @@ public class Constants {
     /**
     * Strings for Retrofit instances
     * */
-    public static final String baseUrl = "http://192.168.0.195:8080/clientapp-web/webresources/";
+    //public static final String baseUrl = "http://192.168.0.195:8080/clientapp-web/webresources/";
     // public static final String baseUrl = "http://3.136.107.70:8080/call-center-web/webresources/";
     // public static final String baseUrl = "http://172.16.0.3:8080/call-center-web/webresources/";
     // public static final String baseUrl = "http://192.168.0.195:8080/call-center-web/webresources/";
     //public static final String baseUrl = "http://3.136.107.70:8080/call-center-web/webresources/";
 
     //public static final String baseUrl = "http://192.168.0.205:8080/clientapp-web/webresources/";
+    public static final String baseUrl = "http://173.44.60.39:8080/clientapp-web/webresources/";
     public static final String findById = "getMenuDetail/{id}";
     public static final String findAll = "getMenus/APP";
-    public static final String sendOrder = "sendOrder";
+    //public static final String sendOrder = "sendOrder";
+    public static final String sendOrder = "order/register";
     public static final String getPromos = "getMenusPromo/APP";
     public static final String loginLocalService = "account/login/local";
     public static final String loginApiService = "account/login/api";
@@ -30,6 +32,10 @@ public class Constants {
     public static final String getCards = "card/list/{id}";
     public static final String deleteCard = "card/delete/{id}";
     public static final String updateCard = "card/update";
+    public static final String getActiveOrders = "order/activas/{idClient}";
+    public static final String getActiveOrderDetail = "order/{idOrder}";
+
+    public static final String getStores = "tiendas/list";
     /*
     * End to strings for Retrofit
     */
@@ -62,6 +68,7 @@ public class Constants {
     public static final String idTelephone = "idTelefono";
     public static final String idDirection = "idDireccion";
     public static final String indications = "indicaciones";
+    public static final String direction = "direccion";
     public static final String canal = "canal";
     public static final String amount = "monto";
     public static final String quantity = "cantidad";
@@ -113,4 +120,15 @@ public class Constants {
     public static final String owner = "titular";
     public static final String cards = "tarjetas";
     public static final String telephone = "telefono";
+    public static final String orderNumber = "orderNumber";
+    public static final String orderCode = "codigoPedido";
+    public static final String orderDate = "fecha";
+    public static final String orderHour= "hora";
+    public static final String orderTotal = "totalOrden";
+    public static final String orders = "ordenes";
+    public static final String code = "codigo";
+    public static final String openHour = "horaApertura";
+    public static final String closeHour = "horaCierre";
+    public static final String stores = "tiendas";
+    public static final String idStore = "idTienda";
 }

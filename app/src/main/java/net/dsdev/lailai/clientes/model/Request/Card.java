@@ -9,14 +9,14 @@ public class Card {
     String paymentMethod = "EFE";
 
     @SerializedName(Constants.document)
-    String document = "02458758";
+    String document;
 
 
     @SerializedName(Constants.ownerName)
-    String ownerName = "Luis Flores";
+    String ownerName;
 
     @SerializedName(Constants.ccv)
-    int ccv = 560;
+    Integer ccv;
 
     @SerializedName(Constants.month)
     private String month;
@@ -52,11 +52,11 @@ public class Card {
         this.ownerName = ownerName;
     }
 
-    public int getCcv() {
+    public Integer getCcv() {
         return ccv;
     }
 
-    public void setCcv(int ccv) {
+    public void setCcv(Integer ccv) {
         this.ccv = ccv;
     }
 

@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
@@ -22,7 +23,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import net.dsdev.lailai.clientes.R;
 import net.dsdev.lailai.clientes.activity.LoginActivity;
 import net.dsdev.lailai.clientes.model.menuDetail.MenuDetailList;
 import net.dsdev.lailai.clientes.model.users.Client;
@@ -112,10 +112,12 @@ public class MainActivity extends AppCompatActivity implements AddOrRemoveCallba
         int id = item.getItemId();
         switch(id){
             case R.id.user:
-                if (sharedPreferencesMethods.getLoggedUser()==null || !sharedPreferencesMethods.getIsLogged()){
-                    RandomMethods.showLoginNeededAlert(this);
+                if (getIsLogged()){
+                    navController.navigate(R.id.profileFragment);
+                    NavDestination s = navController.getCurrentDestination();
+                    Log.d(TAG, "onOptionsItemSelected: test");
                 } else {
-                    Navigation.findNavController(this, R.id.fragment).navigate(R.id.profileFragment);
+                    RandomMethods.showLoginNeededAlert(this);
                 }
                 break;
             case R.id.logout:
@@ -123,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements AddOrRemoveCallba
                 break;
             case R.id.cart:
                 if (cart_count > 0) {
-                    Navigation.findNavController(this, R.id.fragment).navigate(R.id.orderDetailFragment);
+                    navController.navigate(R.id.orderDetailFragment);
                 }
                 break;
 
@@ -299,18 +301,26 @@ public class MainActivity extends AppCompatActivity implements AddOrRemoveCallba
                 navController.navigate(R.id.homeFragment);
                 break;
             case R.id.drawerProfile:
-                if (!sharedPreferencesMethods.getIsLogged() || sharedPreferencesMethods.getLoggedUser()==null ){
-                    RandomMethods.showLoginNeededAlert(MainActivity.this);
-                } else {
+                if (getIsLogged()){
                     navController.navigate(R.id.profileFragment);
+                }else{
+                    RandomMethods.showLoginNeededAlert(MainActivity.this);
                 }
                 break;
             case R.id.drawerOrder:
-                navController.navigate(R.id.trackOrderFragment);
+                if (getIsLogged()){
+                    navController.navigate(R.id.activeOrdersFragment);
+                }else{
+                    RandomMethods.showLoginNeededAlert(MainActivity.this);
+                }
                 break;
-            case R.id.drawerOrderHistory:
-                navController.navigate(R.id.orderHistoryFragment);
-                break;
+            /*case R.id.drawerOrderHistory:
+                if (getIsLogged()){
+                    navController.navigate(R.id.orderHistoryFragment);
+                }else{
+                    RandomMethods.showLoginNeededAlert(MainActivity.this);
+                }
+                break;*/
             default:
                 Toast.makeText(this, "click default", Toast.LENGTH_SHORT).show();
         }
@@ -318,6 +328,10 @@ public class MainActivity extends AppCompatActivity implements AddOrRemoveCallba
         item.setChecked(true);
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private boolean getIsLogged() {
+        return sharedPreferencesMethods.getIsLogged() && sharedPreferencesMethods.getLoggedUser() !=null;
     }
 
     @Override

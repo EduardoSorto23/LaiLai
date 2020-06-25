@@ -90,7 +90,8 @@ public abstract class MenuDetailAdapter extends RecyclerView.Adapter<MenuDetailV
 
             TextView textView = new TextView(context);
             TextViewCompat.setTextAppearance(textView, R.style.CustomFontFamily);
-            textView.setText("+"+v.getExtraPrice().toString());
+            String formatText = "+%01.02f";
+            textView.setText(String.format(formatText,v.getExtraPrice()));
             if (!(v.getExtraPrice()>0)){
                 textView.setVisibility(View.INVISIBLE);
             }

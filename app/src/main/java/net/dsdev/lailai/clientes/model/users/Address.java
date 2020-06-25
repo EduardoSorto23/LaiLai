@@ -26,6 +26,9 @@ public class Address {
     @SerializedName(Constants.indications)
     private String indications;
 
+    @SerializedName(Constants.direction)
+    private String direction;
+
     @SerializedName(Constants.latitude)
     private double latitude;
 
@@ -114,5 +117,13 @@ public class Address {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+
+    public String getDirection() {
+        return direction;
+    }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
     }
 }

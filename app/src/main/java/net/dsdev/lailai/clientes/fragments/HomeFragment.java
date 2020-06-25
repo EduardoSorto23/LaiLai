@@ -286,6 +286,8 @@ public class HomeFragment extends Fragment {
             call.enqueue(new Callback<JsonMenus>() {
                 @Override
                 public void onResponse(Call<JsonMenus> call, Response<JsonMenus> response) {
+                    shimmerFrameLayout.stopShimmerAnimation();
+                    shimmerFrameLayout.setVisibility(View.GONE);
                     if (response.code() == 404) {
                         Log.d(TAG, "onResponse: code " + response.code());
                         return;
@@ -293,9 +295,6 @@ public class HomeFragment extends Fragment {
                     if (response.body() != null) {
                         sharedPreferencesMethods.saveMenuTree(Constants.menuTree, new Gson().toJson(response.body()));
                         Globals.MENUS_SAVED = new Gson().toJson(response.body());
-                        shimmerFrameLayout.stopShimmerAnimation();
-                        shimmerFrameLayout.setVisibility(View.GONE);
-
                         categoryAdapter.setMenu(response.body());
                         rvIniHome.setAdapter(categoryAdapter);
                         rvIniHome.setLayoutManager(
@@ -308,6 +307,8 @@ public class HomeFragment extends Fragment {
                 @Override
                 public void onFailure(Call<JsonMenus> call, Throwable t) {
                     Log.d(TAG, "onFailure : " + t.getMessage());
+                    shimmerFrameLayout.stopShimmerAnimation();
+                    shimmerFrameLayout.setVisibility(View.GONE);
                 }
             });
         }

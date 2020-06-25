@@ -143,4 +143,11 @@
     <style name="MyDialogThemeMaterial" parent="Theme.MaterialComponents.Dialog.Alert">
         <item name="colorPrimary">@color/yellow_app</item>
     </style>
+    <style name="MyTimePickerDialogTheme" parent="Theme.MaterialComponents.Dialog.Alert">
+        <item name="colorPrimary">@color/yellow_app</item>
+        <item name="colorSecondary">@color/white</item>
+        <item name="colorBackgroundFloating">@color/red_app</item>
+        <item name="android:textColor">@color/red_app</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
 </resources>
