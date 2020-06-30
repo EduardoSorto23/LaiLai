@@ -61,7 +61,7 @@ public class OrderHistoryFragment extends Fragment {
                 holder.getTbLOrderTrack().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(context,"Select "+position,Toast.LENGTH_LONG).show();
+                        //Toast.makeText(context,"Select "+position,Toast.LENGTH_LONG).show();
                         NavHostFragment.findNavController(THIS).navigate(R.id.action_orderHistoryFragment_to_activeOrderDetailFragment);
                     }
                 });

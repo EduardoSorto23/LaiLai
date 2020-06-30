@@ -136,7 +136,7 @@ public class OrderDetailFragment extends Fragment {
                             custom.show(fm,"");
                             sharedMethods.saveSweetSelect("isSweetSelected",true);
                         }else{
-                            new MaterialAlertDialogBuilder(getActivity(), R.style.MyDialogThemeMaterial)
+                            /*new MaterialAlertDialogBuilder(getActivity(), R.style.MyDialogThemeMaterial)
                                     .setTitle("Importante")
                                     .setMessage("¿Deseas tu pedido a domicilio o para pasar a recogerlo en tienda?")
                                     .setNeutralButton("DOMICILIO", new DialogInterface.OnClickListener() {
@@ -152,9 +152,10 @@ public class OrderDetailFragment extends Fragment {
                                         }
                                     })
                                     .setPositiveButton("CANCELAR",null)
-                                    .show();
+                                    .show();*/
+                            Navigation.findNavController(v).navigate(R.id.action_orderDetailFragment_to_directionsFragment);
                         }
-                        //Navigation.findNavController(v).navigate(R.id.action_orderDetailFragment_to_directionsFragment);
+
                     }else{
                         Toast.makeText(getActivity().getApplicationContext(),"Por favor, añade algún producto",Toast.LENGTH_LONG).show();
                     }
@@ -195,7 +196,7 @@ public class OrderDetailFragment extends Fragment {
                         //String formatButton = " %s ( %s ) ── Q%s";
                         String formatButton = Globals.formatBtn;
                         btnProcess.setText(String.format(formatButton,getResources().getString(R.string.process_my_order), menuDetailList.getMenus() == null ? 0:menuDetailList.getMenus().size(),orderDetailAdapter.getTotal()));
-                        Toast.makeText(getActivity().getApplicationContext(),"Producto eliminado exitosamente",Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getActivity().getApplicationContext(),"Producto eliminado exitosamente",Toast.LENGTH_LONG).show();
                     }
                 });
 

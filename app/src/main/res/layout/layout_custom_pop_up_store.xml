@@ -32,10 +32,9 @@
                     android:src="@drawable/ic_custom_pop_up" />
 
                 <TextView
-                    android:id="@+id/lblAddress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/send_address"
+                    android:text="@string/send_store"
                     android:textColor="@color/md_black_1000"
                     android:textSize="16sp"
                     android:layout_gravity="center_horizontal|center_vertical"

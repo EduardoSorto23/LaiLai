@@ -289,9 +289,9 @@ public class MainActivity extends AppCompatActivity implements AddOrRemoveCallba
         navigationView = findViewById(R.id.navigationView);
         navController = Navigation.findNavController(this, R.id.fragment);
         navigationView.setNavigationItemSelectedListener(this);
-        MenuItem menuItem = navigationView.getMenu().getItem(0);
-        onNavigationItemSelected(menuItem);
-        menuItem.setChecked(true);
+        //MenuItem menuItem = navigationView.getMenu().getItem(0);
+        //onNavigationItemSelected(menuItem);
+        //menuItem.setChecked(true);
     }
 
     @Override
@@ -322,7 +322,7 @@ public class MainActivity extends AppCompatActivity implements AddOrRemoveCallba
                 }
                 break;*/
             default:
-                Toast.makeText(this, "click default", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "click default", Toast.LENGTH_SHORT).show();
         }
         //Toast.makeText(this, "click", Toast.LENGTH_SHORT).show();
         item.setChecked(true);

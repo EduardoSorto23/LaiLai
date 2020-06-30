@@ -13,7 +13,8 @@ public class Constants {
     //public static final String baseUrl = "http://3.136.107.70:8080/call-center-web/webresources/";
 
     //public static final String baseUrl = "http://192.168.0.205:8080/clientapp-web/webresources/";
-    public static final String baseUrl = "http://173.44.60.39:8080/clientapp-web/webresources/";
+    //public static final String baseUrl = "http://173.44.60.39:8080/clientapp-web/webresources/";
+    public static final String baseUrl = "http://173.254.242.213:8080/clientapp-web/webresources/";
     public static final String findById = "getMenuDetail/{id}";
     public static final String findAll = "getMenus/APP";
     //public static final String sendOrder = "sendOrder";

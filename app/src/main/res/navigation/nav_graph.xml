@@ -157,7 +157,9 @@
         <action
             android:id="@+id/action_orderLastRevisionFragment_to_thanksFragment"
             app:destination="@id/thanksFragment"
-            app:popUpTo="@+id/thanksFragment" />
+            app:popUpTo="@+id/thanksFragment"
+            app:popUpToInclusive="true"
+            />
         <action
             android:id="@+id/action_orderLastRevisionFragment_to_directionsFragment"
             app:destination="@id/directionsFragment" />

@@ -43,8 +43,10 @@ public class Order {
     private Long idStore;
 
     private String horaEntrega;
-    public String ocasion;
-
+    private String ocasion;
+    private Double vuelto;
+    private Boolean factura;
+    private String facturaNit;
     public Order() {
     }
 
@@ -158,5 +160,29 @@ public class Order {
 
     public void setOcasion(String ocasion) {
         this.ocasion = ocasion;
+    }
+
+    public Double getVuelto() {
+        return vuelto;
+    }
+
+    public void setVuelto(Double vuelto) {
+        this.vuelto = vuelto;
+    }
+
+    public Boolean getFactura() {
+        return factura;
+    }
+
+    public void setFactura(Boolean factura) {
+        this.factura = factura;
+    }
+
+    public String getFacturaNit() {
+        return facturaNit;
+    }
+
+    public void setFacturaNit(String facturaNit) {
+        this.facturaNit = facturaNit;
     }
 }

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SegmentedButtonGroup">
+        <attr format="color" name="sbg_selectorTextColor"/>
+        <attr format="dimension" name="sbg_shadowElevation"/>
+        <attr format="dimension" name="sbg_shadowMargin"/>
+        <attr name="sbg_shadow" format="boolean"/>
+    </declare-styleable>
+</resources>

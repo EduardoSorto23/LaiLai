@@ -15,6 +15,10 @@ public class AuthResponse {
     @SerializedName(Constants.client)
     private Client client;
 
+    @SerializedName(Constants.orderCode)
+    private String orderCode;
+
+
 
     public boolean isValid() {
         return valid;
@@ -38,5 +42,13 @@ public class AuthResponse {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public String getOrderCode() {
+        return orderCode;
+    }
+
+    public void setOrderCode(String orderCode) {
+        this.orderCode = orderCode;
     }
 }

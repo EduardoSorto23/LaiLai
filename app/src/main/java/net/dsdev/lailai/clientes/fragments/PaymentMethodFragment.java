@@ -2,6 +2,7 @@ package net.dsdev.lailai.clientes.fragments;
 
 
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -210,7 +212,8 @@ public class PaymentMethodFragment extends Fragment {
         input.setMaxLines(1);
         input.setFilters(new InputFilter[] {new InputFilter.LengthFilter(3)});
         input.requestFocus();
-        new MaterialAlertDialogBuilder(getActivity(), R.style.MyDialogTheme)
+        input.setTextColor(Color.WHITE);
+        new MaterialAlertDialogBuilder(getActivity(), R.style.MyDialogThemeMaterial)
                 .setTitle("Tarjeta")
                 .setMessage("Por favor ingrese el número CCV. \nSon los últimos 3 dígitos al reverso de su tarjeta")
                 .setView(input)

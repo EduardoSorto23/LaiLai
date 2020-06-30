@@ -8,4 +8,6 @@
     <dimen name="little_divider">22dp</dimen>
     <dimen name="big_margin">38dp</dimen>
     <dimen name="little_standard_margin">4dp</dimen>
+
+    <dimen name="md_btn_stroke_size">1dp</dimen>
 </resources>

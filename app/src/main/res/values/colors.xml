@@ -13,4 +13,5 @@
     <color name="overlay">#A9FFFFFF</color>
     <color name="skeleton_background">#dddddd</color>
     <color name="call">#109507</color>
+    <color name="whitApp">#FFFFFF</color>
 </resources>

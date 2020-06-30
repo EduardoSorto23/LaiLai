@@ -34,13 +34,13 @@ public class CustomDialogSelectSweet extends DialogFragment implements View.OnCl
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnAccept:
-                Toast.makeText(getActivity(),"Aceptar",Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity(),"Aceptar",Toast.LENGTH_LONG).show();
                 //Navigation.findNavController(v).navigate(R.id.action_orderDetailFragment_to_directionsFragment);
                 NavHostFragment.findNavController(this).navigate(R.id.action_orderDetailFragment_to_directionsFragment);
                 dismiss();
                 break;
             case R.id.btnCancel:
-                Toast.makeText(getActivity(),"Cancelar",Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity(),"Cancelar",Toast.LENGTH_LONG).show();
                 dismiss();
                 break;
             default:

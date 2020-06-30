@@ -228,6 +228,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/lblTipoOcasion"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Dirección de envío"
@@ -433,13 +434,14 @@
                             android:fontFamily="@font/neue_kabel_bold"/>
 
                         <RadioGroup
+                            android:id="@+id/rgBill"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:checkedButton="@+id/first"
                             android:orientation="horizontal">
 
                             <RadioButton
-                                android:id="@+id/first"
+                                android:id="@+id/rbYes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Sí"
@@ -447,13 +449,30 @@
                                 app:buttonTint="@color/md_black_1000"/>
 
                             <RadioButton
-                                android:id="@+id/second"
+                                android:id="@+id/rbNo"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="No"
                                 android:fontFamily="@font/neue_kabel"
                                 app:buttonTint="@color/md_black_1000"/>
                         </RadioGroup>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="NIT:"
+                            android:textColor="@color/red_app"
+                            android:textSize="15sp"
+                            android:fontFamily="@font/neue_kabel_bold"/>
+                        <EditText
+                            android:id="@+id/txtNit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/md_black_1000"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/neue_kabel"
+                            android:inputType="number"
+                            android:focusable="false"
+                            />
 
                     </LinearLayout>
 
@@ -470,19 +489,20 @@
                             android:textColor="@color/md_black_1000"
                             android:textSize="14sp"
                             android:fontFamily="@font/neue_kabel_bold" />
-
                         <EditText
+                            android:id="@+id/txtMoneyBack"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/corner_radius_cart_bottom_item"
-                            android:layout_marginTop="@dimen/little_standard_margin"
-                            android:layout_marginBottom="@dimen/little_standard_margin"
+                            android:layout_height="wrap_content"
                             android:paddingStart="@dimen/big_standard_margin"
                             android:paddingEnd="@dimen/big_standard_margin"
+                            android:paddingTop="@dimen/little_standard_margin"
+                            android:paddingBottom="@dimen/little_standard_margin"
+                            android:background="@drawable/corner_radius_cart_bottom_item"
                             android:hint="Q"
                             android:textColor="@color/white"
                             android:textColorHint="@color/white"
                             android:inputType="numberDecimal"
+                            android:textSize="18sp"
                             android:maxLines="1"
                             android:imeOptions="actionDone"
                             android:fontFamily="@font/neue_kabel"/>

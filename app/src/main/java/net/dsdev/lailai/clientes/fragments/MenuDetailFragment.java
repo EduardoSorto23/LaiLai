@@ -144,15 +144,15 @@ public class MenuDetailFragment extends Fragment {
                         List<JsonMenuDetail> jsMd = new ArrayList<>();
                         jsMd.add(jsonMenuDetail);
                         menuDetailList.setMenus(jsMd);
-                        Toast.makeText(getActivity().getApplicationContext(),"Producto añadido exitosamente",Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getActivity().getApplicationContext(),"Producto añadido exitosamente",Toast.LENGTH_LONG).show();
                     } else {
                         menuDetailList = gson.fromJson(json, MenuDetailList.class);
                         if (isEditable){
                             menuDetailList.getMenus().get(positionSelectedMenu).setMenu(jsonMenuDetail.getMenu());
-                            Toast.makeText(getActivity().getApplicationContext(),"Producto editado exitosamente",Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getActivity().getApplicationContext(),"Producto editado exitosamente",Toast.LENGTH_LONG).show();
                         } else {
                             menuDetailList.getMenus().add(jsonMenuDetail);
-                            Toast.makeText(getActivity().getApplicationContext(),"Producto añadido exitosamente",Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getActivity().getApplicationContext(),"Producto añadido exitosamente",Toast.LENGTH_LONG).show();
                         }
                         menuDetailList.getMenus().get(positionSelectedMenu).getMenu().setExtraPrice(sharedPreferencesMethods.getMenuExtraPrice(positionSelectedMenu));
                     }
@@ -269,7 +269,7 @@ public class MenuDetailFragment extends Fragment {
                         /*Double extraPrice = Double.parseDouble(txtPriceCart.getText().toString());
                         txtPriceCart.setText(extraPrice.toString());*/
 
-                        Toast.makeText(getActivity().getApplicationContext(), radioButton.getText(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity().getApplicationContext(), radioButton.getText(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -349,7 +349,7 @@ public class MenuDetailFragment extends Fragment {
                         //setRadioButtonColor(radioButton);
                         setSelectedVariant(idOption, checkedId);
 
-                        Toast.makeText(getActivity().getApplicationContext(), radioButton.getText(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity().getApplicationContext(), radioButton.getText(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }

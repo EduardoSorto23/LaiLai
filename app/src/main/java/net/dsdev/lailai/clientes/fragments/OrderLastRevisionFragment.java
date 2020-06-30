@@ -22,7 +22,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +45,7 @@ import net.dsdev.lailai.clientes.view.CustomDialogConfirmation;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
+import com.google.zxing.common.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,9 +78,11 @@ public class OrderLastRevisionFragment extends Fragment {
     TextView txtPayment, txtLastOrderNumber;
     View paymentLine;
     ImageView imgPayment,imgArrowAddress, imgArrowPayment;
-    TextView txtAddress,txtTotal,txtSubTotal;
+    TextView txtAddress,txtTotal,txtSubTotal,lblTipoOcasion;
     private static final String actionBarTittle = "Procesar mi Orden";
     private FragmentActivity myContext;
+    private EditText txtMoneyBack,txtNit;
+    RadioGroup rgBill;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -113,10 +118,6 @@ public class OrderLastRevisionFragment extends Fragment {
         init();
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-    }
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -134,10 +135,14 @@ public class OrderLastRevisionFragment extends Fragment {
         imgPayment = rootView.findViewById(R.id.imgPayment);
         imgArrowAddress = rootView.findViewById(R.id.imgArrowAddress);
         txtAddress = rootView.findViewById(R.id.txtAddress);
+        lblTipoOcasion = rootView.findViewById(R.id.lblTipoOcasion);
         imgArrowPayment = rootView.findViewById(R.id.imgArrowPayment);
         txtTotal = rootView.findViewById(R.id.txtTotal);
         txtSubTotal = rootView.findViewById(R.id.txtSubTotal);
         txtLastOrderNumber = rootView.findViewById(R.id.txtLastOrderNumber);
+        txtMoneyBack = rootView.findViewById(R.id.txtMoneyBack);
+        txtNit = rootView.findViewById(R.id.txtNit);
+        rgBill = rootView.findViewById(R.id.rgBill);
         String method = getArguments().getString("paymentMethod", "EFE");
         if (method.equals("EFE")){
             txtPayment.setText("EFECTIVO");
@@ -150,7 +155,31 @@ public class OrderLastRevisionFragment extends Fragment {
     }
 
     private void init(){
-        txtAddress.setText(sharedPreferencesMethods.getLoggedUser().getFinalAddress());
+        txtNit.setFocusable(false);
+        txtNit.setEnabled(false);
+        rgBill.check(R.id.rbNo);
+        rgBill.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.rbYes){
+                    finalOrder.setFactura(true);
+                    finalOrder.setFacturaNit(txtNit.getText().toString());
+                    txtNit.setFocusable(true);
+                    txtNit.setEnabled(true);
+                    txtNit.setFocusableInTouchMode(true);
+                }else {
+                    txtNit.setFocusable(false);
+                    txtNit.setEnabled(false);
+                }
+            }
+        });
+        if(Globals.OCASION==null || Globals.OCASION.equalsIgnoreCase("DOM")){
+            lblTipoOcasion.setText("Dirección de envío");
+            txtAddress.setText(sharedPreferencesMethods.getLoggedUser().getFinalAddress());
+        }else if (Globals.OCASION.equalsIgnoreCase("LLV")){
+            txtAddress.setText(Globals.tiendaName);
+            lblTipoOcasion.setText("Tienda");
+        }
         finalOrder = new Order();
         finalOrder.setAmount(sharedPreferencesMethods.getFinalPrice());
         finalOrder.setCanal("APP");
@@ -181,10 +210,24 @@ public class OrderLastRevisionFragment extends Fragment {
                 if (txtLastOrderNumber.getText().length()<=0){
                     Toast.makeText(getContext(), "El número de teléfono es un campo obligatorio", Toast.LENGTH_LONG).show();
                     return;
+                }else if (rgBill.getCheckedRadioButtonId() == R.id.rbYes &&
+                        (txtNit.getText().toString().isEmpty() || txtNit.getText().toString().length()<=0)
+                ){
+                    Toast.makeText(getContext(), "Debe ingresar un número de NIT", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                try{
+                    finalOrder.setVuelto(Double.parseDouble(txtMoneyBack.getText().toString()));
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
                 finalOrder.setTelephone(txtLastOrderNumber.getText().toString());
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                CustomDialogConfirmation custom = new CustomDialogConfirmation(finalOrder,OrderLastRevisionFragment.this,sharedPreferencesMethods);
+                Boolean isAddress = true;
+                if (Globals.OCASION.equalsIgnoreCase("LLV")){
+                    isAddress=false;
+                }
+                CustomDialogConfirmation custom = new CustomDialogConfirmation(finalOrder,OrderLastRevisionFragment.this,sharedPreferencesMethods,isAddress);
                 custom.show(fm,"");
                 Log.d(TAG, "onClick: go to send response");
                 Log.d(TAG, "onClick: to json "+gson.toJson(finalOrder));
@@ -256,6 +299,8 @@ public class OrderLastRevisionFragment extends Fragment {
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putString("action","order");
+                bundle.putString("paymentMethod",getArguments().getString("paymentMethod", "EFE"));
+                bundle.putString("cardAuth",getArguments().getString("cardAuth",""));
                 Navigation.findNavController(v).navigate(R.id.action_orderLastRevisionFragment_to_directionsFragment,bundle);
             }
         });

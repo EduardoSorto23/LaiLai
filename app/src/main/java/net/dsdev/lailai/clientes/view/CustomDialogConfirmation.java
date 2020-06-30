@@ -15,15 +15,19 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
+import androidx.navigation.Navigator;
 import androidx.navigation.fragment.NavHostFragment;
 
 import net.dsdev.lailai.clientes.R;
+import net.dsdev.lailai.clientes.fragments.OrderLastRevisionFragmentDirections;
 import net.dsdev.lailai.clientes.model.Request.Order;
 import net.dsdev.lailai.clientes.model.users.AuthResponse;
 import net.dsdev.lailai.clientes.retrofit.RetrofitInstance;
 import net.dsdev.lailai.clientes.retrofit.requests.OrderRequest;
 import net.dsdev.lailai.clientes.util.AddOrRemoveCallbacks;
+import net.dsdev.lailai.clientes.util.Globals;
 import net.dsdev.lailai.clientes.util.SharedPreferencesMethods;
 
 import java.util.Objects;
@@ -42,10 +46,13 @@ public class CustomDialogConfirmation extends DialogFragment implements View.OnC
     TextView txtAddress;
     View mView;
     ProgressDialog progressDialog;
-    public CustomDialogConfirmation(Order finalOrder, Fragment fragment, SharedPreferencesMethods sharedPreferencesMethods) {
+    Boolean isAddress;
+    private TextView lblAddress;
+    public CustomDialogConfirmation(Order finalOrder, Fragment fragment, SharedPreferencesMethods sharedPreferencesMethods,Boolean isAddress) {
         this.finalOrder = finalOrder;
         this.fragment = fragment;
         this.sharedPreferencesMethods = sharedPreferencesMethods;
+        this.isAddress = isAddress;
     }
 
     private Button btnAccept, btnCancel;
@@ -54,9 +61,15 @@ public class CustomDialogConfirmation extends DialogFragment implements View.OnC
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.layout_custom_pop_up,container,false);
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        getDialog().setTitle("Test");
+        //getDialog().setTitle("Test");
         bindUI();
-        txtAddress.setText(sharedPreferencesMethods.getLoggedUser().getFinalAddress());
+        if (isAddress) {
+            lblAddress.setText("¿Estás seguro que deseas enviar a la siguiente dirección?");
+            txtAddress.setText(sharedPreferencesMethods.getLoggedUser().getFinalAddress());
+        } else {
+            lblAddress.setText("¿Estás seguro que deseas recoger en la siguiente Tienda?");
+            txtAddress.setText(Globals.tiendaName);
+        }
         btnAccept = mView.findViewById(R.id.btnAccept);
         btnAccept.setOnClickListener(this);
         btnCancel = mView.findViewById(R.id.btnCancel);
@@ -66,6 +79,7 @@ public class CustomDialogConfirmation extends DialogFragment implements View.OnC
 
     private void bindUI() {
         txtAddress = mView.findViewById(R.id.txtAddress);
+        lblAddress = mView.findViewById(R.id.lblAddress);
     }
 
     @Override
@@ -97,17 +111,24 @@ public class CustomDialogConfirmation extends DialogFragment implements View.OnC
                 }
                 Log.d(TAG, "onResponse: response code last revision "+response.code());
                 if (response.body() != null){
-                    try {
-                        Toast.makeText(getActivity(),response.body().getMsg(),Toast.LENGTH_LONG).show();
-                    }catch (Exception e){
-                        Log.d(TAG, "onResponse: error al mostrar toast"+e.getMessage());
-                    }
                     if (response.body().isValid()){
                         sharedPreferencesMethods.deleteMenusTree();
                         ((AddOrRemoveCallbacks) Objects.requireNonNull(getActivity())).onRemoveProduct();
+                        Globals.OCASION="DOM";
+                        Globals.tiendaName="";
+                        Globals.tienda=null;
+                        Globals.horaEntrega=null;
                         dismiss();
-                        NavHostFragment.findNavController(fragment).navigate(R.id.action_orderLastRevisionFragment_to_thanksFragment);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("orderCode",response.body().getOrderCode());
+                        NavHostFragment.findNavController(fragment).navigate(R.id.action_orderLastRevisionFragment_to_thanksFragment,bundle);
+                        //Navigation.findNavController(mView).navigate(R.id.action_orderLastRevisionFragment_to_thanksFragment,bundle);
                     }else{
+                        try {
+                            Toast.makeText(getActivity(),response.body().getMsg(),Toast.LENGTH_LONG).show();
+                        }catch (Exception e){
+                            Log.d(TAG, "onResponse: error al mostrar toast"+e.getMessage());
+                        }
                         dismiss();
                     }
                 }else{

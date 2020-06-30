@@ -140,8 +140,14 @@
         <item name="colorPrimary">@color/yellow_app</item>
     </style>
 
+    <style name="MyDialogThemeMaterialLight" parent="Theme.MaterialComponents.Light.Dialog.Alert">
+        <item name="colorPrimary">@color/yellow_app</item>
+        <item name="editTextColor">@color/white</item>
+    </style>
+
     <style name="MyDialogThemeMaterial" parent="Theme.MaterialComponents.Dialog.Alert">
         <item name="colorPrimary">@color/yellow_app</item>
+        <item name="editTextColor">@color/white</item>
     </style>
     <style name="MyTimePickerDialogTheme" parent="Theme.MaterialComponents.Dialog.Alert">
         <item name="colorPrimary">@color/yellow_app</item>
@@ -149,5 +155,15 @@
         <item name="colorBackgroundFloating">@color/red_app</item>
         <item name="android:textColor">@color/red_app</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.Button.MyButtonToggle" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="strokeColor">@color/md_btn_stroke_selector</item>
+        <item name="strokeWidth">@dimen/md_btn_stroke_size</item>
+        <item name="android:textColor">@color/md_btn_text_color_selector</item>
+        <item name="backgroundTint">@color/md_btn_bg_color_selector</item>
+        <item name="rippleColor">@color/md_btn_ripple_color_selector</item>
     </style>
 </resources>

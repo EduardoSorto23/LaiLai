@@ -9,6 +9,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,26 +17,37 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import net.dsdev.lailai.clientes.MainActivity;
 import net.dsdev.lailai.clientes.R;
 import net.dsdev.lailai.clientes.adapters.DirectionAdapter;
+import net.dsdev.lailai.clientes.adapters.StoreAdapter;
+import net.dsdev.lailai.clientes.model.Store;
+import net.dsdev.lailai.clientes.model.StoreList;
 import net.dsdev.lailai.clientes.model.users.Address;
 import net.dsdev.lailai.clientes.model.users.AddressResponse;
 import net.dsdev.lailai.clientes.model.users.Client;
 import net.dsdev.lailai.clientes.retrofit.RetrofitInstance;
 import net.dsdev.lailai.clientes.retrofit.users.AddressService;
+import net.dsdev.lailai.clientes.retrofit.users.StoreService;
 import net.dsdev.lailai.clientes.util.Globals;
 import net.dsdev.lailai.clientes.viewHolders.DirectionViewHolder;
 import net.dsdev.lailai.clientes.util.SharedPreferencesMethods;
+import net.dsdev.lailai.clientes.viewHolders.StoreViewHolder;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -62,7 +74,12 @@ public class DirectionsFragment extends Fragment implements View.OnClickListener
     private int hourSelected,minuteSelected;
     TimePickerDialog mTimePicker;
     MaterialButton btnTimePicker;
-
+    private LinearLayout layoutTimePicker;
+    MaterialButtonToggleGroup toggleGroupAddress;
+    Button btnDom,btnRec;
+    private TextView lblOcasion;
+    private StoreAdapter storeAdapter;
+    private List<Store> stores;
     public DirectionsFragment() {
     }
 
@@ -80,22 +97,46 @@ public class DirectionsFragment extends Fragment implements View.OnClickListener
     @Override
     public void onResume() {
         super.onResume();
-        getAddresses();
+        //getAddresses();
     }
 
     private void bindUI(){
         recyclerView = rootView.findViewById(R.id.rvDirections);
         fab = rootView.findViewById(R.id.fabDirections);
         btnTimePicker = rootView.findViewById(R.id.btnTimePicker);
+        layoutTimePicker = rootView.findViewById(R.id.layoutTimePicker);
+        toggleGroupAddress = rootView.findViewById(R.id.toggleGroupAddress);
+        btnDom = rootView.findViewById(R.id.btnDom);
+        btnRec = rootView.findViewById(R.id.btnRec);
+        lblOcasion = rootView.findViewById(R.id.lblOcasion);
     }
 
     public void init(){
         sharedPreferencesMethods = new SharedPreferencesMethods(getActivity());
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+        recyclerView.setNestedScrollingEnabled(false);
         btnTimePicker.setOnClickListener(this);
         Calendar mcurrentTime = Calendar.getInstance();
         hourSelected = mcurrentTime.get(Calendar.HOUR);
         minuteSelected = mcurrentTime.get(Calendar.MINUTE);
-
+        toggleGroupAddress.addOnButtonCheckedListener(new MaterialButtonToggleGroup.OnButtonCheckedListener() {
+            @Override
+            public void onButtonChecked(MaterialButtonToggleGroup group, int checkedId, boolean isChecked) {
+                if (isChecked){
+                    if (checkedId == R.id.btnDom){
+                        fab.setVisibility(View.VISIBLE);
+                        lblOcasion.setText("Direcciones:");
+                        recyclerView.setAdapter(null);
+                        getAddresses();
+                    }else if (checkedId == R.id.btnRec){
+                        fab.setVisibility(View.GONE);
+                        lblOcasion.setText("Tiendas:");
+                        recyclerView.setAdapter(null);
+                        initStoresAdapter();
+                    }
+                }
+            }
+        });
         if (getArguments() != null) {
             String actionArg = getArguments().getString("action");
             if (actionArg != null) {
@@ -103,12 +144,30 @@ public class DirectionsFragment extends Fragment implements View.OnClickListener
             }
         }
         try {
+            if (action.equalsIgnoreCase("profile")){
+                layoutTimePicker.setVisibility(View.GONE);
+                toggleGroupAddress.setVisibility(View.GONE);
+                getAddresses();
+            }else{
+                if (Globals.OCASION!=null) {
+                    if (Globals.OCASION.equalsIgnoreCase("DOM") || !Globals.OCASION.equalsIgnoreCase("LLV")) {
+                        toggleGroupAddress.check(R.id.btnDom);
+                    } else if (Globals.OCASION.equalsIgnoreCase("LLV")) {
+                        toggleGroupAddress.check(R.id.btnRec);
+                    }
+                }else{
+                    toggleGroupAddress.check(R.id.btnDom);
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        /*try {
             getAddresses();
         }
         catch (Exception e){
             Log.d(TAG, "init: error al iniciar getAddresses "+e.getMessage());
-        }
-
+        }*/
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,6 +175,7 @@ public class DirectionsFragment extends Fragment implements View.OnClickListener
                 Navigation.findNavController(v).navigate(R.id.action_directionsFragment_to_newDirectionFragment);
             }
         });
+
 
         ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
         if (actionBar != null) {
@@ -127,6 +187,49 @@ public class DirectionsFragment extends Fragment implements View.OnClickListener
         }
         setHasOptionsMenu(true);
 
+    }
+
+    private void initStoresAdapter() {
+        storeAdapter = new StoreAdapter(getContext()) {
+            @Override
+            public void setClickListener(StoreViewHolder holder, final Store store) {
+                holder.getLlStore().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (!isTimeSelected){
+                            Toast.makeText(getActivity(),"Seleccione una hora",Toast.LENGTH_LONG).show();
+                        }else{
+                            Client client = sharedPreferencesMethods.getLoggedUser();
+                            client.setIdAddress(0L);
+                            client.setTelephone(null);
+                            client.setFinalAddress(null);
+                            sharedPreferencesMethods.saveLoggedUser(client);
+                            String f = String.format("%d:%d", hourSelected,minuteSelected);
+                            Globals.horaEntrega = f;
+                            Globals.tienda = store.getId();
+                            Globals.tiendaName = store.getName();
+                            Globals.OCASION = "LLV";
+                            //Navigation.findNavController(v).navigate(R.id.action_directionsFragment_to_paymentMethodFragment2);
+                            if (action.equalsIgnoreCase("order")){
+                                Bundle bundle = new Bundle();
+                                bundle.putString("paymentMethod",getArguments().getString("paymentMethod", "EFE"));
+                                bundle.putString("cardAuth",getArguments().getString("cardAuth",""));
+                                Navigation.findNavController(v).navigate(R.id.action_directionsFragment_to_orderLastRevisionFragment,bundle);
+                            }else {
+                                Navigation.findNavController(v).navigate(R.id.action_directionsFragment_to_paymentMethodFragment2);
+                            }
+                        }
+                    }
+                });
+
+            }
+        };
+        stores = new ArrayList<>();
+        storeAdapter.setDirections(stores);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity().getApplicationContext(), DividerItemDecoration.VERTICAL));
+        recyclerView.setAdapter(storeAdapter);
+        getAllStores();
     }
 
     private void getAddresses() {
@@ -143,7 +246,7 @@ public class DirectionsFragment extends Fragment implements View.OnClickListener
                         && response.body().getAddresses().size()>0
                 ) {
                     addresses.setAddresses(response.body().getAddresses());
-                    initAdapter();
+                    initAddressAdapter();
                 }else{
                     Toast.makeText(getActivity().getApplicationContext(),"No hay direcciones disponibles favor añadir una",Toast.LENGTH_LONG).show();
                 }
@@ -176,7 +279,7 @@ public class DirectionsFragment extends Fragment implements View.OnClickListener
         }
     }
 
-    private void initAdapter(){
+    private void initAddressAdapter(){
         directionAdapter = new DirectionAdapter(getActivity()) {
             @Override
             public void setClickListener(DirectionViewHolder holder, final Address address) {
@@ -193,6 +296,12 @@ public class DirectionsFragment extends Fragment implements View.OnClickListener
                             Navigation.findNavController(v).navigate(R.id.action_directionsFragment_to_editDirectionFragment,bundle);
                         }else if (action.equalsIgnoreCase("order")){
                             sharedPreferencesMethods.saveLoggedUser(client);
+                            String f = String.format("%d:%d", hourSelected,minuteSelected);
+                            Globals.horaEntrega = f;
+                            Globals.tienda = null;
+                            Globals.OCASION = "DOM";
+                            bundle.putString("paymentMethod",getArguments().getString("paymentMethod", "EFE"));
+                            bundle.putString("cardAuth",getArguments().getString("cardAuth",""));
                             Navigation.findNavController(v).navigate(R.id.action_directionsFragment_to_orderLastRevisionFragment,bundle);
                         }else {
                             sharedPreferencesMethods.saveLoggedUser(client);
@@ -208,7 +317,6 @@ public class DirectionsFragment extends Fragment implements View.OnClickListener
         };
         directionAdapter.setDirections(addresses.getAddresses());
         recyclerView.setAdapter(directionAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
     }
 
     @Override
@@ -230,8 +338,33 @@ public class DirectionsFragment extends Fragment implements View.OnClickListener
                 btnTimePicker.setText(f);
             }
         }, hourSelected,minuteSelected, false);//Yes 24 hour time
-        //mTimePicker.setTitle("Select Time");
         mTimePicker.show();
+    }
+    private void getAllStores() {
+        StoreService storeService = RetrofitInstance.getRetrofitInstance().create(StoreService.class);
+        Call<StoreList> call = storeService.getStores();
+        call.enqueue(new Callback<StoreList>() {
+            @Override
+            public void onResponse(Call<StoreList> call, Response<StoreList> response) {
+                String msg = "Error al obtener las tiendas";
+                if (response.body()!=null){
+                    if (response.body().getStores()!=null){
+                        stores = response.body().getStores();
+                        storeAdapter.setDirections(stores);
+                    }else{
+                        msg = "No se encontraron tiendas";
+                    }
+                }
+                Log.d(TAG, "onResponse: "+msg);
+            }
+
+            @Override
+            public void onFailure(Call<StoreList> call, Throwable t) {
+                String msg = "Error al obtener las ordenes";
+                Toast.makeText(getActivity(),msg,Toast.LENGTH_LONG).show();
+                Log.d(TAG, "onFailure: "+msg+t.getMessage());
+            }
+        });
     }
 
 }

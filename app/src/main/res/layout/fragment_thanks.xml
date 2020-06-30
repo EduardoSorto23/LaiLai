@@ -1,18 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/red_app"
     android:gravity="center"
-    android:orientation="vertical"
-    tools:context=".fragments.ThanksFragment">
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/medium_margin"
+        android:layout_marginEnd="@dimen/medium_margin"
+        android:layout_marginBottom="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:id="@+id/lblInfoCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:fontFamily="@font/neue_kabel"
+                android:maxLines="2"
+                android:text="@string/info_order_code"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="19sp"/>
+
+            <TextView
+                android:id="@+id/lblOrderCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:fontFamily="@font/neue_kabel"
+                android:maxLines="2"
+                android:text=""
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="19sp" />
+
+            <TextView
+                android:id="@+id/lblInfoEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:fontFamily="@font/neue_kabel"
+                android:text="@string/info_email"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="19sp"/>
+
+            <TextView
+                android:id="@+id/lblEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/neue_kabel"
+                android:maxLines="2"
+                android:text="test@test.com"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="19sp" />
+
+            <TextView
+                android:id="@+id/lblThanks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:fontFamily="@font/neue_kabel"
+                android:maxLines="2"
+                android:text="@string/thanks"
+                android:textAlignment="center"
+                android:textColor="@color/whitApp"
+                android:textSize="19sp" />
+
+            <Button
+                android:id="@+id/btnGoToHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:text="@string/go_to_home"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="19sp"
+                app:backgroundTint="@android:color/holo_red_dark"
+                app:icon="@drawable/ic_home"
+                app:iconTint="@color/white" />
+
+        </LinearLayout>
+    </ScrollView>
 
 
-    <ImageView
-        android:layout_width="280dp"
-        android:layout_height="200dp"
-        android:src="@drawable/ic_thanks"/>
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
