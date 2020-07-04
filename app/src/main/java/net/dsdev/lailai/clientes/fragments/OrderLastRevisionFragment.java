@@ -50,6 +50,8 @@ import com.google.zxing.common.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.dsdev.lailai.clientes.util.Globals.formatCard;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -78,7 +80,7 @@ public class OrderLastRevisionFragment extends Fragment {
     TextView txtPayment, txtLastOrderNumber;
     View paymentLine;
     ImageView imgPayment,imgArrowAddress, imgArrowPayment;
-    TextView txtAddress,txtTotal,txtSubTotal,lblTipoOcasion;
+    TextView txtAddress,txtTotal,txtSubTotal,lblTipoOcasion,txtCardNumber;
     private static final String actionBarTittle = "Procesar mi Orden";
     private FragmentActivity myContext;
     private EditText txtMoneyBack,txtNit;
@@ -151,6 +153,7 @@ public class OrderLastRevisionFragment extends Fragment {
         } else if (method.equals("CRD")){
             txtPayment.setText("CRÉDITO");
         }
+        txtCardNumber = rootView.findViewById(R.id.txtCardNumber);
 
     }
 
@@ -199,6 +202,11 @@ public class OrderLastRevisionFragment extends Fragment {
             card.setMonth(cardAuth.getMonth());
             card.setYear(cardAuth.getYear());
             card.setCcv(cardAuth.getCcv());
+            if (cardAuth.getDocumentId().length()>=4){
+                String nC = cardAuth.getDocumentId().substring(cardAuth.getDocumentId().length()-4);
+                txtCardNumber.setVisibility(View.VISIBLE);
+                txtCardNumber.setText(String.format(formatCard,nC));
+            }
         }
         List<Card> cards = new ArrayList<>();
         cards.add(card);

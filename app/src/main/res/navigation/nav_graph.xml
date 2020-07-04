@@ -235,7 +235,7 @@
         android:id="@+id/activeOrderDetailFragment"
         android:name="net.dsdev.lailai.clientes.fragments.ActiveOrderDetailFragment"
         android:label="fragment_active_order_detail"
-        tools:layout="@layout/fragment_active_order__detail" />
+        tools:layout="@layout/fragment_active_order_detail" />
     <fragment
         android:id="@+id/storesFragment"
         android:name="net.dsdev.lailai.clientes.fragments.StoresFragment"

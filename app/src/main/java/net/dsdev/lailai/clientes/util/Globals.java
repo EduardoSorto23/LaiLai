@@ -10,4 +10,6 @@ public class Globals {
     public static String tiendaName;
     public static String OCASION;
     public static String formatBtn= " %s ( %s ) ── Q%01.02f";
+    public static String formatDouble= "Q%01.02f";
+    public static String formatCard = "**** **** **** %s";
 }

@@ -1,0 +1,760 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/llstate"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/standard_divider"
+        android:layout_marginEnd="@dimen/medium_margin"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/neue_kabel_bold"
+                android:text="Pedido No.  "
+                android:textColor="#000"
+                android:textSize="19sp"
+                android:textAlignment="center"
+                />
+            <TextView
+                android:id="@+id/txtOrderNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/neue_kabel_bold"
+                android:textColor="@color/md_black_1000"
+                android:textSize="19sp"
+                android:textAlignment="center"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center"
+            >
+            <TextView
+                android:id="@+id/txtOrderState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/neue_kabel_bold"
+                android:textSize="19sp"
+                android:textColor="@color/md_black_1000"
+                android:textAlignment="center"
+                />
+        </LinearLayout>
+    </LinearLayout>
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/llBottom"
+        android:layout_below="@+id/llstate"
+        android:layout_marginTop="@dimen/standard_divider"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btnProcessLast"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="@dimen/medium_margin"
+            android:layout_marginEnd="@dimen/medium_margin"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/neue_kabel_bold"
+                        android:text="ORDEN #:"
+                        android:textColor="@color/md_black_1000"
+                        android:textSize="19sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/neue_kabel_bold"
+                        android:text="ESTADO:"
+                        android:textColor="@color/md_black_1000"
+                        android:textSize="19sp" />
+
+                    <TextView
+                        android:id="@+id/txtsss"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/neue_kabel"
+                        android:textColor="@color/md_black_1000"
+                        android:textSize="19sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/neue_kabel_bold"
+                        android:text="MONTO:"
+                        android:textColor="@color/md_black_1000"
+                        android:textSize="19sp" />
+
+                    <TextView
+                        android:id="@+id/txtOrderAmmount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/neue_kabel"
+                        android:textColor="@color/md_black_1000"
+                        android:textSize="19sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/neue_kabel_bold"
+                        android:text="TELEFONO:"
+                        android:textColor="@color/md_black_1000"
+                        android:textSize="19sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/neue_kabel_bold"
+                        android:text="FECHA Y HORA:"
+                        android:textColor="@color/md_black_1000"
+                        android:textSize="19sp" />
+
+                    <TextView
+                        android:id="@+id/txtOrderDate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/neue_kabel"
+                        android:textColor="@color/md_black_1000"
+                        android:textSize="19sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/neue_kabel_bold"
+                        android:text="INDICACIONES:"
+                        android:textColor="@color/md_black_1000"
+                        android:textSize="19sp"
+                        android:maxLines="2"
+                        />
+
+                    <TextView
+                        android:id="@+id/txtOrderIndications"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/neue_kabel"
+                        android:textColor="@color/md_black_1000"
+                        android:textSize="19sp"
+                        android:maxLines="2"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/neue_kabel_bold"
+                        android:text="FORMA DE PAGO:"
+                        android:textColor="@color/md_black_1000"
+                        android:textSize="19sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/txtOrderPayment"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/neue_kabel"
+                        android:textColor="@color/md_black_1000"
+                        android:textSize="19sp"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/line_divider" />
+
+
+            <LinearLayout
+                android:id="@+id/linear_layout_products"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/standard_divider"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TableLayout
+                    android:id="@+id/simpleTableLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="3">
+
+                    <TableRow
+                        android:id="@+id/firstRow"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/simpleTextView1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.8"
+                            android:fontFamily="@font/neue_kabel_bold"
+                            android:gravity="center"
+                            android:padding="0dp"
+                            android:text="@string/quantity"
+                            android:textColor="#000"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/simpleTextView2"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2.1"
+                            android:fontFamily="@font/neue_kabel_bold"
+                            android:gravity="center"
+                            android:padding="0dp"
+                            android:text="@string/product"
+                            android:textColor="#000"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/simpleTextView3"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.8"
+                            android:fontFamily="@font/neue_kabel_bold"
+                            android:gravity="center"
+                            android:padding="0dp"
+                            android:text="@string/price"
+                            android:textColor="#000"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/simpleTextView4"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.8"
+                            android:fontFamily="@font/neue_kabel_bold"
+                            android:gravity="center"
+                            android:padding="0dp"
+                            android:text="@string/total"
+                            android:textColor="#000"
+                            android:textSize="16sp" />
+                    </TableRow>
+                </TableLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/standard_margin"
+                    android:background="@color/md_red_800" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvOrderTrackList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/standard_divider"
+                    android:layout_marginBottom="10dp">
+
+                </androidx.recyclerview.widget.RecyclerView>
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/linear_layout_costs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/standard_margin"
+                    android:layout_marginBottom="@dimen/standard_margin"
+                    >
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/sub_total"
+                            android:textSize="16sp"
+                            android:textColor="@color/md_black_1000"
+                            android:fontFamily="@font/neue_kabel_light_italic" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/txtSubTotal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Q0.00"
+                            android:textSize="17sp"
+                            android:textColor="@color/md_black_1000"
+                            android:fontFamily="@font/neue_kabel_light_italic"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_layout_total"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/linear_layout_costs"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/standard_margin"
+                    android:layout_marginBottom="@dimen/standard_margin"
+                    >
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/total"
+                        android:textAllCaps="true"
+                        android:textColor="@color/red_app"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/neue_kabel" />
+
+                    <TextView
+                        android:id="@+id/txtTotal"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="Q0.00"
+                        android:textColor="@color/red_app"
+                        android:textSize="17sp"
+                        android:fontFamily="@font/neue_kabel" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/lineDivider1"
+                    android:layout_below="@id/linear_layout_total"
+                    style="@style/Divider"/>
+
+                <LinearLayout
+                    android:id="@+id/linear_layout_direccion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/lineDivider1"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/standard_margin"
+                    android:layout_marginBottom="@dimen/standard_margin"
+                    >
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/lblTipoOcasion"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Dirección de envío"
+                            android:textColor="@color/red_app"
+                            android:textSize="15sp"
+                            android:fontFamily="@font/neue_kabel_bold"/>
+
+                        <TextView
+                            android:id="@+id/txtAddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/md_black_1000"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/neue_kabel"
+                            android:layout_marginTop="@dimen/standard_margin"
+                            />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/lineDivider2"
+                    android:layout_below="@id/linear_layout_direccion"
+                    style="@style/Divider"/>
+
+                <LinearLayout
+                    android:id="@+id/linear_layout_formas_pago"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/lineDivider2"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/standard_margin"
+                    android:layout_marginBottom="@dimen/standard_margin"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Forma de pago"
+                            android:textColor="@color/red_app"
+                            android:textSize="15sp"
+                            android:fontFamily="@font/neue_kabel_bold" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/txtPayment"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/corner_radius_black"
+                                android:text=""
+                                android:textColor="@color/white"
+                                android:textSize="13sp"
+                                android:fontFamily="@font/neue_kabel_bold"
+                                android:paddingEnd="@dimen/standard_margin"
+                                android:paddingStart="@dimen/standard_margin"
+                                android:paddingTop="@dimen/little_standard_margin"
+                                android:paddingBottom="@dimen/little_standard_margin"/>
+
+                            <View
+                                style="@style/DividerVertical"
+                                android:id="@+id/paymentLine"
+                                android:layout_marginStart="@dimen/little_standard_margin"
+                                android:layout_marginEnd="@dimen/little_standard_margin"
+                                android:layout_marginTop="@dimen/standard_margin"
+                                android:layout_marginBottom="@dimen/standard_margin"/>
+
+                            <ImageView
+                                android:id="@+id/imgPayment"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:src="@drawable/ic_visa"
+                                android:tint="@color/md_black_1000"
+                                android:visibility="invisible"
+                                />
+                            <TextView
+                                android:id="@+id/txtCardNumber"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="**** **** **** ****"
+                                android:tint="@color/md_black_1000"
+                                android:textSize="14sp"
+                                android:fontFamily="@font/neue_kabel"
+                                android:visibility="gone"
+                                />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/lineDivider3"
+                    android:layout_below="@id/linear_layout_formas_pago"
+                    style="@style/Divider"/>
+
+                <LinearLayout
+                    android:id="@+id/linear_layout_telefono"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/lineDivider3"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/standard_margin"
+                    android:layout_marginBottom="@dimen/standard_margin"
+                    >
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Teléfono"
+                        android:textColor="@color/red_app"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/neue_kabel_bold"/>
+                    <TextView
+                        android:id="@+id/txtOrderTelephone"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:background="@drawable/corner_radius_cart_bottom_item"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:maxLines="1"
+                        android:fontFamily="@font/neue_kabel"
+                        android:textAlignment="center"
+                        />
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/lineDivider4"
+                    android:layout_below="@id/linear_layout_telefono"
+                    style="@style/Divider"/>
+
+                <LinearLayout
+                    android:id="@+id/linear_layout_factura"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/lineDivider4"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/standard_margin"
+                    android:layout_marginBottom="@dimen/standard_margin"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="¿Factura?"
+                            android:textColor="@color/red_app"
+                            android:textSize="15sp"
+                            android:fontFamily="@font/neue_kabel_bold"/>
+
+                        <RadioGroup
+                            android:id="@+id/rgBill"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:checkedButton="@+id/first"
+                            android:orientation="horizontal"
+                            android:clickable="false"
+                            >
+
+                            <RadioButton
+                                android:id="@+id/rbYes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Sí"
+                                android:fontFamily="@font/neue_kabel"
+                                android:clickable="false"
+                                android:enabled="false"
+                                android:textColor="@color/md_black_1000"
+                                app:buttonTint="@color/md_black_1000"/>
+
+                            <RadioButton
+                                android:id="@+id/rbNo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/md_black_1000"
+                                android:text="No"
+                                android:clickable="false"
+                                android:enabled="false"
+                                android:fontFamily="@font/neue_kabel"
+                                app:buttonTint="@color/md_black_1000"/>
+                        </RadioGroup>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="NIT:"
+                            android:textColor="@color/red_app"
+                            android:textSize="15sp"
+                            android:fontFamily="@font/neue_kabel_bold"/>
+                        <TextView
+                            android:id="@+id/txtNit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/md_black_1000"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/neue_kabel"
+                            android:inputType="number"
+                            android:focusable="false"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Vuelto para"
+                            android:textColor="@color/md_black_1000"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/neue_kabel_bold" />
+                        <TextView
+                            android:id="@+id/txtMoneyBack"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/corner_radius_cart_bottom_item"
+                            android:textColor="@color/white"
+                            android:textColorHint="@color/white"
+                            android:textSize="18sp"
+                            android:maxLines="1"
+                            android:fontFamily="@font/neue_kabel"/>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/lineDivider5"
+                    android:layout_below="@id/linear_layout_factura"
+                    style="@style/Divider"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/lineDivider5"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/standard_margin"
+                    android:layout_marginBottom="@dimen/standard_margin"
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nota para la orden: "
+                        android:textColor="@color/red_app"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/neue_kabel_bold"/>
+                    <TextView
+                        android:id="@+id/txtIndications"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="4"
+                        android:fontFamily="@font/neue_kabel"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_alignParentStart="true"
+       android:layout_alignParentBottom="true"
+       android:orientation="horizontal"
+       android:id="@+id/llBottom"
+       >
+       <Button
+           android:id="@+id/btnBack"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_weight="1"
+           android:background="@color/red_app"
+           android:insetTop="0dp"
+           android:insetBottom="0dp"
+           app:backgroundTint="@color/white"
+           android:text="@string/back"
+           android:textAllCaps="true"
+           android:textColor="@color/md_black_1000"
+           android:fontFamily="@font/neue_kabel_bold"
+           />
+
+       <Button
+           android:id="@+id/btnCancel"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_weight="1"
+           android:background="@color/colorPrimaryDark"
+           android:drawableEnd="@drawable/ic_close_black_24dp"
+           android:drawableTint="@color/white"
+           android:fontFamily="@font/neue_kabel_bold"
+           android:insetTop="0dp"
+           android:insetBottom="0dp"
+           android:text="@string/cancel_order"
+           android:textAllCaps="true"
+           app:backgroundTint="@color/red_app"
+           android:clickable="false"
+           android:enabled="false"
+           />
+   </LinearLayout>
+
+</RelativeLayout>

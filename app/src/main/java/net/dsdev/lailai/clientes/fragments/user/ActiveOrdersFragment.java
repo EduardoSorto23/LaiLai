@@ -124,18 +124,20 @@ public class ActiveOrdersFragment extends Fragment {
             @Override
             public void onResponse(Call<ActiveOrders> call, Response<ActiveOrders> response) {
                 String msg = "Error al obtener las ordenes activas";
+                boolean show = true;
                 if (response.body()!=null){
                     ActiveOrders res = response.body();
                     if (res.getOrders()!=null && res.getOrders().size()>0){
                         activeOrders = res.getOrders();
                         activeOrdersAdapter.setOrderActives(activeOrders);
-                        msg = "Ordenes obtenidas exitosamente";
+                        show = false;
+                        //msg = "Ordenes obtenidas exitosamente";
                     }else{
                         msg = "No hay ordenes activas";
                     }
                 }
                 Log.d(TAG, "onResponse: "+msg);
-                if (getActivity()!=null){
+                if (getActivity()!=null && show){
                     Toast.makeText(getActivity().getApplicationContext(),msg,Toast.LENGTH_LONG).show();
                 }
             }

@@ -21,6 +21,8 @@ import net.dsdev.lailai.clientes.viewHolders.OrderDetailHolder;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.dsdev.lailai.clientes.util.Globals.formatDouble;
+
 public abstract class ActiveOrderDetailAdapter extends RecyclerView.Adapter<OrderDetailHolder> {
 
     private Context context;
@@ -51,11 +53,12 @@ public abstract class ActiveOrderDetailAdapter extends RecyclerView.Adapter<Orde
         holder.getTxtOrderProduct().setText(menu.getName());
         holder.getTxtOrderDesc().setText(menu.getDesc());
         if (menu.getPrice()!=null){
-            holder.getTxtOrderPrice().setText(String.valueOf(menu.getPrice()));
+            holder.getTxtOrderPrice().setText(String.format(formatDouble,menu.getPrice()));
         }
         if (menu.getFinalPrice()!=null){
-            holder.getTxtOrderTotal().setText(String.valueOf(menu.getFinalPrice()));
+            holder.getTxtOrderTotal().setText(String.format(formatDouble,menu.getFinalPrice()));
         }
+        holder.getTxtOrderQuantity().setText(String.valueOf(menu.getQuantity()));
         holder.getBtnDeleteProcess().setVisibility(View.GONE);
         setClickListener(holder,position,getItemCount());
     }

@@ -394,8 +394,9 @@ public class MenuDetailFragment extends Fragment {
                             jsonMenuDetail.getMenu().getOptions().get(i).getSelectedVariants().add(variant);
                         }
                         //Double price = jsonMenuDetail.getMenu().getPrice() + jsonMenuDetail.getMenu().getOptions().get(i).getSelectedVariants().get(0).getExtraPrice();
-                        Double price = jsonMenuDetail.getMenu().getFinalPrice() + (jsonMenuDetail.getMenu().getOptions().get(i).getSelectedVariants().get(0).getExtraPrice()*numberPicker.getValue());
+                        //Double price = jsonMenuDetail.getMenu().getFinalPrice() + (jsonMenuDetail.getMenu().getOptions().get(i).getSelectedVariants().get(0).getExtraPrice()*numberPicker.getValue());
                         jsonMenuDetail.getMenu().setExtraPrice(jsonMenuDetail.getMenu().getOptions().get(i).getSelectedVariants().get(0).getExtraPrice());
+                        Double price = (jsonMenuDetail.getMenu().getPrice() * numberPicker.getValue()) + (jsonMenuDetail.getMenu().getExtraPrice()*numberPicker.getValue());
                         jsonMenuDetail.getMenu().setFinalPrice(price);
                         txtPriceCart.setText(String.format(formatText,price));
                         //txtPriceCart.setText("Q"+price.toString());

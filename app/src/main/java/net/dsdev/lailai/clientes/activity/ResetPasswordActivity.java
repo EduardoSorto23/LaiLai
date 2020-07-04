@@ -84,7 +84,7 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnC
                 if(response.body() != null){
                     accounts = response.body();
                     MaterialAlertDialogBuilder materialAlertDialogBuilder;
-                    materialAlertDialogBuilder = new MaterialAlertDialogBuilder(ResetPasswordActivity.this, R.style.MyDialogTheme);
+                    materialAlertDialogBuilder = new MaterialAlertDialogBuilder(ResetPasswordActivity.this, R.style.MyDialogThemeMaterialLight);
                     materialAlertDialogBuilder.setCancelable(false);
                     String tittle;
                     if (accounts.isValid()) {

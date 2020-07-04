@@ -1,6 +1,8 @@
 package net.dsdev.lailai.clientes.model.Request;
 
+import net.dsdev.lailai.clientes.model.Store;
 import net.dsdev.lailai.clientes.model.menuDetail.MenuDetail;
+import net.dsdev.lailai.clientes.model.users.Address;
 import net.dsdev.lailai.clientes.util.Constants;
 import com.google.gson.annotations.SerializedName;
 
@@ -47,6 +49,10 @@ public class Order {
     private Double vuelto;
     private Boolean factura;
     private String facturaNit;
+    private String estadoDesc;
+    private Address direccion;
+    private Store tienda;
+
     public Order() {
     }
 
@@ -184,5 +190,29 @@ public class Order {
 
     public void setFacturaNit(String facturaNit) {
         this.facturaNit = facturaNit;
+    }
+
+    public String getEstadoDesc() {
+        return estadoDesc;
+    }
+
+    public void setEstadoDesc(String estadoDesc) {
+        this.estadoDesc = estadoDesc;
+    }
+
+    public Address getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(Address direccion) {
+        this.direccion = direccion;
+    }
+
+    public Store getTienda() {
+        return tienda;
+    }
+
+    public void setTienda(Store tienda) {
+        this.tienda = tienda;
     }
 }

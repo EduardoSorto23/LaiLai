@@ -124,7 +124,7 @@ public class EditCreditCardFragment extends Fragment implements View.OnClickList
             @Override
             public void onResponse(Call<AuthResponse> call, final Response<AuthResponse> response) {
                 if (response.body() != null){
-                    new MaterialAlertDialogBuilder(getActivity(), R.style.MyDialogTheme)
+                    new MaterialAlertDialogBuilder(getActivity(), R.style.MyDialogThemeMaterialLight)
                             .setTitle("Tarjeta")
                             .setMessage(response.body().getMsg())
                             .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
@@ -172,7 +172,7 @@ public class EditCreditCardFragment extends Fragment implements View.OnClickList
             @Override
             public void onResponse(Call<AuthResponse> call, final Response<AuthResponse> response) {
                 if (response.body() != null){
-                    new MaterialAlertDialogBuilder(getActivity(), R.style.MyDialogTheme)
+                    new MaterialAlertDialogBuilder(getActivity(), R.style.MyDialogThemeMaterialLight)
                             .setTitle("Tarjeta")
                             .setMessage(response.body().getMsg())
                             .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {

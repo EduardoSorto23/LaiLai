@@ -227,7 +227,7 @@ public class NewDirectionFragment extends Fragment implements OnMapReadyCallback
             @Override
             public void onResponse(Call<AuthResponse> call, final Response<AuthResponse> response) {
                 if (response.body()!= null){
-                    new MaterialAlertDialogBuilder(context, R.style.MyDialogTheme)
+                    new MaterialAlertDialogBuilder(context, R.style.MyDialogThemeMaterialLight)
                             .setTitle("Dirección")
                             .setMessage(response.body().getMsg())
                             .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
@@ -312,7 +312,7 @@ public class NewDirectionFragment extends Fragment implements OnMapReadyCallback
 
 
         if (!ubicationSelected()){
-            new MaterialAlertDialogBuilder(context, R.style.MyDialogTheme)
+            new MaterialAlertDialogBuilder(context, R.style.MyDialogThemeMaterialLight)
                     .setTitle("Selecciona dirección")
                     .setMessage("Debes seleccionar una ubicación")
                     .setNegativeButton("Aceptar", null)
@@ -323,7 +323,7 @@ public class NewDirectionFragment extends Fragment implements OnMapReadyCallback
     }
 
     private void showInfoAlert() {
-        new MaterialAlertDialogBuilder(context, R.style.MyDialogTheme)
+        new MaterialAlertDialogBuilder(context, R.style.MyDialogThemeMaterialLight)
                 .setTitle("Señal GPS")
                 .setMessage("No tienes encendido el GPS. Quieres encenderlo ahora?")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {

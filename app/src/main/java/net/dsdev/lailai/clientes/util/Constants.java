@@ -37,6 +37,7 @@ public class Constants {
     public static final String getActiveOrderDetail = "order/{idOrder}";
 
     public static final String getStores = "tiendas/list";
+    public static final String orderCancel = "order/cancelar/{idOrder}";
     /*
     * End to strings for Retrofit
     */
