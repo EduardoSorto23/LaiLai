@@ -38,6 +38,9 @@ public class Constants {
 
     public static final String getStores = "tiendas/list";
     public static final String orderCancel = "order/cancelar/{idOrder}";
+
+    public static final String getDepartments = "direccion/departamentos";
+    public static final String getMunicipalies = "direccion/municipios/{idDepto}";
     /*
     * End to strings for Retrofit
     */
@@ -133,4 +136,13 @@ public class Constants {
     public static final String closeHour = "horaCierre";
     public static final String stores = "tiendas";
     public static final String idStore = "idTienda";
+
+    public static final String references = "referencias";
+    public static final String suBurb = "colonia";
+    public static final String zone = "zona";
+    public static final String accessCode = "codigoAcceso";
+    public static final String houseNumber = "numeroCasa";
+    public static final String departments = "departamentos";
+    public static final String municipalies = "municipios";
+
 }

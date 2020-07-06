@@ -16,11 +16,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.provider.Settings;
@@ -28,12 +26,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.RadioGroup;
-import android.widget.Toast;
+import android.widget.Spinner;
 
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -44,7 +41,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PointOfInterest;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.net.PlacesClient;
@@ -57,16 +53,20 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import net.dsdev.lailai.clientes.MainActivity;
 import net.dsdev.lailai.clientes.R;
-import net.dsdev.lailai.clientes.activity.ResetPasswordActivity;
+import net.dsdev.lailai.clientes.adapters.item.SpinAdapter;
 import net.dsdev.lailai.clientes.model.users.Address;
-import net.dsdev.lailai.clientes.model.users.AddressResponse;
+import net.dsdev.lailai.clientes.model.users.AddressDTO;
 import net.dsdev.lailai.clientes.model.users.AuthResponse;
 import net.dsdev.lailai.clientes.retrofit.RetrofitInstance;
 import net.dsdev.lailai.clientes.retrofit.users.AddressService;
+import net.dsdev.lailai.clientes.util.Constants;
 import net.dsdev.lailai.clientes.util.RandomMethods;
 import net.dsdev.lailai.clientes.util.SharedPreferencesMethods;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -94,8 +94,8 @@ public class NewDirectionFragment extends Fragment implements OnMapReadyCallback
 
     /*UI*/
     RadioGroup rgDirections;
-    TextInputEditText etDirection,etMunicipality,etDepartment,etOther,etTelephone,etIndication;
-    TextInputLayout tlDirection,tlMunicipality,tlDepartment,tlOther,tlTelephone,tlIndication;
+    TextInputEditText etDirection,etOther,etTelephone,etIndication, etCol, etZone, etAccessCode, etHouseNumber;
+    TextInputLayout tlDirection,tlOther,tlTelephone,tlIndication, tlCol, tlZone, tlAccessCode, tlHouseNumber;
     MaterialButton btnSaveDirection;
     /**/
     AddressService addressService;
@@ -103,6 +103,12 @@ public class NewDirectionFragment extends Fragment implements OnMapReadyCallback
     Address address;
     Double latitudeSelected, longitudeSelected;
     SharedPreferencesMethods sharedPreferencesMethods;
+    List<AddressDTO> departmentList;
+    List<AddressDTO> municipalyList;
+    private Spinner spDepartments, spMunicipalies;
+    Boolean isFirst = true;
+    SpinAdapter muniAdapter,deptoAdapter;
+
     public NewDirectionFragment() {
         // Required empty public constructor
     }
@@ -130,16 +136,25 @@ public class NewDirectionFragment extends Fragment implements OnMapReadyCallback
         etDirection = rootView.findViewById(R.id.etDirection);
         etIndication = rootView.findViewById(R.id.etIndication);
         tlIndication = rootView.findViewById(R.id.tlIndication);
-        etMunicipality = rootView.findViewById(R.id.etMunicipality);
-        etDepartment = rootView.findViewById(R.id.etDepartment);
         etOther = rootView.findViewById(R.id.etOther);
         btnSaveDirection = rootView.findViewById(R.id.btnSaveDirection);
         tlOther = rootView.findViewById(R.id.tlOther);
         tlDirection = rootView.findViewById(R.id.tlDirection);
-        tlMunicipality = rootView.findViewById(R.id.tlMunicipality);
-        tlDepartment = rootView.findViewById(R.id.tlDepartment);
         tlTelephone = rootView.findViewById(R.id.tlTelephone);
         etTelephone = rootView.findViewById(R.id.etTelephone);
+
+        spDepartments = rootView.findViewById(R.id.spDepartments);
+        spMunicipalies = rootView.findViewById(R.id.spMunicipalies);
+
+        etCol = rootView.findViewById(R.id.etCol);
+        etZone = rootView.findViewById(R.id.etZone);
+        etAccessCode = rootView.findViewById(R.id.etAccessCode);
+        tlCol = rootView.findViewById(R.id.tlCol);
+        tlZone = rootView.findViewById(R.id.tlZone);
+        tlAccessCode = rootView.findViewById(R.id.tlAccessCode);
+
+        tlHouseNumber = rootView.findViewById(R.id.tlHouseNumber);
+        etHouseNumber = rootView.findViewById(R.id.etHouseNumber);
     }
 
     @Override
@@ -207,19 +222,87 @@ public class NewDirectionFragment extends Fragment implements OnMapReadyCallback
                 }
             }
         });
+
+        listDepartments();
+    }
+    private void listDepartments() {
+        AddressService service = RetrofitInstance.getRetrofitInstance().create(AddressService.class);
+        Call<LinkedHashMap<String, List<AddressDTO>>> callDeptos = service.getDepartments();
+        callDeptos.enqueue(new Callback<LinkedHashMap<String, List<AddressDTO>>>() {
+            @Override
+            public void onResponse(Call<LinkedHashMap<String, List<AddressDTO>>> call, Response<LinkedHashMap<String, List<AddressDTO>>> response) {
+                if (response.body() != null) {
+                    LinkedHashMap<String, List<AddressDTO>> res = response.body();
+                    departmentList = res.get(Constants.departments);
+                    initDepartmentsAdapter();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LinkedHashMap<String, List<AddressDTO>>> call, Throwable t) {
+                Log.d(TAG, "onFailure: " + t.getMessage());
+            }
+        });
+    }
+    private void initDepartmentsAdapter() {
+        deptoAdapter = new SpinAdapter(getContext().getApplicationContext(), R.layout.spinner_dropdown_item, departmentList);
+        spDepartments.setAdapter(deptoAdapter); // Set the custom adapter to the spinner
+        spDepartments.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view,
+                                       int position, long id) {
+                AddressDTO depto = deptoAdapter.getItem(position);
+                if (depto != null) {
+                    municipalyList = new ArrayList<>();
+                    municipalyList.addAll(depto.getMunicipalies());
+                    initMunicipaliesAdapter();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapter) {
+            }
+        });
+    }
+
+    private void initMunicipaliesAdapter() {
+        muniAdapter = new SpinAdapter(getContext().getApplicationContext(), R.layout.spinner_dropdown_item, municipalyList);
+        spMunicipalies.setAdapter(muniAdapter); // Set the custom adapter to the spinner
+        spMunicipalies.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view,
+                                       int position, long id) {
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapter) {
+            }
+        });
+
     }
 
     private void saveAddress() {
         address = new Address();
         address.setIdClient(sharedPreferencesMethods.getLoggedUser().getIdCliente());
         address.setNombre(getAddressName());
-        address.setDepartment(etDepartment.getText().toString());
-        address.setMunicipaly(etMunicipality.getText().toString());
+        //address.setDepartment(etDepartment.getText().toString());
+        //address.setMunicipaly(etMunicipality.getText().toString());
+        //AddressDTO depto = (AddressDTO) spDepartments.getSelectedItem();
+        AddressDTO muni = (AddressDTO) spMunicipalies.getSelectedItem();
+        //address.setoDepartment(depto);
+        address.setoMunicipaly(muni);
+
         address.setDirection(etDirection.getText().toString());
-        address.setIndications(etIndication.getText().toString());
+        address.setReferences(etIndication.getText().toString());
         address.setLatitude(latitudeSelected);
         address.setLongitude(longitudeSelected);
         address.setTelephone(etTelephone.getText().toString());
+
+        address.setSuBurb(etCol.getText().toString());
+        address.setZone(etZone.getText().toString());
+        address.setAccessCode(etAccessCode.getText().toString());
+        address.setHouseNumber(etHouseNumber.getText().toString());
+
         Log.d(TAG, "saveAddress: etTelephone "+etTelephone.getText().toString());
         addressService = RetrofitInstance.getRetrofitInstance().create(AddressService.class);
         call = addressService.saveAddress(address);
@@ -268,11 +351,12 @@ public class NewDirectionFragment extends Fragment implements OnMapReadyCallback
     }
 
     private boolean validateFields() {
+        boolean isNotError = true;
         if ( (etDirection.getText() == null
                 || etDirection.getText().toString().isEmpty()
                 || etDirection.getText().toString().length() ==0 )){
             tlDirection.setError("Favor ingresa una dirección válida");
-            return false;
+            isNotError = false;
         }else{
             tlDirection.setError("");
         }
@@ -280,7 +364,7 @@ public class NewDirectionFragment extends Fragment implements OnMapReadyCallback
                 || etTelephone.getText().toString().isEmpty()
                 || etTelephone.getText().toString().length() ==0 )){
             tlTelephone.setError("Favor ingresa una dirección válida");
-            return false;
+            isNotError = false;
         }else{
             tlTelephone.setError("");
         }
@@ -289,27 +373,46 @@ public class NewDirectionFragment extends Fragment implements OnMapReadyCallback
                 || etOther.getText().toString().isEmpty()
         )){
             tlOther.setError("Por favor escribe un nombre de la dirección");
-            return false;
+            isNotError = false;
         }else{
             tlOther.setError("");
         }
-        if ( (etMunicipality.getText() == null
-                || etMunicipality.getText().toString().isEmpty()
-                || etMunicipality.getText().toString().length() ==0 )){
-            tlMunicipality.setError("Favor ingresa un municipio");
-            return false;
-        }else{
-            tlMunicipality.setError("");
+
+
+        if ((etCol.getText() == null
+                || etCol.getText().toString().isEmpty()
+                || etCol.getText().toString().length() == 0)) {
+            tlCol.setError("Favor ingresa una colonia");
+            isNotError = false;
+        } else {
+            tlCol.setError("");
         }
-        if ( (etDepartment.getText() == null
-                || etDepartment.getText().toString().isEmpty()
-                || etDepartment.getText().toString().length() ==0 )){
-            tlDepartment.setError("Favor ingresa un departamento");
-            return false;
-        }else{
-            tlDepartment.setError("");
+        if ((etZone.getText() == null
+                || etZone.getText().toString().isEmpty()
+                || etZone.getText().toString().length() == 0)) {
+            tlZone.setError("Favor ingresa una zona");
+            isNotError = false;
+        } else {
+            tlZone.setError("");
         }
 
+        if ((etHouseNumber.getText() == null
+                || etHouseNumber.getText().toString().isEmpty()
+                || etHouseNumber.getText().toString().length() == 0)) {
+            tlHouseNumber.setError("Favor ingresa un No de Casa/Appto");
+            isNotError = false;
+        } else {
+            tlHouseNumber.setError("");
+        }
+
+        if ((etIndication.getText() == null
+                || etIndication.getText().toString().isEmpty()
+                || etIndication.getText().toString().length() == 0)) {
+            tlIndication.setError("Favor ingresa un No de Casa/Appto");
+            isNotError = false;
+        } else {
+            tlIndication.setError("");
+        }
 
         if (!ubicationSelected()){
             new MaterialAlertDialogBuilder(context, R.style.MyDialogThemeMaterialLight)
@@ -317,9 +420,9 @@ public class NewDirectionFragment extends Fragment implements OnMapReadyCallback
                     .setMessage("Debes seleccionar una ubicación")
                     .setNegativeButton("Aceptar", null)
                     .show();
-            return false;
+            isNotError = false;
         }
-        return true;
+        return isNotError;
     }
 
     private void showInfoAlert() {

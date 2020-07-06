@@ -8,7 +8,7 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,66 +19,72 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/layoutTimePicker"
+                android:id="@+id/llView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/neue_kabel"
-                    android:text="Hora de entrega:"
-                    android:textAlignment="textStart"
-                    android:textColor="#000"
-                    android:textSize="18sp" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnTimePicker"
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:layout_width="0dp"
+                android:orientation="vertical"
+                android:padding="10dp"
+                >
+                <LinearLayout
+                    android:id="@+id/layoutTimePicker"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:fontFamily="@font/neue_kabel"
-                    android:text="..."
-                    android:textAlignment="textStart"
-                    android:textColor="#000"
-                    android:textSize="19sp" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/neue_kabel"
+                        android:text="Hora de entrega:"
+                        android:textAlignment="textStart"
+                        android:textColor="#000"
+                        android:textSize="18sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnTimePicker"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:fontFamily="@font/neue_kabel"
+                        android:text="..."
+                        android:textAlignment="textStart"
+                        android:textColor="#000"
+                        android:textSize="19sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@drawable/line_divider" />
+
+                <com.google.android.material.button.MaterialButtonToggleGroup
+                    android:id="@+id/toggleGroupAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/standard_margin"
+                    app:selectionRequired="true"
+                    app:singleSelection="true">
+
+                    <Button
+                        android:id="@+id/btnDom"
+                        style="@style/AppTheme.Button.MyButtonToggle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="DOMICILIO" />
+
+                    <Button
+                        android:id="@+id/btnRec"
+                        style="@style/AppTheme.Button.MyButtonToggle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="RECOGER" />
+
+                </com.google.android.material.button.MaterialButtonToggleGroup>
             </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@drawable/line_divider" />
-
-            <com.google.android.material.button.MaterialButtonToggleGroup
-                android:id="@+id/toggleGroupAddress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/standard_margin"
-                app:selectionRequired="true"
-                app:singleSelection="true">
-
-                <Button
-                    android:id="@+id/btnDom"
-                    style="@style/AppTheme.Button.MyButtonToggle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="DOMICILIO" />
-
-                <Button
-                    android:id="@+id/btnRec"
-                    style="@style/AppTheme.Button.MyButtonToggle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="RECOGER" />
-
-            </com.google.android.material.button.MaterialButtonToggleGroup>
-
             <TextView
                 android:id="@+id/lblOcasion"
                 android:layout_width="match_parent"

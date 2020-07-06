@@ -4,30 +4,32 @@ import com.google.gson.annotations.SerializedName;
 
 import net.dsdev.lailai.clientes.util.Constants;
 
-public class Address {
-    @SerializedName(Constants.id)
-    private long id;
+public class Address extends AddressDTO {
 
-    @SerializedName(Constants.idAddress)
-    private long idAddress;
-
-    @SerializedName(Constants.idClient)
-    private long idClient;
-
-    @SerializedName(Constants.name)
-    private String nombre;
-
-    @SerializedName(Constants.department)
-    private String department;
-
-    @SerializedName(Constants.municipaly)
-    private String municipaly;
-
-    @SerializedName(Constants.indications)
-    private String indications;
+    @SerializedName(Constants.telephone)
+    private String telephone;
 
     @SerializedName(Constants.direction)
     private String direction;
+
+    @SerializedName(Constants.references)
+    private String references;
+
+    @SerializedName(Constants.suBurb)
+    private String suBurb;
+
+    @SerializedName(Constants.zone)
+    private String zone;
+
+    @SerializedName(Constants.accessCode)
+    private String accessCode;
+    @SerializedName(Constants.houseNumber)
+    private String houseNumber;
+
+    @SerializedName(Constants.department)
+    private AddressDTO oDepartment;
+    @SerializedName(Constants.municipaly)
+    private AddressDTO oMunicipaly;
 
     @SerializedName(Constants.latitude)
     private double latitude;
@@ -35,48 +37,90 @@ public class Address {
     @SerializedName(Constants.longitude)
     private double longitude;
 
-    @SerializedName(Constants.telephone)
-    private String telephone;
+
+    @SerializedName(Constants.idAddress)
+    private long idAddress;
+
+    @SerializedName(Constants.idClient)
+    private long idClient;
+
+    @SerializedName(Constants.month)
+    private String department;
+
+    @SerializedName(Constants.year)
+    private String municipaly;
 
 
-    public long getId() {
-        return id;
+    public String getTelephone() {
+        return telephone;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getDirection() {
+        return direction;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setDirection(String direction) {
+        this.direction = direction;
     }
 
-    public String getDepartment() {
-        return department;
+    public String getReferences() {
+        return references;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public void setReferences(String references) {
+        this.references = references;
     }
 
-    public String getMunicipaly() {
-        return municipaly;
+    public String getSuBurb() {
+        return suBurb;
     }
 
-    public void setMunicipaly(String municipaly) {
-        this.municipaly = municipaly;
+    public void setSuBurb(String suBurb) {
+        this.suBurb = suBurb;
     }
 
-    public String getIndications() {
-        return indications;
+    public String getZone() {
+        return zone;
     }
 
-    public void setIndications(String indications) {
-        this.indications = indications;
+    public void setZone(String zone) {
+        this.zone = zone;
+    }
+
+    public String getAccessCode() {
+        return accessCode;
+    }
+
+    public void setAccessCode(String accessCode) {
+        this.accessCode = accessCode;
+    }
+
+    public String getHouseNumber() {
+        return houseNumber;
+    }
+
+    public void setHouseNumber(String houseNumber) {
+        this.houseNumber = houseNumber;
+    }
+
+    public AddressDTO getoDepartment() {
+        return oDepartment;
+    }
+
+    public void setoDepartment(AddressDTO oDepartment) {
+        this.oDepartment = oDepartment;
+    }
+
+    public AddressDTO getoMunicipaly() {
+        return oMunicipaly;
+    }
+
+    public void setoMunicipaly(AddressDTO oMunicipaly) {
+        this.oMunicipaly = oMunicipaly;
     }
 
     public double getLatitude() {
@@ -95,14 +139,6 @@ public class Address {
         this.longitude = longitude;
     }
 
-    public long getIdClient() {
-        return idClient;
-    }
-
-    public void setIdClient(long idClient) {
-        this.idClient = idClient;
-    }
-
     public long getIdAddress() {
         return idAddress;
     }
@@ -111,19 +147,27 @@ public class Address {
         this.idAddress = idAddress;
     }
 
-    public String getTelephone() {
-        return telephone;
+    public long getIdClient() {
+        return idClient;
     }
 
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
+    public void setIdClient(long idClient) {
+        this.idClient = idClient;
     }
 
-    public String getDirection() {
-        return direction;
+    public String getDepartment() {
+        return department;
     }
 
-    public void setDirection(String direction) {
-        this.direction = direction;
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public String getMunicipaly() {
+        return municipaly;
+    }
+
+    public void setMunicipaly(String municipaly) {
+        this.municipaly = municipaly;
     }
 }

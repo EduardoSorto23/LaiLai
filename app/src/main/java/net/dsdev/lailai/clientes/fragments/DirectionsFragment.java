@@ -74,7 +74,7 @@ public class DirectionsFragment extends Fragment implements View.OnClickListener
     private int hourSelected,minuteSelected;
     TimePickerDialog mTimePicker;
     MaterialButton btnTimePicker;
-    private LinearLayout layoutTimePicker;
+    private LinearLayout layoutTimePicker,llView;
     MaterialButtonToggleGroup toggleGroupAddress;
     Button btnDom,btnRec;
     private TextView lblOcasion;
@@ -109,6 +109,7 @@ public class DirectionsFragment extends Fragment implements View.OnClickListener
         btnDom = rootView.findViewById(R.id.btnDom);
         btnRec = rootView.findViewById(R.id.btnRec);
         lblOcasion = rootView.findViewById(R.id.lblOcasion);
+        llView = rootView.findViewById(R.id.llView);
     }
 
     public void init(){
@@ -146,6 +147,7 @@ public class DirectionsFragment extends Fragment implements View.OnClickListener
         try {
             if (action.equalsIgnoreCase("profile")){
                 layoutTimePicker.setVisibility(View.GONE);
+                llView.setVisibility(View.GONE);
                 toggleGroupAddress.setVisibility(View.GONE);
                 getAddresses();
             }else{
@@ -248,7 +250,9 @@ public class DirectionsFragment extends Fragment implements View.OnClickListener
                     addresses.setAddresses(response.body().getAddresses());
                     initAddressAdapter();
                 }else{
-                    Toast.makeText(getActivity().getApplicationContext(),"No hay direcciones disponibles favor añadir una",Toast.LENGTH_LONG).show();
+                    if (getActivity()!=null){
+                        Toast.makeText(getActivity(),"No hay direcciones disponibles favor añadir una",Toast.LENGTH_LONG).show();
+                    }
                 }
             }
 
@@ -291,7 +295,7 @@ public class DirectionsFragment extends Fragment implements View.OnClickListener
                         Client client = sharedPreferencesMethods.getLoggedUser();
                         client.setIdAddress(address.getId());
                         client.setTelephone(address.getTelephone());
-                        client.setFinalAddress(address.getIndications().concat(", ").concat(address.getMunicipaly()).concat(", ").concat(address.getDepartment()));
+                        client.setFinalAddress(address.getReferences().concat(", ").concat(address.getoMunicipaly().getNombre()).concat(", ").concat(address.getoDepartment().getNombre()));
                         if (action.equalsIgnoreCase("profile")){
                             Navigation.findNavController(v).navigate(R.id.action_directionsFragment_to_editDirectionFragment,bundle);
                         }else if (action.equalsIgnoreCase("order")){
@@ -316,6 +320,8 @@ public class DirectionsFragment extends Fragment implements View.OnClickListener
             }
         };
         directionAdapter.setDirections(addresses.getAddresses());
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity().getApplicationContext(), DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(directionAdapter);
     }
 

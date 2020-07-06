@@ -43,7 +43,7 @@ public abstract class DirectionAdapter extends RecyclerView.Adapter<DirectionVie
     @Override
     public void onBindViewHolder(@NonNull DirectionViewHolder holder, int position) {
         Address currentAddresses= addresses.get(position);
-        holder.getTxtDirection().setText(currentAddresses.getIndications());
+        holder.getTxtDirection().setText(currentAddresses.getReferences());
         holder.getTxtDirectionName().setText(currentAddresses.getNombre());
         if (holder.getTxtDirectionName().getText().toString().equalsIgnoreCase("Casa")){
             holder.getImgIcon().setImageResource(R.drawable.ic_home);
