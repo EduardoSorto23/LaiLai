@@ -127,7 +127,7 @@ public class OrderDetailFragment extends Fragment {
 
                 if (!sharedMethods.getIsLogged() || sharedMethods.getLoggedUser()==null){
                     //showInfoAlert();
-                    RandomMethods.showLoginNeededAlert(getActivity());
+                    RandomMethods.showLoginNeededAlert(getActivity(),true);
                 } else {
                     if (menuDetailList != null && menuDetailList.getMenus() != null && menuDetailList.getMenus().size()>0){
                         if (!sharedMethods.isSweetSelected()){

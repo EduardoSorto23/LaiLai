@@ -342,9 +342,9 @@
                                 android:layout_height="wrap_content"
                                 android:text="**** **** **** ****"
                                 android:tint="@color/md_black_1000"
-                                android:textSize="14sp"
+                                android:textSize="13sp"
                                 android:fontFamily="@font/neue_kabel"
-                                android:visibility="gone"
+                                android:visibility="visible"
                                 />
                         </LinearLayout>
 
@@ -353,7 +353,7 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.5"
+                        android:layout_weight="0.3"
                         android:gravity="end">
 
                         <ImageView

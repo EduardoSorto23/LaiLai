@@ -48,6 +48,13 @@ public class RandomMethods {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         context.startActivity(intent);
     }
+    public static void navigate(Class clas, Context context, Boolean goToCart){
+        Intent intent;
+        intent = new Intent(context,clas);
+        intent.putExtra("goToCart",goToCart);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        context.startActivity(intent);
+    }
 
     public static boolean emailVerified(String email) {
         Pattern pattern = Patterns.EMAIL_ADDRESS;
@@ -63,6 +70,24 @@ public class RandomMethods {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Intent intent = new Intent(activity, LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                        activity.startActivity(intent);
+                    }
+                })
+                .setNegativeButton("Cancelar", null)
+                .show();
+    }
+    public static void showLoginNeededAlert(final Activity activity, final Boolean goToCart){
+        new MaterialAlertDialogBuilder(activity, R.style.MyDialogThemeMaterial)
+                .setTitle("Importante")
+                .setMessage("No has iniciado sesión. Para poder acceder a esta opción es necesario iniciar sesión.")
+                .setPositiveButton("Iniciar sesión", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(activity, LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                        if (goToCart){
+                            intent.putExtra("goToCart",true);
+                        }
                         activity.startActivity(intent);
                     }
                 })

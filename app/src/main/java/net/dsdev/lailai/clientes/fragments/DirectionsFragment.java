@@ -320,8 +320,10 @@ public class DirectionsFragment extends Fragment implements View.OnClickListener
             }
         };
         directionAdapter.setDirections(addresses.getAddresses());
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
-        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity().getApplicationContext(), DividerItemDecoration.VERTICAL));
+        if (getActivity()!=null){
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+            recyclerView.addItemDecoration(new DividerItemDecoration(getActivity().getApplicationContext(), DividerItemDecoration.VERTICAL));
+        }
         recyclerView.setAdapter(directionAdapter);
     }
 

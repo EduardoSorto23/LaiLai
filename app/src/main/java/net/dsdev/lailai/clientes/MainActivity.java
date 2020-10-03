@@ -79,6 +79,15 @@ public class MainActivity extends AppCompatActivity implements AddOrRemoveCallba
         setCartCount();
         btnDrawerLogOut.setOnClickListener(this);
         facebookSetup();
+        Bundle extras = getIntent().getExtras();
+        if(extras != null){
+            Boolean goToCart = extras.getBoolean("goToCart",false);
+            if (goToCart){
+                if (cart_count > 0) {
+                    navController.navigate(R.id.directionsFragment);
+                }
+            }
+        }
         //logData();
     }
 

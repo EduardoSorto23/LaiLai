@@ -80,6 +80,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     CallbackManager callbackManager;
     LoginButton loginButton;
     public TextView fb;
+    Boolean goToCart = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +111,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         } catch (PackageManager.NameNotFoundException | NoSuchAlgorithmException e) {
             Log.d("Hola", "onCreate: "+e.toString());
 
+        }
+        Bundle extras = getIntent().getExtras();
+        if(extras != null){
+            goToCart = extras.getBoolean("goToCart");
         }
 
     }
@@ -144,7 +149,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
         switch (v.getId()){
             case R.id.btnSignUp :
-                RandomMethods.navigate(RegisterActivity.class, LoginActivity.this);
+                RandomMethods.navigate(RegisterActivity.class, LoginActivity.this,goToCart);
                 break;
             case R.id.cvLogin:
                 usersService = RetrofitInstance.getRetrofitInstance().create(UsersService.class);
@@ -173,7 +178,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 client.setAccountType("LOCAL");
                                 sharedPreferencesMethods.saveLoggedUser(client);
                                 //Toast.makeText(LoginActivity.this, "Acceso concedido", Toast.LENGTH_SHORT).show();
-                                RandomMethods.navigate(MainActivity.class, LoginActivity.this);
+                                RandomMethods.navigate(MainActivity.class, LoginActivity.this, goToCart);
                             } else {
                                 Log.d(TAG, "onResponse: denegado");
                                 Toast.makeText(LoginActivity.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
@@ -215,8 +220,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         tilPassword = findViewById(R.id.tlPassword);
         cvFbLogin = findViewById(R.id.cvFbLogin);
         cvGoogleLogin = findViewById(R.id.cvGoogleLogin);
-        loginButton = (LoginButton) findViewById(R.id.login_button);
-        fb = (TextView) findViewById(R.id.txtLoginFace);
+        loginButton = findViewById(R.id.login_button);
+        fb = findViewById(R.id.txtLoginFace);
     }
 
     private void facebookLoginSetup() {
@@ -290,6 +295,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra(MainActivity.GOOGLE_ACCOUNT, googleSignInAccount);
+        intent.putExtra("goToCart",goToCart);
         sendLoginAp(googleSignInAccount.getGivenName(), googleSignInAccount.getFamilyName(), googleSignInAccount.getEmail(), googleSignInAccount.getId(), intent, "GOOGLE");
 
     }
@@ -299,7 +305,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         sharedPreferencesMethods.setIsLogged(true);
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
+        intent.putExtra("goToCart",goToCart);
+        //startActivity(intent);
         sendLoginAp(client.getNames(), client.getLastNames(), client.getEmail(), id, intent, "FACEBOOK");
     }
 
@@ -336,6 +343,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void goToResetPassword() {
         Intent intent = new Intent(this,ResetPasswordActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("goToCart",goToCart);
         startActivity(intent);
 
     }

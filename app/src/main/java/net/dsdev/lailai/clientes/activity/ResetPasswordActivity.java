@@ -32,11 +32,16 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnC
     private String TAG = "Hola";
     private Accounts accounts;
     ProgressBar pbReset;
+    Boolean goToCart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
         bindUI();
+        Bundle extras = getIntent().getExtras();
+        if(extras != null){
+            goToCart = extras.getBoolean("goToCart");
+        }
     }
 
     private void bindUI() {
@@ -100,7 +105,7 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnC
                         public void onClick(DialogInterface dialog, int which) {
                             Log.d(TAG, "onClick: iscomplete "+accounts.isValid());
                             if (accounts.isValid()){
-                                RandomMethods.navigate(LoginActivity.class,ResetPasswordActivity.this);
+                                RandomMethods.navigate(LoginActivity.class,ResetPasswordActivity.this,goToCart);
                             }
                             dialog.dismiss();
                         }
@@ -137,7 +142,7 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onBackPressed() {
-        RandomMethods.navigate(LoginActivity.class,ResetPasswordActivity.this);
+        RandomMethods.navigate(LoginActivity.class,ResetPasswordActivity.this,goToCart);
         super.onBackPressed();
     }
 }

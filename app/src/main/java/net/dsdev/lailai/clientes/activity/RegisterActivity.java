@@ -68,6 +68,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     //FACEBOOK
     CallbackManager callbackManager;
     LoginButton loginButton;
+    Boolean goToCart = false;
 
     @Override
     protected void onStart() {
@@ -96,6 +97,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 .build();
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
         facebookLoginSetup();
+        Bundle extras = getIntent().getExtras();
+        if(extras != null){
+            goToCart = extras.getBoolean("goToCart");
+        }
     }
 
     private void facebookLoginSetup() {
@@ -213,7 +218,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             if (response.body().isValid()){
                                 Toast.makeText(RegisterActivity.this, response.body().getMsg(), Toast.LENGTH_LONG).show();
                                 sharedPreferencesMethods.saveLoggedUser(response.body().getClient());
-                                RandomMethods.navigate(LoginActivity.class, RegisterActivity.this);
+                                RandomMethods.navigate(LoginActivity.class, RegisterActivity.this,goToCart);
                             } else {
                                 Toast.makeText(RegisterActivity.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
                             }
@@ -250,6 +255,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         super.onBackPressed();
         Intent intent = new Intent(this,LoginActivity.class );
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("goToCart",goToCart);
         startActivity(intent);
     }
 
@@ -334,6 +340,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         client.setAccountType(accountType);
                         sharedPreferencesMethods.saveLoggedUser(client);
                         Toast.makeText(RegisterActivity.this, response.body().getMsg(), Toast.LENGTH_LONG).show();
+                        intent.putExtra("goToCart",goToCart);
                         startActivity(intent);
                     } else {
                         Toast.makeText(RegisterActivity.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
