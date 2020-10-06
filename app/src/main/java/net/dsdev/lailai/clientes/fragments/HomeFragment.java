@@ -59,7 +59,7 @@ import static androidx.navigation.Navigation.findNavController;
 public class HomeFragment extends Fragment {
 
     //public static String MENU_SAVED = "";
-    static int secondsForSlider = 7;
+    static int secondsForSlider = 10;
     View rootView;
     SliderView sliderView;
     private Toolbar mTopToolbar;
@@ -123,7 +123,7 @@ public class HomeFragment extends Fragment {
                 try {
                     sliderView.setCurrentPagePosition(sliderView.getCurrentPagePosition()-1);
                 }catch (Exception e){
-                    Log.d(TAG, "onClick: bla bla : "+e.getLocalizedMessage());
+                     Log.d(TAG, "onClick: bla bla : "+e.getLocalizedMessage());
                 }
             }
         });
@@ -147,8 +147,10 @@ public class HomeFragment extends Fragment {
         setPromoList();
         sliderView.setScrollTimeInSec(secondsForSlider);
         sliderView.setIndicatorAnimation(IndicatorAnimations.SLIDE); //set indicator animation by using SliderLayout.IndicatorAnimations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
-        sliderView.setSliderTransformAnimation(SliderAnimations.CUBEINROTATIONTRANSFORMATION);
-        sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);
+        // sliderView.setSliderTransformAnimation(SliderAnimations.CUBEINROTATIONTRANSFORMATION);
+        sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
+        // sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);
+        sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_RIGHT);
         sliderView.setIndicatorSelectedColor(Color.WHITE);
         sliderView.setIndicatorUnselectedColor(Color.GRAY);
         sliderView.startAutoCycle();
