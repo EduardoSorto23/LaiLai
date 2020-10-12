@@ -44,7 +44,7 @@ abstract public class SubCategoryAdapter extends RecyclerView.Adapter<CategoryVi
         holder.getTxtName().setText(subCategory.getName());
         holder.getTxtShowMenu().setText("Ver Menú");
         Glide.with(context)
-                .load(subCategory.getImages().getSmall() == null ? subCategory.getImages().getUnavailable():subCategory.getImages().getNormal())
+                .load(subCategory.getImages().getNormal() == null ? subCategory.getImages().getUnavailable():subCategory.getImages().getNormal())
                 .centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 //.apply(RequestOptions.circleCropTransform())
