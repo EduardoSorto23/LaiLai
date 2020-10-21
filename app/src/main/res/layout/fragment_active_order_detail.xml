@@ -2,6 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -50,15 +51,15 @@
             android:layout_gravity="center"
             android:gravity="center"
             >
+
             <TextView
                 android:id="@+id/txtOrderState"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/neue_kabel_bold"
-                android:textSize="19sp"
-                android:textColor="@color/md_black_1000"
                 android:textAlignment="center"
-                />
+                android:textColor="@color/md_black_1000"
+                android:textSize="19sp" />
         </LinearLayout>
     </LinearLayout>
     <androidx.core.widget.NestedScrollView

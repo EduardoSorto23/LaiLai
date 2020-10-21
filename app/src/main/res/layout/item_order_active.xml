@@ -50,6 +50,7 @@
                 android:textColor="#000"
                 android:textSize="19sp"
                 android:textAlignment="center"/>
+
             <TextView
                 android:id="@+id/txtOrderState"
                 android:layout_width="0dp"
@@ -58,10 +59,10 @@
                 android:fontFamily="@font/neue_kabel"
                 android:gravity="center"
                 android:padding="0dp"
+                android:textAlignment="center"
                 android:textColor="#000"
                 android:textSize="19sp"
-                android:textAlignment="center"
-                />
+                android:visibility="gone" />
         </TableRow>
     </TableLayout>
 </LinearLayout>

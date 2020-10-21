@@ -75,6 +75,7 @@
                 android:textColor="#000"
                 android:textSize="19sp"
                 android:textAlignment="center"/>
+
             <TextView
                 android:id="@+id/simpleTextView2"
                 android:layout_width="0dp"
@@ -84,9 +85,10 @@
                 android:gravity="center"
                 android:padding="0dp"
                 android:text="ESTADO"
+                android:textAlignment="center"
                 android:textColor="#000"
                 android:textSize="19sp"
-                android:textAlignment="center"/>
+                android:visibility="gone" />
         </TableRow>
         </TableLayout>
         <View

@@ -49,7 +49,8 @@ public abstract class ActiveOrdersAdapter extends RecyclerView.Adapter<ActiveOrd
         holder.getTxtOrderNumber().setText(activeOrders.get(position).getOrderCode());
         holder.getTxtOrderTime().setText(activeOrders.get(position).getHour());
         holder.getTxtOrderTotal().setText(String.valueOf(activeOrders.get(position).getOrderTotal()));
-        holder.getTxtOrderState().setText(activeOrders.get(position).getState());
+        //holder.getTxtOrderState().setText(activeOrders.get(position).getState());
+        holder.getTxtOrderState().setText("");
         setClickListener(holder,position,activeOrders.get(position));
     }
 

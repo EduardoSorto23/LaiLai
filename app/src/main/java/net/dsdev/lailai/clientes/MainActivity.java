@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import net.dsdev.lailai.clientes.activity.LoginActivity;
@@ -56,6 +57,8 @@ public class MainActivity extends AppCompatActivity implements AddOrRemoveCallba
     private DrawerLayout drawerLayout;
     private NavController navController;
     private NavigationView navigationView;
+    private TextView txtWellcome;
+    private
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
     String json;
@@ -298,6 +301,17 @@ public class MainActivity extends AppCompatActivity implements AddOrRemoveCallba
         navigationView = findViewById(R.id.navigationView);
         navController = Navigation.findNavController(this, R.id.fragment);
         navigationView.setNavigationItemSelectedListener(this);
+
+        /*--------------------------------------------
+             Para agregar primer nombre en cuadro
+            amarillo de imagen en menu hamburguesa
+        --------------------------------------------*/
+        String primerNombre = "";
+        String[] cadena = sharedPreferencesMethods.getLoggedUser().getNames().split(" ");
+        primerNombre = cadena[0];
+        txtWellcome = navigationView.getHeaderView(0).findViewById(R.id.txtWellcome);
+        txtWellcome.setText("Bienvenido/a ".concat(primerNombre));
+
         //MenuItem menuItem = navigationView.getMenu().getItem(0);
         //onNavigationItemSelected(menuItem);
         //menuItem.setChecked(true);

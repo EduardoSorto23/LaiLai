@@ -100,7 +100,7 @@
                             android:id="@+id/imgRecommendedIcon"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
-                            android:src="@drawable/chef_recomendation"/>
+                            android:src="@drawable/chef_recomendation2"/>
 
                         <TextView
                             android:id="@+id/txtRecommended"

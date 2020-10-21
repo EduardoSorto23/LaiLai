@@ -300,7 +300,7 @@ public class ActiveOrderDetailFragment extends Fragment {
 
     private void setTxtValues() {
         txtOrderNumber.setText(order.getOrderCode());
-        txtOrderState.setText(order.getEstadoDesc());
+        //txtOrderState.setText(order.getEstadoDesc());
         if (order.getAmount()!=null){
             txtOrderAmmount.setText(String.format(formatDouble,order.getAmount()));
         }
