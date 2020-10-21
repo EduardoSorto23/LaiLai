@@ -131,6 +131,9 @@ public abstract class MenuAdapter extends RecyclerView.Adapter<RecyclerView.View
         public void bind(Menus menu, int position){
             this.txtName.setText(menu.getName());
             this.txtDesc.setText(menu.getDescription());
+            // this.txtDesc.setText(menu.getDescription());
+            this.txtDesc.setText("");
+            this.txtPrice.setText("Q"+menu.getPrice());
             /** CAMBIADO POR REQUERIMIENTO DE MOSTRAR IMAGEN CUADRADA **/
             Glide.with(context)
                     .load(menu.getImages().getNormal() == null ? menu.getImages().getUnavailable():menu.getImages().getNormal())

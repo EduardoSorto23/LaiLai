@@ -78,7 +78,7 @@ public class MenuDetailFragment extends Fragment {
     JsonMenuDetail jsonMenuDetail;
     long idMenu;
     MaterialButton btnBottomCart;
-    TextView txtPriceCart,txtMenuDetailName,txtMenuDetailPrice;
+    TextView txtPriceCart,txtMenuDetailName,txtMenuDetailPrice,txtRecommended;
     SharedPreferences mPrefs;
     SharedPreferences.Editor prefsEditor;
     private Gson gson;
@@ -227,6 +227,7 @@ public class MenuDetailFragment extends Fragment {
         imgMenu = rootView.findViewById(R.id.imgMenu);
         txtMenuDetailName = rootView.findViewById(R.id.txtMenuDetailName);
         txtMenuDetailPrice = rootView.findViewById(R.id.txtMenuDetailPrice);
+        txtRecommended = rootView.findViewById(R.id.txtRecommended);
         gson = new Gson();
         txtPriceCart = getActivity().findViewById(R.id.txtPriceCart);
         numberPicker = rootView.findViewById(R.id.numberPicker);
@@ -297,6 +298,7 @@ public class MenuDetailFragment extends Fragment {
                     menuDetailAdapter.setOptions(jsonMenuDetail.getMenu().getOptions());
                     txtMenuDetailName.setText(jsonMenuDetail.getMenu().getName());
                     txtMenuDetailPrice.setText(String.format(formatText,jsonMenuDetail.getMenu().getPrice()));
+                    txtRecommended.setText(jsonMenuDetail.getMenu().getDesc());
                     menuDetailAdapter.setOptions(jsonMenuDetail.getMenu().getOptions());
                     recyclerView.setAdapter(menuDetailAdapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
