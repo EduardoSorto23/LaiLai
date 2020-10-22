@@ -42,7 +42,6 @@ public class MenuFragment extends Fragment {
     RadioGroup radioGroup;
     TextView txtSubCategories,txtPriceCart;
     SharedPreferencesMethods sharedPreferencesMethods;
-    TextInputEditText etSearch;
     private static final String actionBarTittle = "";
     public static final String TAG = "Hola";
     ImageButton imgSearch;
@@ -219,7 +218,6 @@ public class MenuFragment extends Fragment {
         //rvMenus.setNestedScrollingEnabled(false);
         radioGroup = rootView.findViewById(R.id.rgToList);
         txtSubCategories = rootView.findViewById(R.id.txtSubCategories);
-        etSearch = rootView.findViewById(R.id.metSearch);
         imgSearch = rootView.findViewById(R.id.imgSearch);
     }
 

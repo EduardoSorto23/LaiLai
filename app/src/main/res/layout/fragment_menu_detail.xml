@@ -90,9 +90,9 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/standard_divider"
+                        android:layout_height="83dp"
                         android:layout_marginStart="@dimen/medium_margin"
+                        android:layout_marginTop="@dimen/standard_divider"
                         android:layout_marginEnd="@dimen/medium_margin"
                         android:orientation="horizontal">
 
@@ -100,15 +100,15 @@
                             android:id="@+id/imgRecommendedIcon"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
-                            android:src="@drawable/chef_recomendation2"/>
+                            android:src="@drawable/chef_recomendation2" />
 
                         <TextView
                             android:id="@+id/txtRecommended"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginHorizontal="8dp"
-                            android:text=""
-                            android:fontFamily="@font/neue_kabel"/>
+                            android:fontFamily="@font/neue_kabel"
+                            android:text="Deliciosa combinación de 5 carnes: pollo, lomito, cerdo, camarón y pato, acompañado de deliciosas verduras: brócoli, apio, arveja china y queso de soya." />
 
                     </LinearLayout>
 

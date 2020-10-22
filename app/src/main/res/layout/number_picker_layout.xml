@@ -27,14 +27,14 @@
         android:id="@+id/display"
         android:gravity="center"
         />
+
     <Button
+        android:id="@+id/increment"
         android:layout_width="30dp"
         android:layout_height="match_parent"
         android:padding="0dp"
-        android:textSize="25sp"
-        android:textColor="@android:color/black"
-        android:id="@+id/increment"
         android:text="+"
-        app:backgroundTint="@color/md_yellow_700"
-        />
+        android:textColor="@android:color/black"
+        android:textSize="25sp"
+        app:backgroundTint="@color/md_yellow_700" />
 </LinearLayout>

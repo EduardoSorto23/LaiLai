@@ -63,6 +63,17 @@ public abstract class MenuDetailAdapter extends RecyclerView.Adapter<MenuDetailV
         ll.setOrientation(LinearLayout.VERTICAL);
         rg.setOrientation(LinearLayout.VERTICAL);
 
+        /*-----------------------------------------------------
+            Para ocultar el rg cuando solo posee una variante
+        -------------------------------------------------------*/
+        if(variants.size() < 2){
+            rg.setVisibility(View.GONE);
+            Log.d(TAG,"Se volvio invisible el radio group");
+        }else{
+            rg.setVisibility(View.VISIBLE);
+            Log.d(TAG,"Se volvio visible el radio group");
+        }
+
         for (VariantMenuDetail v: variants) {
             RadioButton radioButton = new RadioButton(context);
             radioButton.setId(v.getIdVariant());

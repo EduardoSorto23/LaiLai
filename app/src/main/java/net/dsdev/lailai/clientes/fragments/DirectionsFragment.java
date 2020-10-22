@@ -13,11 +13,14 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -77,9 +80,11 @@ public class DirectionsFragment extends Fragment implements View.OnClickListener
     private LinearLayout layoutTimePicker,llView;
     MaterialButtonToggleGroup toggleGroupAddress;
     Button btnDom,btnRec;
+    private EditText etSearch;
     private TextView lblOcasion;
     private StoreAdapter storeAdapter;
     private List<Store> stores;
+    private List<Store> storesFilter;
     public DirectionsFragment() {
     }
 
@@ -110,6 +115,7 @@ public class DirectionsFragment extends Fragment implements View.OnClickListener
         btnRec = rootView.findViewById(R.id.btnRec);
         lblOcasion = rootView.findViewById(R.id.lblOcasion);
         llView = rootView.findViewById(R.id.llView);
+        etSearch = rootView.findViewById(R.id.etSearch);
     }
 
     public void init(){
@@ -128,11 +134,13 @@ public class DirectionsFragment extends Fragment implements View.OnClickListener
                         fab.setVisibility(View.VISIBLE);
                         lblOcasion.setText("Direcciones:");
                         recyclerView.setAdapter(null);
+                        etSearch.setVisibility(View.GONE);
                         getAddresses();
                     }else if (checkedId == R.id.btnRec){
                         fab.setVisibility(View.GONE);
                         lblOcasion.setText("Tiendas:");
                         recyclerView.setAdapter(null);
+                        etSearch.setVisibility(View.VISIBLE);
                         initStoresAdapter();
                     }
                 }
@@ -189,6 +197,35 @@ public class DirectionsFragment extends Fragment implements View.OnClickListener
         }
         setHasOptionsMenu(true);
 
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filtarTiendas(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+    }
+
+    private void filtarTiendas(CharSequence s){
+        storesFilter = new ArrayList<>();
+        for(Store item: stores){
+            if(item.getName().toUpperCase().contains(s.toString().toUpperCase()) || item.getAddress().toUpperCase().contains(s.toString().toUpperCase())){
+                storesFilter.add(item);
+            }
+        }
+
+        storeAdapter.setDirections(storesFilter);
+        storeAdapter.notifyDataSetChanged();
     }
 
     private void initStoresAdapter() {

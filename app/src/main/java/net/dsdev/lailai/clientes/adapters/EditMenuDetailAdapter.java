@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -101,7 +102,6 @@ public abstract class EditMenuDetailAdapter extends RecyclerView.Adapter<MenuDet
 
         holder.getLinearLayout().addView(ll);
         holder.getRgMenuDetailOptions().addView(rg);
-
     }
 
     @Override
