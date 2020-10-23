@@ -17,11 +17,13 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -43,6 +45,7 @@ import net.dsdev.lailai.clientes.viewHolders.DirectionViewHolder;
 import net.dsdev.lailai.clientes.util.SharedPreferencesMethods;
 import net.dsdev.lailai.clientes.viewHolders.StoreViewHolder;
 
+import com.google.android.gms.maps.MapView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -213,6 +216,8 @@ public class DirectionsFragment extends Fragment implements View.OnClickListener
 
             }
         });
+
+
 
     }
 

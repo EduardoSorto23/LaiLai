@@ -8,6 +8,7 @@
     tools:context=".fragments.NewDirectionFragment">
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/overlay"
@@ -31,6 +32,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:layout_margin="16dp"
+                    android:descendantFocusability="blocksDescendants"
                     android:elevation="4dp"
                     app:cardBackgroundColor="#FF9E80"
                     app:cardCornerRadius="15dp"
@@ -41,8 +43,13 @@
                         android:name="com.google.android.gms.maps.MapFragment"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
-                </com.google.android.material.card.MaterialCardView>
 
+                    <View
+                        android:id="@+id/transparent_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#00FFFFFF" />
+                </com.google.android.material.card.MaterialCardView>
 
                 <RelativeLayout
                     android:id="@+id/relLayout1"
@@ -142,73 +149,72 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_marginLeft="24dp"
                     android:layout_marginRight="24dp"
                     android:layout_marginBottom="20dp"
-                    >
+                    android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="vertical"
-                        >
+                        android:orientation="vertical">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"
+                            android:fontFamily="@font/neue_kabel"
                             android:text="Departamento"
                             android:textColor="@color/md_black_1000"
-                            android:fontFamily="@font/neue_kabel"
-                            android:textSize="16sp"
-                            android:layout_marginEnd="16dp"
-                            />
+                            android:textSize="16sp" />
+
                         <Spinner
                             android:id="@+id/spDepartments"
                             style="@style/Widget.AppCompat.Spinner"
                             android:layout_width="match_parent"
                             android:layout_height="?attr/dropdownListPreferredItemHeight"
+                            android:layout_marginEnd="16dp"
                             android:background="@drawable/spinner_bg"
                             android:dropDownWidth="300dp"
                             android:dropDownVerticalOffset="?attr/dropdownListPreferredItemHeight"
                             android:popupBackground="@android:color/white"
                             android:popupElevation="3dp"
-                            android:stateListAnimator="@drawable/spinner_sla"
-                            android:layout_marginEnd="16dp"
-                            />
+                            android:stateListAnimator="@drawable/spinner_sla" />
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="vertical"
-                        >
+                        android:orientation="vertical">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:fontFamily="@font/neue_kabel"
                             android:text="Municipio"
                             android:textColor="@color/md_black_1000"
-                            android:fontFamily="@font/neue_kabel"
-                            android:textSize="16sp"
-                            android:layout_marginStart="16dp"
-                            />
+                            android:textSize="16sp" />
+
                         <Spinner
                             android:id="@+id/spMunicipalies"
                             style="@style/Widget.AppCompat.Spinner"
                             android:layout_width="match_parent"
                             android:layout_height="?attr/dropdownListPreferredItemHeight"
+                            android:layout_marginStart="16dp"
                             android:background="@drawable/spinner_bg"
                             android:dropDownWidth="300dp"
                             android:dropDownVerticalOffset="?attr/dropdownListPreferredItemHeight"
                             android:popupBackground="@android:color/white"
                             android:popupElevation="3dp"
-                            android:stateListAnimator="@drawable/spinner_sla"
-                            android:layout_marginStart="16dp"
-                            />
+                            android:stateListAnimator="@drawable/spinner_sla" />
                     </LinearLayout>
 
                 </LinearLayout>
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tlCol"
                     android:layout_width="match_parent"
@@ -217,6 +223,7 @@
                     android:layout_marginRight="24dp"
                     android:layout_marginBottom="20dp"
                     app:hintTextColor="@color/browser_actions_title_color">
+
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etCol"
                         android:layout_width="match_parent"
@@ -227,6 +234,7 @@
                         android:inputType="text"
                         android:maxLines="1" />
                 </com.google.android.material.textfield.TextInputLayout>
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tlZone"
                     android:layout_width="match_parent"
@@ -235,6 +243,7 @@
                     android:layout_marginRight="24dp"
                     android:layout_marginBottom="20dp"
                     app:hintTextColor="@color/browser_actions_title_color">
+
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etZone"
                         android:layout_width="match_parent"
@@ -254,6 +263,7 @@
                     android:layout_marginRight="24dp"
                     android:layout_marginBottom="20dp"
                     app:hintTextColor="@color/browser_actions_title_color">
+
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etAccessCode"
                         android:layout_width="match_parent"
@@ -273,6 +283,7 @@
                     android:layout_marginRight="24dp"
                     android:layout_marginBottom="20dp"
                     app:hintTextColor="@color/browser_actions_title_color">
+
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etHouseNumber"
                         android:layout_width="match_parent"

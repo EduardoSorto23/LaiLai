@@ -18,16 +18,20 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 
 import com.google.android.gms.common.api.Status;
@@ -89,6 +93,8 @@ public class NewDirectionFragment extends Fragment implements OnMapReadyCallback
     private Marker markerUser;
     private static final int REQUEST_LOCATION_PERMISSION = 99;
     private GoogleMap gMap;
+    MapView map;
+    NestedScrollView scroll;
     AutocompleteSupportFragment autocompleteFragment;
     //FusedLocationProviderClient mFusedLocationClient;
 
@@ -108,6 +114,7 @@ public class NewDirectionFragment extends Fragment implements OnMapReadyCallback
     private Spinner spDepartments, spMunicipalies;
     Boolean isFirst = true;
     SpinAdapter muniAdapter,deptoAdapter;
+    View transparent_image;
 
     public NewDirectionFragment() {
         // Required empty public constructor
@@ -155,6 +162,10 @@ public class NewDirectionFragment extends Fragment implements OnMapReadyCallback
 
         tlHouseNumber = rootView.findViewById(R.id.tlHouseNumber);
         etHouseNumber = rootView.findViewById(R.id.etHouseNumber);
+
+        scroll = rootView.findViewById(R.id.scroll);
+        map = rootView.findViewById(R.id.map);
+        transparent_image = rootView.findViewById(R.id.transparent_image);
     }
 
     @Override
@@ -224,6 +235,28 @@ public class NewDirectionFragment extends Fragment implements OnMapReadyCallback
         });
 
         listDepartments();
+
+        transparent_image.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                switch (action) {
+                    case MotionEvent.ACTION_DOWN: // Disallow ScrollView to intercept touch events.
+                        scroll.requestDisallowInterceptTouchEvent(true); // Disable touch on transparent view return false;
+                        map.onTouchEvent(event);
+                        return false;
+                    case MotionEvent.ACTION_UP: // Allow ScrollView to intercept touch events.
+                        scroll.requestDisallowInterceptTouchEvent(false);
+                        return true;
+                    case MotionEvent.ACTION_MOVE:
+                        scroll.requestDisallowInterceptTouchEvent(true);
+                        map.onTouchEvent(event);
+                        return false;
+                    default:
+                        return true;
+                }
+            }
+        });
     }
     private void listDepartments() {
         AddressService service = RetrofitInstance.getRetrofitInstance().create(AddressService.class);
@@ -607,7 +640,7 @@ public class NewDirectionFragment extends Fragment implements OnMapReadyCallback
         Bitmap bitmap = Bitmap.createBitmap(background.getIntrinsicWidth(), background.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         background.draw(canvas);
-        vectorDrawable.draw(canvas);
+        //vectorDrawable.draw(canvas);
         return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 

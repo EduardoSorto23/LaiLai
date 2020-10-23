@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
@@ -18,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
@@ -25,6 +27,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -84,6 +87,9 @@ public class EditDirectionFragment extends Fragment implements OnMapReadyCallbac
         GoogleMap.OnMyLocationClickListener {
 
     View rootView;
+    View transparent_image;
+    MapView map;
+    NestedScrollView scroll;
     private static final String actionBarTittle = "Direcciones";
     private static final String TAG = "Hola";
     private Context context;
@@ -165,6 +171,10 @@ public class EditDirectionFragment extends Fragment implements OnMapReadyCallbac
         tlHouseNumber = rootView.findViewById(R.id.tlHouseNumber);
         etHouseNumber = rootView.findViewById(R.id.etHouseNumber);
         cvMap = rootView.findViewById(R.id.cvMap);
+
+        scroll = rootView.findViewById(R.id.scroll);
+        map = rootView.findViewById(R.id.map);
+        transparent_image = rootView.findViewById(R.id.transparent_image);
     }
 
     @Override
@@ -276,6 +286,28 @@ public class EditDirectionFragment extends Fragment implements OnMapReadyCallbac
         });
 
         listDepartments();
+
+        transparent_image.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                switch (action) {
+                    case MotionEvent.ACTION_DOWN: // Disallow ScrollView to intercept touch events.
+                        scroll.requestDisallowInterceptTouchEvent(true); // Disable touch on transparent view return false;
+                        map.onTouchEvent(event);
+                        return false;
+                    case MotionEvent.ACTION_UP: // Allow ScrollView to intercept touch events.
+                        scroll.requestDisallowInterceptTouchEvent(false);
+                        return true;
+                    case MotionEvent.ACTION_MOVE:
+                        scroll.requestDisallowInterceptTouchEvent(true);
+                        map.onTouchEvent(event);
+                        return false;
+                    default:
+                        return true;
+                }
+            }
+        });
     }
 
     private void listDepartments() {
@@ -738,11 +770,11 @@ public class EditDirectionFragment extends Fragment implements OnMapReadyCallbac
         Drawable background = ContextCompat.getDrawable(context, R.drawable.ic_location);
         background.setBounds(0, 0, background.getIntrinsicWidth(), background.getIntrinsicHeight());
         Drawable vectorDrawable = ContextCompat.getDrawable(context, R.drawable.ic_location);
-        vectorDrawable.setBounds(40, 20, vectorDrawable.getIntrinsicWidth() + 40, vectorDrawable.getIntrinsicHeight() + 20);
+        vectorDrawable.setBounds(24, 24, vectorDrawable.getIntrinsicWidth() + 24, vectorDrawable.getIntrinsicHeight() + 24);
         Bitmap bitmap = Bitmap.createBitmap(background.getIntrinsicWidth(), background.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         background.draw(canvas);
-        vectorDrawable.draw(canvas);
+        //vectorDrawable.draw(canvas);
         return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 
