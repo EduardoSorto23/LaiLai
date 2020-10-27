@@ -156,6 +156,15 @@
         <item name="android:textColor">@color/red_app</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="MyDatePickerDialogTheme" parent="Theme.MaterialComponents.Dialog.Alert">
+        <item name="colorPrimary">@color/yellow_app</item>
+        <item name="colorSecondary">@color/white</item>
+        <item name="colorBackgroundFloating">@color/red_app</item>
+        <item name="android:textColor">@color/red_app</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimaryDisableOnly">@color/colorLightGray</item>
+        <item name="android:textColorPrimary">@color/md_black_1000</item>
+    </style>
 
     <style name="AppTheme.Button.MyButtonToggle" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:paddingLeft">16dp</item>

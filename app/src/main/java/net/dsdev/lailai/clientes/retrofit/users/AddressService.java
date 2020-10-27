@@ -3,6 +3,7 @@ import net.dsdev.lailai.clientes.model.users.Address;
 import net.dsdev.lailai.clientes.model.users.AddressDTO;
 import net.dsdev.lailai.clientes.model.users.AddressResponse;
 import net.dsdev.lailai.clientes.model.users.AuthResponse;
+import net.dsdev.lailai.clientes.model.users.Coverage;
 import net.dsdev.lailai.clientes.util.Constants;
 
 import java.util.LinkedHashMap;
@@ -33,5 +34,4 @@ public interface AddressService {
 
     @GET(Constants.getMunicipalies)
     Call<LinkedHashMap<String, List<AddressDTO>>> getMunicipalies(@Path("idDepto") Long idDepto);
-
 }

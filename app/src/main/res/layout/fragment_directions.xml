@@ -25,6 +25,37 @@
                 android:orientation="vertical"
                 android:padding="10dp"
                 >
+
+                <TextView
+                    android:id="@+id/txtRgPedido"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/neue_kabel"
+                    android:text="@string/txtRgPedido"
+                    android:textColor="#000"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <RadioGroup
+                    android:id="@+id/rgPedido"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RadioButton
+                        android:id="@+id/rbPedidoNormal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="@string/rbPedidoNormal" />
+
+                    <RadioButton
+                        android:id="@+id/rbPedidoFuturo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/rbPedidoFuturo"
+                        android:layout_marginBottom="10dp"/>
+                </RadioGroup>
+
                 <LinearLayout
                     android:id="@+id/layoutTimePicker"
                     android:layout_width="match_parent"
@@ -32,17 +63,18 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/txtFechaFutura"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_weight="2"
                         android:fontFamily="@font/neue_kabel"
-                        android:text="Hora de entrega:"
+                        android:text="Hora y fecha entrega:"
                         android:textAlignment="textStart"
                         android:textColor="#000"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnTimePicker"
+                        android:id="@+id/btnDatePicker"
                         style="@style/Widget.MaterialComponents.Button.TextButton"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -51,7 +83,19 @@
                         android:text="..."
                         android:textAlignment="textStart"
                         android:textColor="#000"
-                        android:textSize="19sp" />
+                        android:textSize="14sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnTimePicker"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/neue_kabel"
+                        android:text="..."
+                        android:textAlignment="textStart"
+                        android:textColor="#000"
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <View

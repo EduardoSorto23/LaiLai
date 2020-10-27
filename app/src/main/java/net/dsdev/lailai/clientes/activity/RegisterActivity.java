@@ -20,6 +20,7 @@ import net.dsdev.lailai.clientes.model.users.LoginApiRequest;
 import net.dsdev.lailai.clientes.model.users.NewUser;
 import net.dsdev.lailai.clientes.retrofit.RetrofitInstance;
 import net.dsdev.lailai.clientes.retrofit.users.UsersService;
+import net.dsdev.lailai.clientes.util.Constants;
 import net.dsdev.lailai.clientes.util.RandomMethods;
 import net.dsdev.lailai.clientes.util.SharedPreferencesMethods;
 
@@ -327,8 +328,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void sendLoginAp(String names, String lastNames, String userEmail, String token, final Intent intent, final String accountType){
+        String account = "";
+        if(accountType.equals("FACEBOOK")){
+            account = Constants.accountFacebook;
+        }else if(accountType.equals("GOOGLE")){
+            account = Constants.accountGoogle;
+        }
         usersService = RetrofitInstance.getRetrofitInstance().create(UsersService.class);
-        LoginApiRequest loginApiRequest = new LoginApiRequest(names, lastNames, userEmail, token);
+        LoginApiRequest loginApiRequest = new LoginApiRequest(names, lastNames, userEmail, token, account);
         Call<AuthResponse> call = usersService.sendLoginApiRequest(loginApiRequest);
         call.enqueue(new Callback<AuthResponse>() {
             @Override

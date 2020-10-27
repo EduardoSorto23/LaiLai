@@ -6,6 +6,7 @@ public class Globals {
             ,PROMOS_SAVED=null;
 
     public static String horaEntrega;
+    public static String fechaEntrega;
     public static Long tienda;
     public static String tiendaName;
     public static String OCASION;

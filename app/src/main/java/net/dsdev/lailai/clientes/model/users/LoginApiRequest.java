@@ -18,11 +18,15 @@ public class LoginApiRequest {
     @SerializedName(Constants.token)
     private String token;
 
-    public LoginApiRequest(String names, String lastNames, String email, String token) {
+    @SerializedName(Constants.account)
+    private String accountType;
+
+    public LoginApiRequest(String names, String lastNames, String email, String token, String account) {
         this.names = names;
         this.lastNames = lastNames;
         this.email = email;
         this.token = token;
+        this.accountType = account;
     }
 
     public String getNames() {
@@ -55,5 +59,13 @@ public class LoginApiRequest {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
     }
 }

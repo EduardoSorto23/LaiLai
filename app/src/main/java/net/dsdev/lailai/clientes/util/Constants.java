@@ -31,6 +31,7 @@ public class Constants {
     public static final String getActiveOrderDetail = "order/{idOrder}";
 
     public static final String getStores = "tiendas/list";
+    public static final String getCoverage = "tiendas/cobertura/{id}";
     public static final String orderCancel = "order/cancelar/{idOrder}";
 
     public static final String getDepartments = "direccion/departamentos";
@@ -130,6 +131,7 @@ public class Constants {
     public static final String closeHour = "horaCierre";
     public static final String stores = "tiendas";
     public static final String idStore = "idTienda";
+    public static final String account = "tipo_cuenta";
 
     public static final String references = "referencias";
     public static final String suBurb = "colonia";
@@ -138,5 +140,13 @@ public class Constants {
     public static final String houseNumber = "numeroCasa";
     public static final String departments = "departamentos";
     public static final String municipalies = "municipios";
-
+    public static final String result = "result";
+    public static final String message = "msg";
+    public static final String stateCoverageClose = "CER";
+    public static final String stateCoverageOpen = "ACT";
+    public static final String stateCoverageOut = "NCB";
+    public static final String fecHourCoverage = "fechaHora";
+    public static final String futureOrderCoverage = "pedidoFuturo";
+    public static final String accountFacebook = "FBK";
+    public static final String accountGoogle = "GOG";
 }

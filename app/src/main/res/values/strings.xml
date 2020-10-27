@@ -89,4 +89,10 @@
     <string name="thanks">Gracias por preferirnos!!</string>
     <string name="go_to_home">Ir a Home</string>
 
+    <!--Strings for controls -->
+        <!-- DirectionsFragment -->
+    <string name="rbPedidoNormal">Deseo mi pedido en este momento</string>
+    <string name="rbPedidoFuturo">Deseo mi pedido para un momento posterior</string>
+    <string name="txtRgPedido">Opciones de Envio</string>
+
 </resources>
