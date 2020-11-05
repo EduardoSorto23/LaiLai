@@ -29,6 +29,7 @@ public class Constants {
     public static final String updateCard = "card/update";
     public static final String getActiveOrders = "order/activas/{idClient}";
     public static final String getActiveOrderDetail = "order/{idOrder}";
+    public static final String getVentaSugerida = "sugerido/menus";
 
     public static final String getStores = "tiendas/list";
     public static final String getCoverage = "tiendas/cobertura/{id}";
@@ -132,6 +133,7 @@ public class Constants {
     public static final String stores = "tiendas";
     public static final String idStore = "idTienda";
     public static final String account = "tipo_cuenta";
+    public static final String chance = "ocasion";
 
     public static final String references = "referencias";
     public static final String suBurb = "colonia";

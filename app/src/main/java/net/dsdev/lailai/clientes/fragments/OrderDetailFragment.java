@@ -31,10 +31,20 @@ import android.widget.Toast;
 import net.dsdev.lailai.clientes.MainActivity;
 import net.dsdev.lailai.clientes.R;
 import net.dsdev.lailai.clientes.activity.LoginActivity;
+import net.dsdev.lailai.clientes.adapters.MenuVentaSugeridaAdapter;
 import net.dsdev.lailai.clientes.adapters.OrderDetailAdapter;
+import net.dsdev.lailai.clientes.model.menuDetail.JsonMenuDetail;
+import net.dsdev.lailai.clientes.model.menuDetail.MenuDetail;
 import net.dsdev.lailai.clientes.model.menuDetail.MenuDetailList;
+import net.dsdev.lailai.clientes.model.users.ventaSugerida;
+import net.dsdev.lailai.clientes.model.users.ventaSugeridaResponse;
+import net.dsdev.lailai.clientes.retrofit.RetrofitInstance;
+import net.dsdev.lailai.clientes.retrofit.menu.MenuDetailService;
+import net.dsdev.lailai.clientes.retrofit.menu.MenuVentaSugeridaService;
 import net.dsdev.lailai.clientes.util.AddOrRemoveCallbacks;
 import net.dsdev.lailai.clientes.util.Globals;
+import net.dsdev.lailai.clientes.view.CustomDialogConfirmation;
+import net.dsdev.lailai.clientes.view.CustomDialogVentaSugerida;
 import net.dsdev.lailai.clientes.viewHolders.OrderDetailHolder;
 import net.dsdev.lailai.clientes.util.RandomMethods;
 import net.dsdev.lailai.clientes.util.SharedPreferencesMethods;
@@ -43,7 +53,13 @@ import net.dsdev.lailai.clientes.view.CustomDialogSelectSweet;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -64,6 +80,7 @@ public class OrderDetailFragment extends Fragment {
     String json;
     MenuDetailList menuDetailList;
     Button btnProcess,btnAdd,btnCancel;
+    ventaSugeridaResponse responseVsug;
     private static final String actionBarTittle = "Procesar mi orden";
 
     public OrderDetailFragment() {
@@ -153,7 +170,59 @@ public class OrderDetailFragment extends Fragment {
                                     })
                                     .setPositiveButton("CANCELAR",null)
                                     .show();*/
-                            Navigation.findNavController(v).navigate(R.id.action_orderDetailFragment_to_directionsFragment);
+
+                            //Preparando solicitud de prueba
+                            ventaSugerida vsugerida;
+                            vsugerida = vsugPrueba();
+
+                            responseVsug = new ventaSugeridaResponse();
+                            MenuVentaSugeridaService mvsService = RetrofitInstance.getRetrofitInstance().create(MenuVentaSugeridaService.class);
+                            Call<ventaSugeridaResponse> call = mvsService.ventaSugerida(vsugerida);
+                            call.enqueue(new Callback<ventaSugeridaResponse>() {
+
+                                @Override
+                                public void onResponse(Call<ventaSugeridaResponse> call, Response<ventaSugeridaResponse> response) {
+                                    if (response.code() == 404){
+                                        Log.d(TAG, "onResponse: code "+response.code());
+                                        Navigation.findNavController(v).navigate(R.id.action_orderDetailFragment_to_directionsFragment);
+                                        return;
+                                    }
+                                    if (response.body() != null){
+                                        responseVsug = response.body();
+                                        Log.d(TAG, "resul: " + response.body().getResult());
+                                        try {
+                                            Log.d(TAG, "menus size: " + response.body().getMenus().size());
+                                        }catch (Exception e){
+                                        }
+
+                                        if (responseVsug.getResult().equalsIgnoreCase("false")){
+                                            Navigation.findNavController(v).navigate(R.id.action_orderDetailFragment_to_directionsFragment);
+                                        }else{
+                                            MenuDetailList menuVentaSug = new MenuDetailList();
+                                            List<JsonMenuDetail> lista = new ArrayList<>();
+                                            for (MenuDetail row: responseVsug.getMenus()){
+                                                JsonMenuDetail jmenu = new JsonMenuDetail();
+                                                jmenu.setMenu(row);
+                                                jmenu.getMenu().setQuantity(1);
+                                                lista.add(jmenu);
+                                            }
+                                            menuVentaSug.setMenus(lista);
+
+                                            FragmentManager fm = getActivity().getSupportFragmentManager();
+                                            CustomDialogVentaSugerida custom = new CustomDialogVentaSugerida(OrderDetailFragment.this,sharedMethods,menuDetailList,menuVentaSug,v);
+                                            custom.show(fm,"");
+                                        }
+                                    } else {
+                                        Log.d(TAG, "onResponse: null");
+                                        Navigation.findNavController(v).navigate(R.id.action_orderDetailFragment_to_directionsFragment);
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<ventaSugeridaResponse> call, Throwable t) {
+                                    Log.d(TAG, "onFailure: "+t.getMessage());
+                                }
+                            });
                         }
 
                     }else{
@@ -278,5 +347,25 @@ public class OrderDetailFragment extends Fragment {
                     }
                 })
                 .show();
+    }
+
+    private ventaSugerida vsugPrueba(){
+        ventaSugerida vsugerida = new ventaSugerida();
+        List<MenuDetail> lista = new ArrayList<>();
+        for (JsonMenuDetail row: menuDetailList.getMenus()){
+            lista.add(row.getMenu());
+        }
+        vsugerida.setMonto(241.00);
+        vsugerida.setCanal("APP");
+        vsugerida.setIdCliente(14);
+        vsugerida.setIdDireccion(59);
+        vsugerida.setTelefono("22334455");
+        vsugerida.setOcasion("DOM");
+        vsugerida.setMenus(lista);
+
+        /*Gson gson = new Gson();
+        String json = gson.toJson(vsugerida);
+        Log.d(TAG, "json enviado: " + json);*/
+        return vsugerida;
     }
 }

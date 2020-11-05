@@ -55,11 +55,16 @@
     <string name="sub_total_qty">Q165.00</string>
     <string name="send_address">¿Estás seguro que deseas enviar a la siguiente dirección?</string>
     <string name="send_store">¿Estás seguro que deseas recoger en la siguiente tienda?</string>
+    <string name="add_venta_sugerida">¿Deseas agregar alguno de estos productos a tu orden?</string>
     <string name="add_sweet">¿Quieres agregar un postre?</string>
     <string name="change_password">Cambiar Contraseña</string>
     <string name="address">Direcciones</string>
     <string name="cards">Tarjetas</string>
     <string name="name">John Deere</string>
+    <string name="moneySymbol">Q</string>
+    <string name="noAddMenu">No agregar</string>
+    <string name="continuar">Continuar</string>
+    <string name="agregar">Agregar ---</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

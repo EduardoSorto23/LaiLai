@@ -329,7 +329,6 @@ public class MenuDetailFragment extends Fragment {
             @Override
             public void onFailure(Call<JsonMenuDetail> call, Throwable t) {
                 Log.d(TAG, "onFailure: "+t.getMessage());
-
             }
         });
     }
