@@ -17,10 +17,10 @@ public class ventaSugerida {
     private String canal;
 
     @SerializedName(Constants.idClient)
-    private Integer idCliente;
+    private Long idCliente;
 
     @SerializedName(Constants.idDirection)
-    private Integer idDireccion;
+    private Long idDireccion;
 
     @SerializedName(Constants.telephone)
     private String telefono;
@@ -48,22 +48,6 @@ public class ventaSugerida {
         this.canal = canal;
     }
 
-    public Integer getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(Integer idCliente) {
-        this.idCliente = idCliente;
-    }
-
-    public Integer getIdDireccion() {
-        return idDireccion;
-    }
-
-    public void setIdDireccion(Integer idDireccion) {
-        this.idDireccion = idDireccion;
-    }
-
     public String getTelefono() {
         return telefono;
     }
@@ -86,5 +70,21 @@ public class ventaSugerida {
 
     public void setMenus(List<MenuDetail> menus) {
         this.menus = menus;
+    }
+
+    public Long getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(Long idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    public Long getIdDireccion() {
+        return idDireccion;
+    }
+
+    public void setIdDireccion(Long idDireccion) {
+        this.idDireccion = idDireccion;
     }
 }

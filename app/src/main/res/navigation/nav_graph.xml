@@ -111,6 +111,11 @@
         <action
             android:id="@+id/action_paymentMethodFragment_to_editCreditCardFragment"
             app:destination="@id/editCreditCardFragment" />
+        <action
+            android:id="@+id/action_paymentMethodFragment_to_directionsFragment"
+            app:destination="@id/directionsFragment"
+            app:popUpTo="@+id/directionsFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/directionsFragment"

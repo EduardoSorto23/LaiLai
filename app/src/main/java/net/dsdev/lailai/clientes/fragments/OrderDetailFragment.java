@@ -42,6 +42,7 @@ import net.dsdev.lailai.clientes.retrofit.RetrofitInstance;
 import net.dsdev.lailai.clientes.retrofit.menu.MenuDetailService;
 import net.dsdev.lailai.clientes.retrofit.menu.MenuVentaSugeridaService;
 import net.dsdev.lailai.clientes.util.AddOrRemoveCallbacks;
+import net.dsdev.lailai.clientes.util.Constants;
 import net.dsdev.lailai.clientes.util.Globals;
 import net.dsdev.lailai.clientes.view.CustomDialogConfirmation;
 import net.dsdev.lailai.clientes.view.CustomDialogVentaSugerida;
@@ -173,7 +174,7 @@ public class OrderDetailFragment extends Fragment {
 
                             //Preparando solicitud de prueba
                             ventaSugerida vsugerida;
-                            vsugerida = vsugPrueba();
+                            vsugerida = vsugConf();
 
                             responseVsug = new ventaSugeridaResponse();
                             MenuVentaSugeridaService mvsService = RetrofitInstance.getRetrofitInstance().create(MenuVentaSugeridaService.class);
@@ -349,19 +350,23 @@ public class OrderDetailFragment extends Fragment {
                 .show();
     }
 
-    private ventaSugerida vsugPrueba(){
+    private ventaSugerida vsugConf(){
         ventaSugerida vsugerida = new ventaSugerida();
         List<MenuDetail> lista = new ArrayList<>();
+        Double montoOrden = 0.0;
         for (JsonMenuDetail row: menuDetailList.getMenus()){
             lista.add(row.getMenu());
+            montoOrden += row.getMenu().getFinalPrice();
         }
-        vsugerida.setMonto(241.00);
-        vsugerida.setCanal("APP");
-        vsugerida.setIdCliente(14);
-        vsugerida.setIdDireccion(59);
-        vsugerida.setTelefono("22334455");
-        vsugerida.setOcasion("DOM");
+        vsugerida.setMonto(montoOrden);
+        vsugerida.setCanal(Constants.canalVsug);
+        vsugerida.setIdCliente(sharedMethods.getLoggedUser().getIdCliente());
+        vsugerida.setIdDireccion(sharedMethods.getLoggedUser().getIdAddress());
+        vsugerida.setTelefono(sharedMethods.getLoggedUser().getTelephone());
+        vsugerida.setOcasion(Constants.ocasionVsug);
         vsugerida.setMenus(lista);
+
+        sharedMethods.getLoggedUser().getIdCliente();
 
         /*Gson gson = new Gson();
         String json = gson.toJson(vsugerida);

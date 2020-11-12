@@ -193,6 +193,7 @@ public class OrderLastRevisionFragment extends Fragment {
         finalOrder.setHoraEntrega(Globals.horaEntrega);
         finalOrder.setIdStore(Globals.tienda);
         finalOrder.setOcasion(Globals.OCASION);
+        finalOrder.setFechaHora(Globals.fechaEntrega);
         Card card = new Card();
         card.setPaymentMethod(getArguments().getString("paymentMethod", "EFE"));
         if (getArguments() != null && getArguments().getString("cardAuth") != null) {

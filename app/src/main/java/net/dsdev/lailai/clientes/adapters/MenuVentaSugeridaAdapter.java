@@ -56,7 +56,8 @@ public abstract class MenuVentaSugeridaAdapter extends RecyclerView.Adapter<Menu
         JsonMenuDetail currentMenu = menus.getMenus().get(position);
         Log.d(TAG,"onBindHolder: menu "+ currentMenu.getMenu().getName());
         holder.getTxtMenuDetailItem().setText(currentMenu.getMenu().getName());
-        holder.getTxtMenuDetailPrice().setText(res.getString(R.string.moneySymbol) + " " + currentMenu.getMenu().getPrice().toString());
+        Double vMenuFormat = formatearDecimales(currentMenu.getMenu().getPrice(),2);
+        holder.getTxtMenuDetailPrice().setText(res.getString(R.string.moneySymbol) + " " + String.format("%.2f", vMenuFormat));
 
         RadioGroup rg = new RadioGroup(context);
         rg.setId(currentMenu.getMenu().getIdMenu());
@@ -106,7 +107,8 @@ public abstract class MenuVentaSugeridaAdapter extends RecyclerView.Adapter<Menu
             }
 
             if (v.getExtraPrice() > 0){
-                radioButton.setText(v.getVariant() + "     +" + res.getString(R.string.moneySymbol) + v.getExtraPrice());
+                Double valorFormateado = formatearDecimales(v.getExtraPrice(),2);
+                radioButton.setText(v.getVariant() + "     +" + res.getString(R.string.moneySymbol) + String.format("%.2f", valorFormateado));
             }else{
                 radioButton.setText(v.getVariant());
             }
@@ -149,5 +151,9 @@ public abstract class MenuVentaSugeridaAdapter extends RecyclerView.Adapter<Menu
     @Override
     public int getItemCount() {
         return menus.getMenus().size();
+    }
+
+    public static Double formatearDecimales(Double numero, Integer numeroDecimales) {
+        return Math.round(numero * Math.pow(10, numeroDecimales)) / Math.pow(10, numeroDecimales);
     }
 }

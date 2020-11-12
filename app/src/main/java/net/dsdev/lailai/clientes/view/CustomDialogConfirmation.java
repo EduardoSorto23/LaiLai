@@ -118,6 +118,7 @@ public class CustomDialogConfirmation extends DialogFragment implements View.OnC
                         Globals.tiendaName="";
                         Globals.tienda=null;
                         Globals.horaEntrega=null;
+                        Globals.fechaEntrega=null;
                         dismiss();
                         Bundle bundle = new Bundle();
                         bundle.putString("orderCode",response.body().getOrderCode());

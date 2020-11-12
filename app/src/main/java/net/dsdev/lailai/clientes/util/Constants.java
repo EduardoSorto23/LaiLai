@@ -151,4 +151,6 @@ public class Constants {
     public static final String futureOrderCoverage = "pedidoFuturo";
     public static final String accountFacebook = "FBK";
     public static final String accountGoogle = "GOG";
+    public static final String ocasionVsug = "DOM";
+    public static final String canalVsug = "APP";
 }

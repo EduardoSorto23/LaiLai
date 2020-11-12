@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -238,6 +239,7 @@ public class DirectionsFragment extends Fragment implements View.OnClickListener
             }
         });
 
+
         //Funcionalidad radioGroup Pedido Futuro
         rgPedido.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -282,15 +284,19 @@ public class DirectionsFragment extends Fragment implements View.OnClickListener
     }
 
     private void filtarTiendas(CharSequence s){
-        storesFilter = new ArrayList<>();
-        for(Store item: stores){
-            if(item.getName().toUpperCase().contains(s.toString().toUpperCase()) || item.getAddress().toUpperCase().contains(s.toString().toUpperCase())){
-                storesFilter.add(item);
+        try {
+            storesFilter = new ArrayList<>();
+            for(Store item: stores){
+                if(item.getName().toUpperCase().contains(s.toString().toUpperCase()) || item.getAddress().toUpperCase().contains(s.toString().toUpperCase())){
+                    storesFilter.add(item);
+                }
             }
-        }
 
-        storeAdapter.setDirections(storesFilter);
-        storeAdapter.notifyDataSetChanged();
+            storeAdapter.setDirections(storesFilter);
+            storeAdapter.notifyDataSetChanged();
+        }catch (Exception e){
+            Log.d(TAG,"Error al aplicar filtrarTiendas: " + e);
+        }
     }
 
     private void initStoresAdapter() {
@@ -300,9 +306,9 @@ public class DirectionsFragment extends Fragment implements View.OnClickListener
                 holder.getLlStore().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (!isTimeSelected) {
+                        if (!isTimeSelected && pedidoFuturo.equals("S")) {
                             Toast.makeText(getActivity(), "Seleccione una hora", Toast.LENGTH_LONG).show();
-                        }else if(!isDateSelected){
+                        }else if(!isDateSelected && pedidoFuturo.equals("S")){
                             Toast.makeText(getActivity(), "Seleccione una fecha", Toast.LENGTH_LONG).show();
                         }else{
                             try {
@@ -337,9 +343,17 @@ public class DirectionsFragment extends Fragment implements View.OnClickListener
                                     client.setFinalAddress(null);
                                     sharedPreferencesMethods.saveLoggedUser(client);
                                     String f = String.format("%d:%d", hourSelected,minuteSelected);
-                                    String f2 = String.format("%d/%d/%d",yearSelected,monthSelected,daySelected);
+                                    //String f2 = String.format("%d/%d/%d",yearSelected,monthSelected,daySelected);
+                                    Calendar fecHora2 = Calendar.getInstance();
+                                    fecHora2.set(Calendar.YEAR,yearSelected);
+                                    fecHora2.set(Calendar.MONTH, monthSelected-1);
+                                    fecHora2.set(Calendar.DAY_OF_MONTH, daySelected);
+                                    fecHora2.set(Calendar.HOUR_OF_DAY, hourSelected);
+                                    fecHora2.set(Calendar.MINUTE, minuteSelected);
+                                    SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                                    String cadenaFecHora2 = sdf3.format(fecHora2.getTime());
                                     Globals.horaEntrega = f;
-                                    Globals.fechaEntrega = f2;
+                                    Globals.fechaEntrega = cadenaFecHora2;
                                     Globals.tienda = store.getId();
                                     Globals.tiendaName = store.getName();
                                     Globals.OCASION = "LLV";
@@ -426,9 +440,9 @@ public class DirectionsFragment extends Fragment implements View.OnClickListener
                     @Override
                     public void onClick(final View v) {
                         //Validando la cobertura y actuando segun el caso
-                        if (!isTimeSelected) {
+                        if (!isTimeSelected && pedidoFuturo.equals("S")) {
                             Toast.makeText(getActivity(), "Seleccione una hora", Toast.LENGTH_LONG).show();
-                        }else if(!isDateSelected){
+                        }else if(!isDateSelected && pedidoFuturo.equals("S")){
                             Toast.makeText(getActivity(), "Seleccione una fecha", Toast.LENGTH_LONG).show();
                         }else{
                             final Coverage covertura = new Coverage();
@@ -488,9 +502,17 @@ public class DirectionsFragment extends Fragment implements View.OnClickListener
                                                 }else if (action.equalsIgnoreCase("order")){
                                                     sharedPreferencesMethods.saveLoggedUser(client);
                                                     String f = String.format("%d:%d", hourSelected,minuteSelected);
-                                                    String f2 = String.format("%d/%d/%d",yearSelected,monthSelected,daySelected);
+                                                    //String f2 = String.format("%d/%d/%d",yearSelected,monthSelected,daySelected);
+                                                    Calendar fecHora2 = Calendar.getInstance();
+                                                    fecHora2.set(Calendar.YEAR,yearSelected);
+                                                    fecHora2.set(Calendar.MONTH, monthSelected-1);
+                                                    fecHora2.set(Calendar.DAY_OF_MONTH, daySelected);
+                                                    fecHora2.set(Calendar.HOUR_OF_DAY, hourSelected);
+                                                    fecHora2.set(Calendar.MINUTE, minuteSelected);
+                                                    SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                                                    String cadenaFecHora2 = sdf3.format(fecHora2.getTime());
                                                     Globals.horaEntrega = f;
-                                                    Globals.fechaEntrega = f2;
+                                                    Globals.fechaEntrega = cadenaFecHora2;
                                                     Globals.tienda = null;
                                                     Globals.OCASION = "DOM";
                                                     bundle.putString("paymentMethod",getArguments().getString("paymentMethod", "EFE"));
@@ -499,9 +521,17 @@ public class DirectionsFragment extends Fragment implements View.OnClickListener
                                                 }else {
                                                     sharedPreferencesMethods.saveLoggedUser(client);
                                                     String f = String.format("%d:%d", hourSelected,minuteSelected);
-                                                    String f2 = String.format("%d/%d/%d",yearSelected,monthSelected,daySelected);
+                                                    //String f2 = String.format("%d/%d/%d",yearSelected,monthSelected,daySelected);
+                                                    Calendar fecHora2 = Calendar.getInstance();
+                                                    fecHora2.set(Calendar.YEAR,yearSelected);
+                                                    fecHora2.set(Calendar.MONTH, monthSelected-1);
+                                                    fecHora2.set(Calendar.DAY_OF_MONTH, daySelected);
+                                                    fecHora2.set(Calendar.HOUR_OF_DAY, hourSelected);
+                                                    fecHora2.set(Calendar.MINUTE, minuteSelected);
+                                                    SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                                                    String cadenaFecHora2 = sdf3.format(fecHora2.getTime());
                                                     Globals.horaEntrega = f;
-                                                    Globals.fechaEntrega = f2;
+                                                    Globals.fechaEntrega = cadenaFecHora2;
                                                     Globals.tienda = null;
                                                     Globals.OCASION = "DOM";
                                                     Navigation.findNavController(v).navigate(R.id.action_directionsFragment_to_paymentMethodFragment2);
