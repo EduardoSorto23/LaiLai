@@ -7,6 +7,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.text.Editable;
@@ -41,7 +43,7 @@ public class NewCreditCardFragment extends Fragment {
     private static final String TAG = "Hola";
     private TextInputEditText etCardName, etCardNumber, etCardCCV, etCardExpire;
     private TextInputLayout tilCardName, tilCardNumber, tilCardCCV, tilCardExpire;
-    private MaterialButton btnSaveCard;
+    private MaterialButton btnSaveCard, btnCancel;
     View rootView;
     private String year, month, action;
     CardService cardService;
@@ -74,6 +76,7 @@ public class NewCreditCardFragment extends Fragment {
         tilCardName = rootView.findViewById(R.id.tilCardName);
         tilCardNumber = rootView.findViewById(R.id.tilCardNumber);
         btnSaveCard = rootView.findViewById(R.id.btnSaveCard);
+        btnCancel = rootView.findViewById(R.id.btnCancel);
     }
 
     private void init() {
@@ -89,6 +92,17 @@ public class NewCreditCardFragment extends Fragment {
             actionBar.setDisplayUseLogoEnabled(false);
             //actionBar.setHomeAsUpIndicator(R.drawable.ic_close_black_24dp);
         }
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Navigation.findNavController(v).navigate(R.id.paymentMethodFragment);
+                }catch (Exception e){
+                    Log.d(TAG, "Error al intentar navegar: " + e);
+                }
+            }
+        });
 
         btnSaveCard.setOnClickListener(new View.OnClickListener() {
             @Override

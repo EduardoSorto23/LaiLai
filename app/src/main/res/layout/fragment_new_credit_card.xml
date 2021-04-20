@@ -6,7 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 <androidx.core.widget.NestedScrollView
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="70dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -211,14 +212,15 @@
             </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="25dp"
             android:layout_marginStart="25dp"
             android:layout_marginTop="25dp"
-            android:orientation="vertical"
-            >
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilCardNumber"
@@ -230,19 +232,19 @@
                     android:id="@+id/etCardNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/card_number"
-                    android:maxLines="1"
-                    android:maxLength="19"
                     android:digits=" 1234567890"
-                    android:inputType="number"
+                    android:hint="@string/card_number"
                     android:imeOptions="actionNext"
-                    />
+                    android:inputType="number"
+                    android:maxLength="19"
+                    android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="25dp">
+                android:layout_marginTop="25dp"
+                android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilCardExpire"
@@ -257,12 +259,12 @@
                         android:id="@+id/etCardExpire"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/until_valid"
-                        android:maxLines="1"
-                        android:maxLength="7"
                         android:digits="/1234567890"
+                        android:hint="@string/until_valid"
+                        android:imeOptions="actionNext"
                         android:inputType="number"
-                        android:imeOptions="actionNext"/>
+                        android:maxLength="7"
+                        android:maxLines="1" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -279,9 +281,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/cvc"
-                        android:maxLines="1"
+                        android:imeOptions="actionNext"
                         android:inputType="number"
-                        android:imeOptions="actionNext"/>
+                        android:maxLines="1" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
@@ -290,14 +292,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etCardName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/name_at_the_card"
-                    android:maxLines="1"
+                    android:imeOptions="actionDone"
                     android:inputType="text"
-                    android:imeOptions="actionDone"/>
+                    android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
     </LinearLayout>

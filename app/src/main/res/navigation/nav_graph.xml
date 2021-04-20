@@ -217,7 +217,7 @@
         android:id="@+id/editCreditCardFragment"
         android:name="net.dsdev.lailai.clientes.fragments.EditCreditCardFragment"
         android:label="fragment_edit_credit_card"
-        tools:layout="@layout/fragment_edit_credit_card" />
+        tools:layout="@layout/fragment_edit_credit_card"/>
     <fragment
         android:id="@+id/activeOrdersFragment"
         android:name="net.dsdev.lailai.clientes.fragments.user.ActiveOrdersFragment"

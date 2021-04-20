@@ -43,7 +43,6 @@ public abstract class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetai
 
     public abstract void setClickListener(OrderDetailHolder holder,int position, int total);
 
-
     @NonNull
     @Override
     public OrderDetailHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

@@ -49,6 +49,7 @@ import com.google.zxing.common.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import static net.dsdev.lailai.clientes.util.Globals.formatCard;
 
@@ -160,7 +161,13 @@ public class OrderLastRevisionFragment extends Fragment {
     private void init(){
         txtNit.setFocusable(false);
         txtNit.setEnabled(false);
-        rgBill.check(R.id.rbNo);
+        //rgBill.check(R.id.rbNo);
+        rgBill.check(R.id.rbYes);
+        //Para habilitar el txtNit desde un inicio
+        txtNit.setFocusable(true);
+        txtNit.setEnabled(true);
+        txtNit.setFocusableInTouchMode(true);
+        txtNit.setText("C.F.");
         rgBill.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -170,7 +177,7 @@ public class OrderLastRevisionFragment extends Fragment {
                     txtNit.setFocusable(true);
                     txtNit.setEnabled(true);
                     txtNit.setFocusableInTouchMode(true);
-                }else {
+                }else{
                     txtNit.setFocusable(false);
                     txtNit.setEnabled(false);
                 }
@@ -224,6 +231,15 @@ public class OrderLastRevisionFragment extends Fragment {
                 ){
                     Toast.makeText(getContext(), "Debe ingresar un número de NIT", Toast.LENGTH_LONG).show();
                     return;
+                }
+                Boolean valNit = validarNit(txtNit.getText().toString());
+                if(!valNit){
+                    Toast.makeText(getContext(), "Debe ingresar \"CF\" o un número de NIT valido", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                String nit = txtNit.getText().toString();
+                if((nit.equals("CF") || nit.equals("cf") || nit.equals("C/F") || nit.equals("c/f") || nit.equals("Cf") || nit.equals("C/f") || nit.equals("c.f.")) && valNit){
+                    txtNit.setText("C.F.");
                 }
                 try{
                     finalOrder.setVuelto(Double.parseDouble(txtMoneyBack.getText().toString()));
@@ -313,6 +329,37 @@ public class OrderLastRevisionFragment extends Fragment {
                 Navigation.findNavController(v).navigate(R.id.action_orderLastRevisionFragment_to_directionsFragment,bundle);
             }
         });
+    }
+
+    public boolean validarNit(String nit) {
+        if (nit.equals("CF") || nit.equals("cf") || nit.equals("C/F") || nit.equals("c/f") || nit.equals("Cf") || nit.equals("C/f") || nit.equals("C.F.") || nit.equals("c.f.")){
+            return true;
+        }
+        if (nit.isEmpty()){
+            return false;
+        }
+        if (!Pattern.matches("^[0-9]+(-?[0-9kK])?$", nit)){
+            return false;
+        }
+        nit = nit.replace("-", "");
+        int laschart = nit.length() - 1;
+        String number = nit.substring(0, laschart);
+        String expectedChecker = nit.substring(laschart, laschart + 1).toLowerCase();
+        int factor = number.length() + 1;
+        int total = 0;
+        for (int i = 0; i < number.length(); i++){
+            String character = number.substring(i, i + 1);
+            int digit = Integer.parseInt(character, 10);
+            total += (digit * factor);
+            factor = factor - 1;
+        }
+        int module = (11 - (total % 11)) % 11;
+        String computedChecker = (module == 10 ? "k" : String.valueOf(module));
+        if (expectedChecker.equals(computedChecker)){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }

@@ -182,6 +182,7 @@ public class DirectionsFragment extends Fragment implements View.OnClickListener
                 layoutTimePicker.setVisibility(View.GONE);
                 llView.setVisibility(View.GONE);
                 toggleGroupAddress.setVisibility(View.GONE);
+                etSearch.setVisibility(View.GONE);
                 getAddresses();
             }else{
                 if (Globals.OCASION!=null) {

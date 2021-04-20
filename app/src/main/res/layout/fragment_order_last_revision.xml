@@ -438,16 +438,17 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="¿Desea indicar el NIT para la factura o que sea emitida como C.F.?"
+                            android:fontFamily="@font/neue_kabel_bold"
+                            android:text="Ingresa tu NIT"
                             android:textColor="@color/red_app"
-                            android:textSize="15sp"
-                            android:fontFamily="@font/neue_kabel_bold"/>
+                            android:textSize="15sp" />
 
                         <RadioGroup
                             android:id="@+id/rgBill"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:checkedButton="@+id/first"
+                            android:visibility="gone"
                             android:orientation="horizontal">
 
                             <RadioButton
@@ -470,19 +471,20 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="NIT:"
+                            android:visibility="gone"
                             android:textColor="@color/red_app"
                             android:textSize="15sp"
                             android:fontFamily="@font/neue_kabel_bold"/>
+
                         <EditText
                             android:id="@+id/txtNit"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/md_black_1000"
-                            android:textSize="14sp"
-                            android:fontFamily="@font/neue_kabel"
-                            android:inputType="number"
                             android:focusable="false"
-                            />
+                            android:fontFamily="@font/neue_kabel"
+                            android:inputType="text"
+                            android:textColor="@color/md_black_1000"
+                            android:textSize="14sp" />
 
                     </LinearLayout>
 

@@ -12,6 +12,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -79,14 +80,14 @@ public class PaymentMethodFragment extends Fragment {
         rootView =inflater.inflate(R.layout.fragment_payment_method, container, false);
         bindUI();
         init();
-        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+        /*OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
                 Log.d(TAG,"Entra en el evento de back");
                 Navigation.findNavController(rootView).navigate(R.id.action_paymentMethodFragment_to_directionsFragment);
             }
         };
-        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);*/
         return rootView;
     }
 
