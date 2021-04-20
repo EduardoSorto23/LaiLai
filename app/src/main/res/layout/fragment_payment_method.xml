@@ -62,6 +62,52 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cvPOST"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/little_margin"
+            android:layout_marginEnd="@dimen/little_margin"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_card_payment" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/neue_kabel_bold"
+                        android:text="@string/pos_payment"
+                        android:textColor="@color/red_app"
+                        android:textSize="22sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/neue_kabel"
+                        android:text="@string/pos_payment_message"
+                        android:textSize="17sp"/>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
     </LinearLayout>
 
     <View
@@ -81,6 +127,7 @@
         android:orientation="vertical"
         android:id="@+id/llCards"
         android:layout_below="@id/viewCash_Card"
+        android:visibility="gone"
         >
         <LinearLayout
             android:layout_width="match_parent"
@@ -128,6 +175,7 @@
         app:tint="@color/white"
         android:backgroundTint="@color/red_app"
         android:src="@android:drawable/ic_input_add"
+        android:visibility="gone"
         app:maxImageSize="32dp"/>
 
 </RelativeLayout>

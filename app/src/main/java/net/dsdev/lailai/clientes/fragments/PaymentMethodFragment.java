@@ -66,7 +66,7 @@ public class PaymentMethodFragment extends Fragment {
     View rootView,viewCash_Card;
     PaymentMethodAdapter paymentMethodAdapter;
     FloatingActionButton fabAddCard;
-    CardView cvCash;
+    CardView cvCash, cvPOS;
     Bundle bundle;
     CardService cardService;
     SharedPreferencesMethods sharedPreferencesMethods;
@@ -105,6 +105,7 @@ public class PaymentMethodFragment extends Fragment {
         rvCards = rootView.findViewById(R.id.rvCards);
         fabAddCard = rootView.findViewById(R.id.fabAddCard);
         cvCash = rootView.findViewById(R.id.cvCash);
+        cvPOS = rootView.findViewById(R.id.cvPOST);
         viewCash_Card = rootView.findViewById(R.id.viewCash_Card);
         llCash = rootView.findViewById(R.id.llCash);
     }
@@ -132,7 +133,18 @@ public class PaymentMethodFragment extends Fragment {
             }
         });
 
-        paymentMethodAdapter = new PaymentMethodAdapter(getActivity().getApplicationContext()) {
+        sharedPreferencesMethods = new SharedPreferencesMethods(getActivity());
+        bundle = new Bundle();
+        cvPOS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: miPOS");
+                bundle.putString("paymentMethod","POS");
+                goTo(v,R.id.action_paymentMethodFragment_to_orderLastRevisionFragment, bundle);
+            }
+        });
+
+        /*paymentMethodAdapter = new PaymentMethodAdapter(getActivity().getApplicationContext()) {
             @Override
             public void setClickListener(PaymentCardHolder holder, final CardAuth cardAuth) {
                 holder.getCardItem().setOnClickListener(new View.OnClickListener() {
@@ -150,20 +162,20 @@ public class PaymentMethodFragment extends Fragment {
                     }
                 });
             }
-        };
+        };*/
 
-        fabAddCard.setOnClickListener(new View.OnClickListener() {
+        /*fabAddCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 bundle.putString("action",action);
                 goTo(v,R.id.action_paymentMethodFragment_to_newCreditCardFragment, bundle);
             }
-        });
+        });*/
 
         //paymentMethodAdapter.setCount(3);
 
 
-        cardService = RetrofitInstance.getRetrofitInstance().create(CardService.class);
+        /*cardService = RetrofitInstance.getRetrofitInstance().create(CardService.class);
         Call<CardList> call = cardService.getCards(sharedPreferencesMethods.getLoggedUser().getIdCliente());
         call.enqueue(new Callback<CardList>() {
             @Override
@@ -181,7 +193,7 @@ public class PaymentMethodFragment extends Fragment {
             public void onFailure(Call<CardList> call, Throwable t) {
 
             }
-        });
+        });*/
 
         ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
         if (actionBar != null) {

@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -82,6 +83,7 @@ public class OrderLastRevisionFragment extends Fragment {
     View paymentLine;
     ImageView imgPayment,imgArrowAddress, imgArrowPayment;
     TextView txtAddress,txtTotal,txtSubTotal,lblTipoOcasion,txtCardNumber;
+    LinearLayout llCambio;
     private static final String actionBarTittle = "Procesar mi Orden";
     private FragmentActivity myContext;
     private EditText txtMoneyBack,txtNit;
@@ -146,16 +148,22 @@ public class OrderLastRevisionFragment extends Fragment {
         txtMoneyBack = rootView.findViewById(R.id.txtMoneyBack);
         txtNit = rootView.findViewById(R.id.txtNit);
         rgBill = rootView.findViewById(R.id.rgBill);
+        llCambio = rootView.findViewById(R.id.llCambio);
         String method = getArguments().getString("paymentMethod", "EFE");
         if (method.equals("EFE")){
             txtPayment.setText("EFECTIVO");
+            llCambio.setVisibility(View.VISIBLE);
             imgPayment.setVisibility(View.INVISIBLE);
             paymentLine.setVisibility(View.INVISIBLE);
         } else if (method.equals("CRD")){
             txtPayment.setText("CRÉDITO");
+        }else if (method.equals("POS")){
+            txtPayment.setText("Mi POS");
+            llCambio.setVisibility(View.GONE);
+            imgPayment.setVisibility(View.INVISIBLE);
+            paymentLine.setVisibility(View.INVISIBLE);
         }
         txtCardNumber = rootView.findViewById(R.id.txtCardNumber);
-
     }
 
     private void init(){

@@ -37,6 +37,8 @@
     <string name="cancel_order">Cancelar orden</string>
     <string name="add_more">Agregar algo más</string>
     <string name="cash">Efectivo</string>
+    <string name="pos_payment">Mi POS</string>
+    <string name="pos_payment_message">Tu orden se cobrará al momento de entrega en tu casa u oficina</string>
     <string name="quetzales">Quetzales</string>
     <string name="cards_available">Tarjetas disponibles :</string>
     <string name="general_information">Información General</string>

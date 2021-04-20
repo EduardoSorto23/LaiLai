@@ -344,7 +344,7 @@
                                 android:tint="@color/md_black_1000"
                                 android:textSize="13sp"
                                 android:fontFamily="@font/neue_kabel"
-                                android:visibility="visible"
+                                android:visibility="invisible"
                                 />
                         </LinearLayout>
 
@@ -489,9 +489,11 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/llCambio"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="0.5"
+                        android:visibility="visible"
                         android:orientation="vertical">
 
                         <TextView
@@ -518,8 +520,6 @@
                             android:maxLines="1"
                             android:imeOptions="actionDone"
                             android:fontFamily="@font/neue_kabel"/>
-
-
                     </LinearLayout>
 
                 </LinearLayout>
